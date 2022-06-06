@@ -1,6 +1,6 @@
-# AndroidStudy
+# Android Study
 
-- [AndroidStudy](#androidstudy)
+- [Android Study](#android-study)
   - [控件](#控件)
     - [下拉框](#下拉框)
     - [输入框 EditText](#输入框-edittext)

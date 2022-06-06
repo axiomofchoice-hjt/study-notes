@@ -1,6 +1,6 @@
-# Java
+# Java Study
 
-- [Java](#java)
+- [Java Study](#java-study)
   - [Java 语法](#java-语法)
   - [Spring Boot 介绍](#spring-boot-介绍)
   - [pom.xml](#pomxml)

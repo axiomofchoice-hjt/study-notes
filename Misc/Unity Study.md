@@ -1,6 +1,6 @@
-# Unity
+# Unity Study
 
-- [Unity](#unity)
+- [Unity Study](#unity-study)
   - [安装](#安装)
   - [目录结构](#目录结构)
   - [窗口](#窗口)

@@ -1,8 +1,9 @@
-# ShellStudy
+# Shell Study
 
-- [ShellStudy](#shellstudy)
+- [Shell Study](#shell-study)
   - [命令](#命令)
     - [文件系统](#文件系统)
+    - [进程](#进程)
     - [包管理](#包管理)
     - [打包和压缩](#打包和压缩)
   - [基本操作](#基本操作)

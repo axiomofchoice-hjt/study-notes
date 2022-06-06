@@ -1,6 +1,6 @@
-# WSLStudy
+# WSL Study
 
-- [WSLStudy](#wslstudy)
+- [WSL Study](#wsl-study)
   - [安装 WSL](#安装-wsl)
   - [VScode 连接 WSL](#vscode-连接-wsl)
 

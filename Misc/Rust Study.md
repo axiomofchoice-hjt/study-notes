@@ -1,6 +1,6 @@
-# Rust
+# Rust Study
 
-- [Rust](#rust)
+- [Rust Study](#rust-study)
   - [Cargo](#cargo)
   - [rust 语言](#rust-语言)
     - [变量](#变量)

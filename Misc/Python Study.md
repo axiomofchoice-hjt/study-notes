@@ -1,6 +1,6 @@
-# PythonStudy
+# Python Study
 
-- [PythonStudy](#pythonstudy)
+- [Python Study](#python-study)
   - [语法](#语法)
     - [魔法函数](#魔法函数)
     - [操作系统文件操作](#操作系统文件操作)

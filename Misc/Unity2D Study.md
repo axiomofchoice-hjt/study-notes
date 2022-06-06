@@ -1,6 +1,6 @@
-# Unity2D
+# Unity2D Study
 
-- [Unity2D](#unity2d)
+- [Unity2D Study](#unity2d-study)
   - [配置](#配置)
   - [准备](#准备)
 

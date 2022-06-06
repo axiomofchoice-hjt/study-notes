@@ -1,6 +1,6 @@
-# SQLStudy
+# SQL Study
 
-- [SQLStudy](#sqlstudy)
+- [SQL Study](#sql-study)
   - [基本概念](#基本概念)
   - [检索数据](#检索数据)
   - [修改数据](#修改数据)

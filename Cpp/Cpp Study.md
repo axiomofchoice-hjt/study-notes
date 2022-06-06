@@ -1,6 +1,6 @@
-# CppStudy
+# Cpp Study
 
-- [CppStudy](#cppstudy)
+- [Cpp Study](#cpp-study)
   - [类型转换](#类型转换)
   - [右值引用](#右值引用)
   - [正则表达式 regex](#正则表达式-regex)

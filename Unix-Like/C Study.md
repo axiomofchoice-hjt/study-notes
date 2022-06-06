@@ -1,10 +1,9 @@
-# CStudy
+# C Study
 
-- [CStudy](#cstudy)
+- [C Study](#c-study)
   - [项目目录结构](#项目目录结构)
   - [编译过程](#编译过程)
   - [Makefile](#makefile)
-  - [Shell](#shell)
 
 ## 项目目录结构
 
@@ -69,25 +68,3 @@ include 将别的 Makefile 包含进来
 环境变量 MAKEFILES 有一定效果（不建议使用）
 
 通配符 `* ? ~` 其中 `~` 是当前用户目录。前面加反斜杠表示单纯的字符
-
-## Shell
-
-- pwd 当前路径
-- passwd 更改密码
-- useradd 建立用户账号
-- who 当前登录的用户名
-- ps 显示进程状态
-- ls 当前路径的内容
-- mkdir 新建目录
-- cd 切换路径
-- rmdir 删除目录
-- rm 删除文件
-- cp 复制文件
-- mv 移动文件(夹)
-- cat 查看文件内容
-- less 按页查看文件内容
-- grep 在文件中查找字符串
-- find 查找文件
-- tar 压缩相关
-- gzip 压缩
-- unzip 解压 gzip

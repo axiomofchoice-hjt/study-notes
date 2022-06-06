@@ -1,3 +1,7 @@
+# Git Study
+
+- [Git Study](#git-study)
+
 - `git status` 状态
 - `git diff readme.txt` 查看差别
 - `git add readme.txt` 添加至暂存区
