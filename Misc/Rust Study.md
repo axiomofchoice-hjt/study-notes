@@ -2,7 +2,7 @@
 
 - [Rust Study](#rust-study)
   - [Cargo](#cargo)
-  - [rust 语言](#rust-语言)
+  - [语法](#语法)
     - [变量](#变量)
     - [数据类型](#数据类型)
     - [函数](#函数)
@@ -59,7 +59,7 @@
     - [状态](#状态)
     - [窗口](#窗口)
   - [序列化反序列化](#序列化反序列化)
-  - [web 框架 actix-web](#web-框架-actix-web)
+  - [Web 框架 Actix-Web](#web-框架-actix-web)
     - [Hello world](#hello-world-1)
     - [状态](#状态-1)
     - [作用域](#作用域)
@@ -68,7 +68,7 @@
     - [WebSockets](#websockets)
   - [Actix](#actix)
     - [Address](#address)
-  - [mysql](#mysql)
+  - [连接 MySQL](#连接-mysql)
   - [Codeforces 板子](#codeforces-板子)
   - [API](#api)
     - [常用 use](#常用-use)
@@ -95,7 +95,7 @@ ferris-says = "0.2"
 
 测试 `cargo test`，运行项目中所有的测试
 
-## rust 语言
+## 语法
 
 在 main.rs 里：
 
@@ -1660,7 +1660,7 @@ fn main() {
 }
 ```
 
-## web 框架 actix-web
+## Web 框架 Actix-Web
 
 ### Hello world
 
@@ -1891,7 +1891,7 @@ enum Responses {
 - 将接收方的接收对象发给发送方
 - 用接收对象 `.try_send(M)` 可以发送消息
 
-## mysql
+## 连接 MySQL
 
 加依赖（最新版本不会搞）
 
