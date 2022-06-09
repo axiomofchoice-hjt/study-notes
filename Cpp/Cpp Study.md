@@ -1,6 +1,7 @@
 # Cpp Study
 
 - [Cpp Study](#cpp-study)
+  - [安装](#安装)
   - [类型转换](#类型转换)
   - [右值引用](#右值引用)
   - [正则表达式 regex](#正则表达式-regex)
@@ -16,6 +17,16 @@
     - [自旋锁](#自旋锁)
     - [Memory Order](#memory-order)
   - [轮子](#轮子)
+
+## 安装
+
+- ubuntu
+
+```text
+sudo apt update
+
+sudo apt install build-essential
+```
 
 ## 类型转换
 
