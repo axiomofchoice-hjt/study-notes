@@ -2,7 +2,9 @@
 
 - [WSL Study](#wsl-study)
   - [安装 WSL](#安装-wsl)
+  - [WSL 基础操作](#wsl-基础操作)
   - [vscode 连接 WSL](#vscode-连接-wsl)
+  - [VcXsrv 图形化界面](#vcxsrv-图形化界面)
   - [vscode 通过 WSL 进行 SSH 连接](#vscode-通过-wsl-进行-ssh-连接)
 
 ## 安装 WSL
@@ -13,15 +15,21 @@ cmd: `wsl --install`
 
 win 里搜索 ubuntu 即可打开 bash 界面
 
+## WSL 基础操作
+
+传文件：资源管理器输入 `\\wsl$` 即可访问 wsl 文件系统
+
+反过来 wsl 里 `/mnt/c/` 表示 C 盘
+
 ## vscode 连接 WSL
 
 安装插件 Remote - WSL, Remote - Containers
 
 点左下角，选择 new wsl window 即可
 
-传文件：资源管理器输入 `\\wsl$` 即可访问 wsl 文件系统
+## VcXsrv 图形化界面
 
-图形化界面：按网站说的做，坑点是 XLaunch 启动的选项要反选 Native opengl 和勾选 Disable access control
+按网站说的做，坑点是 XLaunch 启动的选项要反选 Native opengl 和勾选 Disable access control
 
 ## vscode 通过 WSL 进行 SSH 连接
 
