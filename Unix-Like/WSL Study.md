@@ -25,6 +25,8 @@ win 里搜索 ubuntu 即可打开 bash 界面
 
 ## vscode 通过 WSL 进行 SSH 连接
 
+（如果 windows 出现无法用 kinit 连接等问题）
+
 先在 WSL 里配置 SSH，并成功连接
 
 在某个目录下创建 `ssh.bat`，内容为
