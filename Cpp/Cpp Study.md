@@ -28,6 +28,10 @@ sudo apt update
 sudo apt install build-essential
 ```
 
+- windows
+
+官网进入 sourceforge，选择 Files 往下拉点 x86_64-win32-seh，解压，配 path
+
 ## 类型转换
 
 - `static_cast` 常规的类型转换
