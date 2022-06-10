@@ -30,7 +30,7 @@ sudo apt install build-essential
 
 - windows
 
-官网进入 sourceforge，选择 Files 往下拉点 x86_64-win32-seh，解压，配 path
+官网进入 sourceforge，选择 Files 往下拉点 x86_64-win32-seh，解压，配环境变量
 
 ## 类型转换
 
