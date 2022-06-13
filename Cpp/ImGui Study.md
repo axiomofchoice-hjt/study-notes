@@ -13,6 +13,7 @@
   - [显示中文](#显示中文)
   - [排版](#排版)
   - [事件](#事件)
+  - [去掉命令行窗口](#去掉命令行窗口)
   - [End](#end)
 
 ## 开始
@@ -34,14 +35,9 @@ VS 创建控制台程序
 ```cpp
 #pragma once
 
-#include "imgui/imconfig.h"
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_dx11.h"
 #include "imgui/imgui_impl_win32.h"
-#include "imgui/imgui_internal.h"
-#include "imgui/imstb_rectpack.h"
-#include "imgui/imstb_textedit.h"
-#include "imgui/imstb_truetype.h"
 
 #include <d3d11.h>
 #pragma comment(lib, "d3d11.lib")
@@ -162,5 +158,11 @@ AddFontFromMemoryTTF
 ## 事件
 
 - `ImGui::IsItemHovered()` 悬浮
+
+## 去掉命令行窗口
+
+- 项目 -> xxx 属性 -> 链接器 ->
+  - 系统 -> 子系统 -> 窗口 (/SUBSYSTEM:WINDOWS)
+  - 高级 -> 入口点 -> mainCRTStartup
 
 ## End
