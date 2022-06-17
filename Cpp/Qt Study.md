@@ -6,6 +6,11 @@
   - [构建](#构建)
   - [pro 文件](#pro-文件)
   - [qrc 文件](#qrc-文件)
+  - [控件](#控件)
+  - [布局](#布局)
+  - [样式](#样式)
+  - [方法](#方法)
+  - [信号和槽](#信号和槽)
   - [End](#end)
 
 ## 安装
@@ -37,5 +42,55 @@ build 完后只要 exe 文件，然后将 qt/Qt/Qt5.9.8/5.9.8/mingw53_32/bin 下
 ## qrc 文件
 
 ...
+
+## 控件
+
+添加控件：
+
+- MainWindow 的 `private` 成员 `std::unique_ptr<QLabel> label;`
+- MainWindow::MainWindow() 里 `label.reset(new QLabel("", this));`
+
+- QWidget 控件的基类
+- QMainWindow 窗口
+
+真·控件
+
+- QLabel 文本框
+- QPushButton 按钮
+- QLineEdit 单行输入
+- QListWidget 列表框，非常简陋
+  - QListView 可以替代
+
+## 布局
+
+- QVBoxLayout 垂直布局
+- QHBoxLayout 水平布局
+- QGridLayout 网格布局
+- QFormLayout 表单布局
+- QStackedLayout 分组布局，可切换
+
+## 样式
+
+## 方法
+
+## 信号和槽
+
+信号函数向槽函数发送消息
+
+`QObject::connect(&button,&QPushButton::clicked,&widget,&QWidget::close);`
+
+自定义信号和槽
+
+```cpp
+class MyWidget: public QWidget {
+    Q_OBJECT
+signals:
+    void MySignal(Args);
+slots:
+    void MySlot(Args); // need impl
+};
+```
+
+- 触发的地方写 `emit MySignal(args);`
 
 ## End
