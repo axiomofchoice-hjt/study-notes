@@ -3,7 +3,7 @@
 - [Qt Study](#qt-study)
   - [安装](#安装)
   - [开始](#开始)
-  - [构建](#构建)
+  - [打包](#打包)
   - [pro 文件](#pro-文件)
   - [qrc 文件](#qrc-文件)
   - [字符串](#字符串)
@@ -32,11 +32,12 @@
 
 输名称
 
-基类选择 QWidget，不要创建界面
+基类选择 QWidget 或 QMainWindow，不要创建界面
 
-## 构建
+## 打包
 
-build 完后只要 exe 文件，然后将 qt/Qt/Qt5.9.8/5.9.8/mingw53_32/bin 下的所有 ddl 文件复制过来放一起即可运行
+- build 完后只要 exe 文件，移动到某空文件夹
+- 打开 Qt 命令行，运行 `windeployqt xxx.exe`
 
 ## pro 文件
 
@@ -96,6 +97,8 @@ QString 由 QChar 组成，16bit
 信号函数向槽函数发送消息
 
 `QObject::connect(&button,&QPushButton::clicked,&widget,&QWidget::close);`
+
+注意点：第 1, 3 参数必须是指针，指向的类型必须继承 QObject，且 connect 必须写在继承 QObject 的类里（不知道为什么）
 
 最后一个参数可以用 lambda
 
