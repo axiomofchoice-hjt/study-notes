@@ -3,6 +3,7 @@
 - [Qt Study](#qt-study)
   - [安装](#安装)
   - [开始](#开始)
+  - [用 vscode](#用-vscode)
   - [打包](#打包)
   - [pro 文件](#pro-文件)
   - [qrc 文件](#qrc-文件)
@@ -33,6 +34,14 @@
 输名称
 
 基类选择 QWidget 或 QMainWindow，不要创建界面
+
+## 用 vscode
+
+插件 C/C++, CMake, CMake Tools
+
+F7 build, Ctrl+F5 run, Shift+F5 stop
+
+添加 .cpp .h 后可能要删一下 build/
 
 ## 打包
 
