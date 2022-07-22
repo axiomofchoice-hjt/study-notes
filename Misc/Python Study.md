@@ -50,6 +50,7 @@ __pow__ 幂 **
 - 切换当前目录 `os.chdir(dir)`
 - 返回是否是文件 `os.path.isfile(file)`
 - 返回是否是目录 `os.path.isdir(dir)`
+- 路径拼接 `os.path.join(s1, s2, ...)`
 - 执行命令 `os.system(cmd)`
 
 `import shutil`：
