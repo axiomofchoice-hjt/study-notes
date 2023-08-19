@@ -219,9 +219,9 @@ apt
   - `--strip-components 1` 删除最外层目录（$file/）
   - `tar xvJf $file.tar.xz` tar.xz 解压
 - `tar zcvf` tar.gz 压缩（？）
-- `gzip file` 压缩文件
+- `gzip file -c > file.gz` 压缩文件
   - `-9` 最大程度压缩
-- `gunzip file.gz` 解压
+- `gunzip file.gz -c > file` 解压
 - `zip $file.zip $src -rq` zip 压缩
 - `unzip $file.zip` 解压到同级目录
   - `-d $dst` 指定目录

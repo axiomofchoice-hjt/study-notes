@@ -106,6 +106,12 @@ cmake .. && make -j
 
 make 可以用 `cmake --build .` 代替
 
+也可以指定构建路径
+
+```sh
+cmake -B build . && cmake --build build
+```
+
 ## 7. 指定标准
 
 要加在 add_executable 前

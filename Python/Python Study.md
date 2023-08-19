@@ -102,8 +102,14 @@ mineThread.join() # 等待该线程结束
 
 ### 2.5. 多进程
 
+问题：无法优雅处理键盘中断
+
+最好用 multiprocessing.Pool
+
 - `import multiprocessing`
-- 创建进程 `proc = multiprocessing.Process(target=func)`
+- `proc = multiprocessing.Process(target=func, args=(xxx, xxx, ...))`
+- `proc.start()`
+- `proc.join()`
 - 阻塞 n 秒 `time.sleep(n)`
 - 条件变量 `multiprocessing.Condition`
   - 条件变量中已经内置了一个进程锁。

@@ -5,9 +5,8 @@
   - [2.1. 任务](#21-任务)
   - [2.2. 调试](#22-调试)
 - [3. SSH](#3-ssh)
-- [4. rsync](#4-rsync)
-- [5. pandoc](#5-pandoc)
-- [6. zsh 终端](#6-zsh-终端)
+- [4. pandoc](#4-pandoc)
+- [5. zsh 终端](#5-zsh-终端)
 
 ## 1. nano 编辑器
 
@@ -34,11 +33,7 @@ F5 调试
 
 可以类似 github 使用 ssh 公私钥验证
 
-## 4. rsync
-
-Linux 同步文件工具
-
-## 5. pandoc
+## 4. pandoc
 
 安装 `sudo apt install pandoc`
 
@@ -46,7 +41,7 @@ markdown 转换为 html `pandoc -f gfm -t html {}.md -o {}.html`
 
 [](https://github.com/Wandmalfarbe/pandoc-latex-template)
 
-## 6. zsh 终端
+## 5. zsh 终端
 
 ```sh
 sudo apt install zsh

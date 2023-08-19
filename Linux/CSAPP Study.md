@@ -45,11 +45,11 @@
 - `(%rax, %rcx, 4)` a + c * 4
 - `9(%rax, %rcx, 4)` a + c * 4 + 9
 
-指令后缀：`b w l q` 分别是 8, 16, 32, 64 位
+指令后缀：`b w l q` `byte, word, dword, qword` 分别是 8, 16, 32, 64 位
 
 一些指令
 
-- `movq a, b`：`b = a`
+- `movq a, b`：`b = a`，不确定
   - movl 会把目的寄存器的高 4 字节置 0
 - `pushq x`：`rsp -= 8, *rsp = x`
 - `popq x`：`x = *rsp, rsp += 8`
