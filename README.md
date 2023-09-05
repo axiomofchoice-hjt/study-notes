@@ -4,6 +4,15 @@
 
 仅供参考
 
+## 常用索引
+
+- [Shell_Study.md](./Tools/Shell%20Study.md)
+- [ASM_Study.md](./High-Performance/ASM%20Study.md)
+- [SIMD_Study.md](./High-Performance/SIMD%20Study.md)
+- [Git_Study.md](./Tools/Git%20Study.md)
+
+## 全部索引
+
 <!-- tree2md -->
 
 - High-Performance
@@ -14,27 +23,31 @@
   - [ASM_Study.md](./High-Performance/ASM%20Study.md)
 - GG
   - Windows
+    - [WSL_Debian_装机.md](./GG/Windows/WSL%20Debian%20装机.md)
+    - [WSL_Study.md](./GG/Windows/WSL%20Study.md)
     - [Windows_Study.md](./GG/Windows/Windows%20Study.md)
   - Back_End
     - [Flask_Study.md](./GG/Back%20End/Flask%20Study.md)
     - [Gin_Study.md](./GG/Back%20End/Gin%20Study.md)
     - [Nginx_Study.md](./GG/Back%20End/Nginx%20Study.md)
-  - Go
-    - [Go_Study.md](./GG/Go/Go%20Study.md)
   - 一些软件
     - [Softwares.md](./GG/一些软件/Softwares.md)
     - [list.md](./GG/一些软件/list.md)
     - [AutoHotkey.md](./GG/一些软件/AutoHotkey.md)
     - [Vim_Study.md](./GG/一些软件/Vim%20Study.md)
     - [Scoop.md](./GG/一些软件/Scoop.md)
-  - [Haskell_Study.md](./GG/Haskell%20Study.md)
+  - 一些语言
+    - [Haskell_Study.md](./GG/一些语言/Haskell%20Study.md)
+    - [Zig_Study.md](./GG/一些语言/Zig%20Study.md)
+    - [Java_Study.md](./GG/一些语言/Java%20Study.md)
+    - [Go_Study.md](./GG/一些语言/Go%20Study.md)
+    - [Rust_Study.md](./GG/一些语言/Rust%20Study.md)
   - DB
     - [GORM_Study.md](./GG/DB/GORM%20Study.md)
     - [DB_Study.md](./GG/DB/DB%20Study.md)
     - [MySQL_Study.md](./GG/DB/MySQL%20Study.md)
   - 通识
     - [Web.md](./GG/通识/Web.md)
-  - [Zig_Study.md](./GG/Zig%20Study.md)
   - Python
     - [Python_Libs.md](./GG/Python/Python%20Libs.md)
     - Machine_Learning
@@ -55,8 +68,6 @@
     - [Geometry.md](./GG/Theory/Geometry.md)
     - [Data_Structure.md](./GG/Theory/Data%20Structure.md)
     - [Theory_Study.md](./GG/Theory/Theory%20Study.md)
-  - Java
-    - [Java_Study.md](./GG/Java/Java%20Study.md)
   - Front_End
     - [Three_Study.md](./GG/Front%20End/Three%20Study.md)
     - [Web_Study.md](./GG/Front%20End/Web%20Study.md)
@@ -67,7 +78,6 @@
     - [jQuery_Study.md](./GG/Front%20End/jQuery%20Study.md)
     - [JS_Study.md](./GG/Front%20End/JS%20Study.md)
     - [Vue_Study.md](./GG/Front%20End/Vue%20Study.md)
-  - [Rust_Study.md](./GG/Rust%20Study.md)
 - Cpp
   - [Cpp_Concurrency_Study.md](./Cpp/Cpp%20Concurrency%20Study.md)
   - [Cpp_Study.md](./Cpp/Cpp%20Study.md)
@@ -85,11 +95,6 @@
     - [gdb_Study.md](./Cpp/Tools/gdb%20Study.md)
     - [Cpp_Tools_Study.md](./Cpp/Tools/Cpp%20Tools%20Study.md)
     - [Makefile_Study.md](./Cpp/Tools/Makefile%20Study.md)
-- Linux
-  - [WSL_Debian_装机.md](./Linux/WSL%20Debian%20装机.md)
-  - [Docker_Study.md](./Linux/Docker%20Study.md)
-  - [WSL_Study.md](./Linux/WSL%20Study.md)
-  - [Shell_Study.md](./Linux/Shell%20Study.md)
 - [Study.md](./Study.md)
 - [README.md](./README.md)
 - Tools
@@ -97,3 +102,5 @@
   - [Code.md](./Tools/Code.md)
   - [Tools_Study.md](./Tools/Tools%20Study.md)
   - [Git_Study.md](./Tools/Git%20Study.md)
+  - [Docker_Study.md](./Tools/Docker%20Study.md)
+  - [Shell_Study.md](./Tools/Shell%20Study.md)
