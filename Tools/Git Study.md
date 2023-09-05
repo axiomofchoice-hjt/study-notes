@@ -1,8 +1,11 @@
 # Git
 
-- [1. ubuntu 安装](#1-ubuntu-安装)
+- [1. Debian 安装](#1-debian-安装)
 - [2. git 配置](#2-git-配置)
-  - [2.1. 配置文件](#21-配置文件)
+  - [2.1. SSH 配置](#21-ssh-配置)
+  - [2.2. 设置别名](#22-设置别名)
+  - [2.3. 代理](#23-代理)
+  - [2.4. 配置文件](#24-配置文件)
 - [3. 查看](#3-查看)
 - [4. 提交](#4-提交)
 - [5. 回滚](#5-回滚)
@@ -10,13 +13,15 @@
 - [7. 修改已提交内容](#7-修改已提交内容)
 - [8. 其他](#8-其他)
 
-## 1. ubuntu 安装
+## 1. Debian 安装
 
 ```bash
 sudo apt install git
 ```
 
 ## 2. git 配置
+
+查看所有配置 `git config --list`
 
 用户名和邮箱
 
@@ -25,7 +30,7 @@ git config --global user.name "axiomofchoice-hjt"
 git config --global user.email "1939696303@qq.com"
 ```
 
-SSH 配置
+### 2.1. SSH 配置
 
 ```sh
 ssh-keygen -t rsa -C "1939696303@qq.com"
@@ -49,7 +54,7 @@ HostName gitee.com
 IdentityFile ~/.ssh/id_xxx
 ```
 
-设置别名
+### 2.2. 设置别名
 
 ```sh
 git config --global alias.co checkout
@@ -58,13 +63,24 @@ git config --global alias.ci commit
 git config --global alias.st status
 ```
 
-查看所有配置 `git config --list`
+`up = "!git add --all && git commit -m \"=\" && git push;"`（需要进入配置文件进行配置）
 
-### 2.1. 配置文件
+### 2.3. 代理
+
+```sh
+git config --global http.proxy http://127.0.0.1:xxxx
+git config --global https.proxy http://127.0.0.1:xxxx
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+```
+
+### 2.4. 配置文件
 
 `~/.gitconfig` 用户配置
 
 `.git/config` 项目配置
+
+`git config --global --edit` 编辑配置文件
 
 ## 3. 查看
 
@@ -80,9 +96,15 @@ git config --global alias.st status
 
 ## 5. 回滚
 
-- `git reset --soft HEAD^` 将上一个提交退回至缓存区
-- `git reset --soft HEAD~10` 将往前第 10 个提交退回至缓存区
-- `git reset --hard origin/main` 强制更新到 origin/main 分支
+- `git reset --soft $target` 移动 HEAD 指针，不改变文件，将文件变化体现在暂存区
+- `git reset --hard $target` 强制移动 HEAD 指针，改变文件
+
+目标 `$target`
+
+- `HEAD^` 上一个提交
+- `HEAD~10` 往前第 10 个提交
+- commit id
+- `origin/main` origin/main 分支
 
 ## 6. 分支
 

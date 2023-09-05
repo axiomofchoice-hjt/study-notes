@@ -10,7 +10,7 @@
 
 ## 1. nano 编辑器
 
-保存并退出：Ctrl+O，输入文件名并回车（如果有了就直接回车），Ctrl+X
+保存并退出：Ctrl+S，Ctrl+X
 
 ## 2. VSCode
 

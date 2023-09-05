@@ -14,6 +14,7 @@
   - [7.2. Hello](#72-hello)
 - [8. 模板引擎 inja](#8-模板引擎-inja)
   - [8.1. 语法](#81-语法)
+  - [8.2. raylib](#82-raylib)
 
 ## 1. 一些库
 
@@ -290,3 +291,9 @@ target_link_libraries(${PROJECT_NAME} PRIVATE pantor::inja)
 - 循环 `## for i in array` `## endfor`
   - `##` 必须在一行的开头
   - `loop.is_last` 是否是最后一个元素
+
+### 8.2. raylib
+
+直接克隆[仓库](https://github.com/axiomofchoice-hjt/raylib-template)
+
+[文档](https://www.raylib.com/cheatsheet/cheatsheet_zh.html)

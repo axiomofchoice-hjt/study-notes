@@ -2,17 +2,18 @@
 
 - [1. 最小配置](#1-最小配置)
 - [2. VSCode 配置](#2-vscode-配置)
-- [3. 项目命令](#3-项目命令)
-- [4. 脚本命令](#4-脚本命令)
+- [3. 配置](#3-配置)
+  - [3.1. 项目配置](#31-项目配置)
+  - [3.2. 产物](#32-产物)
+  - [3.3. 编译选项](#33-编译选项)
+- [4. 脚本](#4-脚本)
 - [5. 一些变量](#5-一些变量)
 - [6. 构建](#6-构建)
-- [7. 指定标准](#7-指定标准)
-- [8. 库](#8-库)
-- [9. CMake 配置文件](#9-cmake-配置文件)
-- [10. 执行命令](#10-执行命令)
-- [11. install](#11-install)
-- [12. 子目录](#12-子目录)
-- [13. 线程](#13-线程)
+- [7. 库](#7-库)
+- [8. 执行命令](#8-执行命令)
+- [9. install](#9-install)
+- [10. 子目录](#10-子目录)
+- [11. 常用写法](#11-常用写法)
 
 ## 1. 最小配置
 
@@ -37,37 +38,43 @@ format
 
 - 安装扩展 cmake-format，安装 pip 包 cmake-format
 
-## 3. 项目命令
+## 3. 配置
 
-- `cmake_minimum_required(VERSION 3.1)` CMake 最低版本
-- `project($proj VERSION 1.0)` 设置项目名和版本
-  - VERSION 版本
-  - DESCRIPTION 描述
-  - LANGUAGES 语言（C / CXX / ASM / CUDA）
-  - `${PROJECT_NAME}` 得到项目名
-  - `${PROJECT_VERSION}` 得到版本
+### 3.1. 项目配置
 
-生成
+- 指定 CMake 最低版本 `cmake_minimum_required(VERSION 3.1)`
+- 设置项目名和版本等 `project(${PROJECT_NAME} VERSION 1.0)`
+  - `VERSION` 版本
+  - `DESCRIPTION` 描述
+  - `LANGUAGES` 语言（C / CXX / ASM / CUDA）
 
-- `add_executable($proj $src $src ...)` 生成可执行文件
-- `add_library($proj STATIC $src...)` 生成静态库
-  - `add_library($proj SHARED $src...)` 生成动态库
-  - `add_library($proj MODULE $src...)` 生成？库
-- `add_subdirectory($dir)` 构建子目录，子目录要包含 CMakeLists.txt 文件
+### 3.2. 产物
 
-目标
+- 生成可执行文件 `add_executable(${PROJECT_NAME} $src $src ...)`
+- 生成静态库 `add_library(${PROJECT_NAME} STATIC $src...)`
+  - 生成动态库 `add_library(${PROJECT_NAME} SHARED $src...)`
+  - 生成？库 `add_library(${PROJECT_NAME} MODULE $src...)`
+- 构建子目录 `add_subdirectory($dir)`
+  - 子目录要包含 `CMakeLists.txt` 文件
 
-- `target_include_directories($proj PUBLIC $incl)`
-- `target_link_libraries($proj PUBLIC $lib)`
+### 3.3. 编译选项
+
+- 头文件目录 `target_include_directories(${PROJECT_NAME} PUBLIC $incl)`
+- 链接 `target_link_libraries(${PROJECT_NAME} PUBLIC $lib)`
   - 如果找不到 $lib，会链接到 $lib 子目录
-- `target_compile_options($proj PRIVATE -Wall)`
+- 指定编译选项 `target_compile_options(${PROJECT_NAME} PRIVATE -Wall)`
+- 指定标准 `target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_20)`
+- 指定 BUILD_TYPE (Debug, Release)
+  - `$<$<CONFIG:Debug>:xxx>` 如果是 Debug 就得到字符串 `xxx`
+  - cmake 编译选项 `-DCMAKE_BUILD_TYPE=Debug`（Debug 开启后似乎自动 `-g`）
 
-## 4. 脚本命令
+## 4. 脚本
 
-- `message("Hello World")` 输出日志
-- `set(SRC_LIST a.cpp b.cpp c.cpp)` 设置变量，用 `${SRC_LIST}` 展开
+- 打印日志 `message("Hello World")`
+- 设置变量 `set(SRC_LIST a.cpp b.cpp c.cpp)`
+  - 用 `${SRC_LIST}` 展开
   - 用分号分隔效果和空格一样 `"a;b;c"`？
-- 缓存变量
+- 缓存变量？
   - `set(MY_CACHE_VARIABLE "VALUE" CACHE STRING "Description")`
 - 选项
   - `option(USE_A "description" OFF)` 设置选项（OFF 为默认值）
@@ -92,9 +99,11 @@ format
 
 ## 5. 一些变量
 
-- `${PROJECT_SOURCE_DIR}` 顶级项目目录
-- `${PROJECT_BINARY_DIR}` 默认是 build 目录
-- `${CMAKE_CURRENT_SOURCE_DIR}` 当前目录
+- 项目名 `${PROJECT_NAME}`
+- 版本 `${PROJECT_VERSION}`
+- 顶级项目目录 `${PROJECT_SOURCE_DIR}`
+- build 目录 `${PROJECT_BINARY_DIR}`
+- 当前目录 `${CMAKE_CURRENT_SOURCE_DIR}`
 
 ## 6. 构建
 
@@ -112,19 +121,7 @@ make 可以用 `cmake --build .` 代替
 cmake -B build . && cmake --build build
 ```
 
-## 7. 指定标准
-
-要加在 add_executable 前
-
-```cmake
-# specify the C++ standard
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-```
-
-Modern CMake: 用 `target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_20)`
-
-## 8. 库
+## 7. 库
 
 在子目录里 CMakeLists.txt 加 `add_library`
 
@@ -136,9 +133,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC mylib)
 target_include_directories(${PROJECT_NAME} PUBLIC mylib)
 ```
 
-## 9. CMake 配置文件
-
-## 10. 执行命令
+## 8. 执行命令
 
 ```cmake
 execute_process(COMMAND xxx xxx xxx 
@@ -148,13 +143,13 @@ RESULT_VARIABLE result)
 
 add_custom_command add_custom_target 可以在构建的时候执行命令
 
-## 11. install
+## 9. install
 
 `${CMAKE_INSTALL_PREFIX}` 安装目录
 
 ...
 
-## 12. 子目录
+## 10. 子目录
 
 可以这么写
 
@@ -168,7 +163,7 @@ add_library(${PROJECT_NAME} ${${PROJECT_NAME}_SRCS})
 target_compile_options(${PROJECT_NAME} PRIVATE -Wall -g)
 ```
 
-## 13. 线程
+## 11. 常用写法
 
 ```cmake
 find_package(Threads REQUIRED)

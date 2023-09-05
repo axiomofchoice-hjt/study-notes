@@ -2,26 +2,35 @@
 
 - [1. 安装](#1-安装)
 - [2. 编译命令](#2-编译命令)
-- [3. 基础](#3-基础)
-- [4. 语法](#4-语法)
-  - [4.1. lambda 移动捕获](#41-lambda-移动捕获)
-  - [4.2. 面向对象](#42-面向对象)
-  - [4.3. 变参模板](#43-变参模板)
-  - [4.4. 右值引用](#44-右值引用)
-  - [4.5. 类型转换](#45-类型转换)
-- [5. 标准库](#5-标准库)
-  - [5.1. 正则表达式 regex](#51-正则表达式-regex)
-  - [5.2. 可空类型 optional](#52-可空类型-optional)
-  - [5.3. 智能指针](#53-智能指针)
-  - [5.4. 带数据枚举 variant](#54-带数据枚举-variant)
-  - [5.5. 时钟 chrono](#55-时钟-chrono)
-  - [5.6. 随机数 random](#56-随机数-random)
-  - [5.7. 文件系统 filesystem](#57-文件系统-filesystem)
-- [6. 规则](#6-规则)
-  - [6.1. 单一定义规则 ODR](#61-单一定义规则-odr)
-  - [6.2. name mangling 符号生成规则](#62-name-mangling-符号生成规则)
-- [7. 轮子](#7-轮子)
-- [8. useless](#8-useless)
+- [3. 链接](#3-链接)
+  - [3.1. 栈](#31-栈)
+  - [3.2. 存储器](#32-存储器)
+  - [3.3. ELF](#33-elf)
+  - [3.4. 静态链接](#34-静态链接)
+- [4. C 语法](#4-c-语法)
+  - [4.1. 变参函数](#41-变参函数)
+  - [4.2. GNU 扩展](#42-gnu-扩展)
+  - [4.3. 宏](#43-宏)
+- [5. 语法](#5-语法)
+  - [5.1. 模板](#51-模板)
+  - [5.2. lambda 通用捕获](#52-lambda-通用捕获)
+  - [5.3. 面向对象](#53-面向对象)
+  - [5.4. 变参模板](#54-变参模板)
+  - [5.5. 右值引用](#55-右值引用)
+  - [5.6. 类型转换](#56-类型转换)
+- [6. 标准库](#6-标准库)
+  - [6.1. 正则表达式 regex](#61-正则表达式-regex)
+  - [6.2. 可空类型 optional](#62-可空类型-optional)
+  - [6.3. 智能指针](#63-智能指针)
+  - [6.4. 带数据枚举 variant](#64-带数据枚举-variant)
+  - [6.5. 时钟 chrono](#65-时钟-chrono)
+  - [6.6. 随机数 random](#66-随机数-random)
+  - [6.7. 文件系统 filesystem](#67-文件系统-filesystem)
+- [7. 规则](#7-规则)
+  - [7.1. 单一定义规则 ODR](#71-单一定义规则-odr)
+  - [7.2. name mangling 符号生成规则](#72-name-mangling-符号生成规则)
+- [8. 轮子](#8-轮子)
+- [9. useless](#9-useless)
 
 ## 1. 安装
 
@@ -40,10 +49,10 @@ sudo apt install build-essential
 
 编译流程
 
-- 预处理 `g++ file.cpp -E -o file.i`，不删除注释加个 `-C`
-- 生成汇编 `g++ file.cpp -S -o file.s`
-- 生成目标 `g++ file.cpp -c -o file.o`
-- 生成可执行 `g++ file.cpp -o file`
+- 预处理（cpp）：`g++ file.cpp -E -o file.i`，不删除注释加个 `-C`
+- 编译（ccl）：`g++ file.i -S -o file.s`
+- 汇编（as）：`g++ file.s -c -o file.o`
+- 链接（ld）：`g++ file.o -o file`
 
 编译参数
 
@@ -84,20 +93,171 @@ GNU Binutils 是一系列工具的集合
   - `-t` 导出符号，`-T` 针对动态链接
 - `readelf -a fileName.o > elf.txt` 阅读 elf 的工具
 
-## 3. 基础
+## 3. 链接
 
 一个翻译单元由源文件和直接或间接包含的所有标头组成
 
-## 4. 语法
+### 3.1. 栈
 
-### 4.1. lambda 移动捕获
+缓冲区溢出攻击：外部向 char 数组写数据时，溢出并覆盖函数返回地址，可以执行任意代码
+
+对抗缓冲区溢出攻击：
+
+- 栈随机化：程序一开始会在栈上分配随机大小的空间，是标准行为。该防御不是完全安全的。
+- 栈破坏检测：在函数中有 char 局部数组时，保存函数返回地址，并在调用后比较
+- 限制可执行代码区域：栈被标记为可读可写不可执行
+
+### 3.2. 存储器
+
+层次结构
+
+- L0 寄存器 0 个周期
+- L1 高速缓存 SRAM 4 个周期
+- L2 高速缓存 SRAM 10 个周期
+- L3 高速缓存 SRAM 50 个周期
+- L4 主存 DRAM 上百个周期
+- L5 二级存储 磁盘 几千万个周期
+
+一个空的缓存称为冷缓存，对冷缓存的不命中称为冷不命中
+
+发生不命中就会执行放置策略
+
+### 3.3. ELF
+
+ELF 分类
+
+- 可重定位文件 relocatable file
+- 可执行文件 executable file
+- 共享目标文件 shared object file
+- 核心转储文件 core dump file
+
+ELF 构成
+
+- ELF 头 ELF header
+- .text 代码段
+- .data 数据段
+- .rodata 只读数据
+- .bss bss 段，存未初始化的静态变量，在文件中不占空间
+- .symtab 符号表
+- .rel.text 重定位到 .text
+- .rel.data 重定位到 .data
+- .debug 调试符号表，需要 -g 编译
+- .line 行号，需要 -g 编译
+- .strtab 字符串表
+
+符号
+
+- 本模块定义的全局符号，比如非静态函数和非静态全局变量
+- 被本模块引用的全局符号（外部符号）
+- 局部符号，比如静态函数和静态全局变量
+
+.symtab 节
+
+```cpp
+typedef struct { 
+    int name; // 字符串索引
+    char type: 4, // 函数还是数据
+         binding: 4; // 局部还是全局
+    char reserved;
+    short section; // 到节头表的索引
+    long value; // 目标地址
+    long size; // 目标大小
+} Elf64_Syrnbol;
+```
+
+### 3.4. 静态链接
+
+重名符号：
+
+1. 不允许多个重名的强符号
+2. 优先强符号
+3. 弱符号里选择任意一个
+
+静态库：多个目标文件的打包
+
+- `ar rcs xxx.a xxx.o xxx.o ...`
+- `gcc -static -o main main.o ./xxx.a`
+
+libc.a 提供标准 IO、字符串等操作
+
+libm.a 提供浮点数学函数
+
+静态库以存档 archive 的文件格式保存，后缀 .a
+
+## 4. C 语法
+
+### 4.1. 变参函数
+
+类型提升：比 int 短的整数提升到 int，比 double 短的浮点数提升到 double
+
+### 4.2. GNU 扩展
+
+- `__attribute__((cleanup($func)))`：清除局部变量时执行函数，可用于关闭文件、释放锁等
+- `__attribute__((weak))`：标记一个函数为弱符号
+- `__attribute__((packed))`：用 1 字节对齐
+- `__attribute__((aligned($n)))`：用 n 字节对齐
+- `__attribute__((always_inline))`：强制内联
+
+### 4.3. 宏
+
+- `#A` 加双引号
+- `A##B` 拼接
+- `...` 匹配任意数量的参数，用 `__VA_ARGS__` 展开
+  - `,##__VA_ARGS__` 若 `__VA_ARGS__` 为空，则删除逗号（GNU 扩展）
+- 特殊宏
+  - `__FILE__` 文件名
+  - `__LINE__` 行号（整数）
+  - `__func__` 函数名
+
+## 5. 语法
+
+### 5.1. 模板
+
+头文件 type_traits
+
+`std::is_same<T, U>::value` 判断两个类型是否相同，得到编译期 bool 值
+
+`std::is_base_of<Base, Derived>::value` 检查 Base 是否是 Derived 的基类
+
+`std::enable_if<B, T>::type` 如果 B 的值为 true，则展开为 T，否则展开失败
+
+`std::invoke_result<Func, Args...>::type` 函数类型 Func 在 Args... 参数下的返回值（C++17）（类似功能的 std::result_of 在 C++20 中移除），还有 std::invokable 等一系列模板
+
+一个只能用于函数的装饰器
+
+```cpp
+#define gen(name, dec, f)                                               \
+    template <typename... Args>                                         \
+    std::invoke_result<decltype(dec), decltype(f), Args...>::type name( \
+        Args... args) {                                                 \
+        return (dec)(f, args...);                                       \
+    }
+void dec1(void (*f)()) {
+    f();
+    f();
+}
+void dec2(void (*f)(int), int a) {
+    f(a);
+    f(a);
+}
+gen(func, dec1, [] { printf("Hello\n"); });
+gen(func, dec2, [](int a) { printf("%d\n", a); });
+int main() {
+    func();
+    func(1);
+}
+```
+
+### 5.2. lambda 通用捕获
+
+C++14
 
 ```cpp
 std::string s;
 [s = std::move(s)] { /* ... */ };
 ```
 
-### 4.2. 面向对象
+### 5.3. 面向对象
 
 虚继承：菱形继承重复的基类只在内存出现一次
 
@@ -113,11 +273,11 @@ class A: virtual public B { ... }
 
 问题：dynamic_cast 原理（似乎是虚函数表的信息）
 
-在指定位置调用构造函数 `auto ptr = malloc(sizeof T); new (ptr) T();`
+replacement new，在指定位置调用构造函数 `auto ptr = malloc(sizeof T); new (ptr) T();`
 
 在指定位置调用析构函数 `ptr->~T()`，此处的 T 不要加命名空间
 
-### 4.3. 变参模板
+### 5.4. 变参模板
 
 `sizeof...(Args)` 得到参数个数，可以用 if constexpr 判断：
 
@@ -151,7 +311,7 @@ template <class ...Args> auto sum(Args ...x) {
 }
 ```
 
-### 4.4. 右值引用
+### 5.5. 右值引用
 
 - `std::vector<int> &&` 只能绑定右值，可变
 - `std::move(x)` 等价于 `static_cast<T &&>(x)`
@@ -161,7 +321,7 @@ template <class ...Args> auto sum(Args ...x) {
 
 - 当使用 `template <typename T> void foo(T &&t)` 后，使用 t 时用 `std::forward<T>(t)` 可以保持右值属性（直接用 t 会变成左值）
 
-### 4.5. 类型转换
+### 5.6. 类型转换
 
 - `static_cast<T>` 常规的类型转换
 - `reinterpret_cast<T>` 二进制数据的强制转换，用于指针或引用
@@ -175,9 +335,9 @@ template <class ...Args> auto sum(Args ...x) {
 auto max_i = static_cast<const int &(*)(const int &, const int &)>(std::max);
 ```
 
-## 5. 标准库
+## 6. 标准库
 
-### 5.1. 正则表达式 regex
+### 6.1. 正则表达式 regex
 
 ```c++
 std::string a = "a[a-z]{2}a", b = "ababcac";
@@ -190,7 +350,7 @@ sm.suffix() // "c", string
 sm.position() // 2, size_t, 子串位置
 ```
 
-### 5.2. 可空类型 optional
+### 6.2. 可空类型 optional
 
 `#include <optional>`
 
@@ -199,7 +359,7 @@ sm.position() // 2, size_t, 子串位置
 - `.has_value()` 判断非空
 - `.value()` 得到值
 
-### 5.3. 智能指针
+### 6.3. 智能指针
 
 unique_ptr
 
@@ -245,7 +405,7 @@ p.expired(); // shared_ptr 不存在
 p.lock(); // 转换到 shared_ptr
 ```
 
-### 5.4. 带数据枚举 variant
+### 6.4. 带数据枚举 variant
 
 ```cpp
 std::variant<std::monostate, int, std::string> a{std::in_place_index<1>, 1};
@@ -253,7 +413,7 @@ a.index()
 std::get<1>(a)
 ```
 
-### 5.5. 时钟 chrono
+### 6.5. 时钟 chrono
 
 - `#include <chrono>`
 - `std::chrono::system_clock` 系统时钟
@@ -279,7 +439,7 @@ std::get<1>(a)
   - `std::chrono::microseconds` 微秒
   - `std::chrono::nanoseconds` 纳秒
 
-### 5.6. 随机数 random
+### 6.6. 随机数 random
 
 ```cpp
 #include <random>
@@ -288,7 +448,7 @@ std::mt19937_64 gen(std::random_device{}());
 gen() // 获得 64 位随机数
 ```
 
-### 5.7. 文件系统 filesystem
+### 6.7. 文件系统 filesystem
 
 ```cpp
 #include <filesystem>
@@ -314,7 +474,7 @@ fs::directory_iterator/fs::recursive_directory_iterator 类
 - 迭代器，(递归)遍历目录和文件
 - `for (fs::directory_entry i : fs::directory_iterator(fs::current_path()))`
 
-## 6. 规则
+## 7. 规则
 
 返回值优化 RVO：
 
@@ -330,7 +490,7 @@ POD 类型
 
 most vexing
 
-### 6.1. 单一定义规则 ODR
+### 7.1. 单一定义规则 ODR
 
 非 inline 函数 / 变量，整个程序只允许一个定义，ODR 式使用了 inline 函数 / 变量的每个翻译单元都需要一个定义
 
@@ -357,7 +517,7 @@ most vexing
   - 声明 `template<> class C<int>;`
   - 定义 `template<> class C<int> { ... };`
 
-### 6.2. name mangling 符号生成规则
+### 7.2. name mangling 符号生成规则
 
 没有统一的约定，只考虑 GCC 编译器
 
@@ -392,7 +552,7 @@ FviiE: void(int, int)
 
 运行时分析：`abi::__cxa_demangle`
 
-## 7. 轮子
+## 8. 轮子
 
 线程池
 
@@ -494,6 +654,6 @@ int main() {
 }
 ```
 
-## 8. useless
+## 9. useless
 
 `bool __builtin_umulll_overflow(size_t a, size_t b, size_t &c)` 用于检查乘法是否越界
