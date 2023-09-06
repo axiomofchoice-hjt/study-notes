@@ -30,38 +30,6 @@
 
 ## 1. 命令
 
-### 1.1. 装机
-
-```sh
-echo "
-function add_script() {
-    touch $1.sh
-    chmod u+x $1.sh
-}
-alias run="./run.sh"
-alias clean="./clean.sh"
-alias test="./test.sh"
-" >> ~/.bashrc
-
-echo "
-deb http://mirrors.huaweicloud.com/repository/ubuntu/ jammy main restricted
-deb http://mirrors.huaweicloud.com/repository/ubuntu/ jammy-updates main restricted
-deb http://mirrors.huaweicloud.com/repository/ubuntu/ jammy universe
-deb http://mirrors.huaweicloud.com/repository/ubuntu/ jammy-updates universe
-deb http://mirrors.huaweicloud.com/repository/ubuntu/ jammy multiverse
-deb http://mirrors.huaweicloud.com/repository/ubuntu/ jammy-updates multiverse
-deb http://mirrors.huaweicloud.com/repository/ubuntu/ jammy-backports main restricted universe multiverse
-deb http://mirrors.huaweicloud.com/repository/ubuntu/ jammy-security main restricted
-deb http://mirrors.huaweicloud.com/repository/ubuntu/ jammy-security universe
-deb http://mirrors.huaweicloud.com/repository/ubuntu/ jammy-security multiverse
-" | sudo tee /etc/apt/sources.list
-sudo apt update
-
-sudo apt install build-essential
-sudo apt install curl zip unzip tar
-sudo apt install cmake
-```
-
 ### 1.2. 文件权限
 
 - `chmod` 修改文件权限 (change mode)
@@ -219,7 +187,7 @@ apt
   - `tar tvf $file.tar.gz` 查看内部文件但不解压
   - `--strip-components 1` 删除最外层目录（$file/）
   - `tar xvJf $file.tar.xz` tar.xz 解压
-- `tar zcvf` tar.gz 压缩（？）
+- `tar zcvf $file.tar.gz fileOrDir...` tar.gz 压缩
 - `gzip file -c > file.gz` 压缩文件
   - `-9` 最大程度压缩
 - `gunzip file.gz -c > file` 解压
