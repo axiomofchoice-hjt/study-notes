@@ -10,6 +10,7 @@
 - [ASM_Study.md](./High-Performance/ASM%20Study.md)
 - [SIMD_Study.md](./High-Performance/SIMD%20Study.md)
 - [Git_Study.md](./Tools/Git%20Study.md)
+- [Python_Study.md](./Python/Python%20Study.md)
 
 ## 全部索引
 
@@ -48,11 +49,6 @@
     - [MySQL_Study.md](./GG/DB/MySQL%20Study.md)
   - 通识
     - [Web.md](./GG/通识/Web.md)
-  - Python
-    - [Python_Libs.md](./GG/Python/Python%20Libs.md)
-    - Machine_Learning
-      - [ML_Study.md](./GG/Python/Machine%20Learning/ML%20Study.md)
-    - [Python_Study.md](./GG/Python/Python%20Study.md)
   - Unity
     - [Unity2D_Study.md](./GG/Unity/Unity2D%20Study.md)
     - [CSharp_Study.md](./GG/Unity/CSharp%20Study.md)
@@ -97,6 +93,11 @@
     - [Makefile_Study.md](./Cpp/Tools/Makefile%20Study.md)
 - [Study.md](./Study.md)
 - [README.md](./README.md)
+- Python
+  - [Python_Libs.md](./Python/Python%20Libs.md)
+  - Machine_Learning
+    - [ML_Study.md](./Python/Machine%20Learning/ML%20Study.md)
+  - [Python_Study.md](./Python/Python%20Study.md)
 - Tools
   - [Protobuf_Study.md](./Tools/Protobuf%20Study.md)
   - [Code.md](./Tools/Code.md)

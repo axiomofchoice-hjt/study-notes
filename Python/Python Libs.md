@@ -1,17 +1,16 @@
 # Python Libs
 
-- [Python Libs](#python-libs)
-  - [自动化工具 pyautogui](#自动化工具-pyautogui)
-  - [键盘 keyboard](#键盘-keyboard)
-  - [音乐播放 pygame.mixer](#音乐播放-pygamemixer)
-  - [亮度调节](#亮度调节)
-  - [爬虫 requests bs4](#爬虫-requests-bs4)
-  - [监听文件变化 watchdog](#监听文件变化-watchdog)
-  - [序列化 Protobuf](#序列化-protobuf)
-  - [序列化 Thrift](#序列化-thrift)
-  - [命令行参数 argparse](#命令行参数-argparse)
+- [1. 自动化工具 pyautogui](#1-自动化工具-pyautogui)
+- [2. 键盘 keyboard](#2-键盘-keyboard)
+- [3. 音乐播放 pygame.mixer](#3-音乐播放-pygamemixer)
+- [4. 亮度调节](#4-亮度调节)
+- [5. 爬虫 requests bs4](#5-爬虫-requests-bs4)
+- [6. 监听文件变化 watchdog](#6-监听文件变化-watchdog)
+- [7. 序列化 Protobuf](#7-序列化-protobuf)
+- [8. 序列化 Thrift](#8-序列化-thrift)
+- [9. 命令行参数 argparse](#9-命令行参数-argparse)
 
-## 自动化工具 pyautogui
+## 1. 自动化工具 pyautogui
 
 配置：`pip install pyautogui`
 
@@ -41,7 +40,7 @@ ag.keyUp("shift") # 释放
 ag.typewrite(message = "Hello world!") # 输入信息
 ```
 
-## 键盘 keyboard
+## 2. 键盘 keyboard
 
 ```py
 import keyboard
@@ -50,7 +49,7 @@ def func():
 keyboard.add_hotkey('ctrl+x', func)
 ```
 
-## 音乐播放 pygame.mixer
+## 3. 音乐播放 pygame.mixer
 
 ```py
 pygame.init()
@@ -63,7 +62,7 @@ pygame.pause() # 暂停
 pygame.unpause() # 继续
 ```
 
-## 亮度调节
+## 4. 亮度调节
 
 `pip install wmi` `pip install pypiwin32`
 
@@ -74,7 +73,7 @@ a = c.WmiMonitorBrightnessMethods()[0]
 a.WmiSetBrightness(Brightness=40, Timeout=500)
 ```
 
-## 爬虫 requests bs4
+## 5. 爬虫 requests bs4
 
 ```py
 import requests # 发送 Http 请求
@@ -101,7 +100,7 @@ a.descendants # 后代节点迭代器
 a.select("#id") # CSS 选择器，返回列表
 ```
 
-## 监听文件变化 watchdog
+## 6. 监听文件变化 watchdog
 
 ```py
 import sys
@@ -131,7 +130,7 @@ if __name__ == "__main__":
     observer.join()
 ```
 
-## 序列化 Protobuf
+## 7. 序列化 Protobuf
 
 - 编译 Protobuf，例如 instance.proto 需要 tensorflow 里的依赖，以及 marine 项目目录开始的依赖，则可以写成：
 
@@ -166,7 +165,7 @@ del xxx.repeated_field[:] # 清空 repeated 字段
 for i in xxx.repeated_field: ... # repeated 字段可遍历
 ```
 
-## 序列化 Thrift
+## 8. 序列化 Thrift
 
 - 加载：
 
@@ -200,7 +199,7 @@ from thriftpy2.thrift import TPayload as ThriftBaseClass
   - `str(obj)` 可以得到可读的字符串，但是没有回车和缩进。
   - `from thriftpy2.protocol.json import struct_to_json，struct_to_json(obj)` 得到 dict，然后用一下 json 库就能转换到 json。
 
-## 命令行参数 argparse
+## 9. 命令行参数 argparse
 
 [参考](https://doc.bccnsoft.com/docs/python-3.7.3-docs-html-cn/library/argparse.html)
 

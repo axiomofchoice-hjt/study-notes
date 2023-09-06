@@ -88,6 +88,8 @@ json.dumps(xxx, cls=DateEncoder)
 
 ### 2.4. 多线程
 
+伪并发，不能加速计算密集任务
+
 ```py
 import threading
 class MineThread(threading.Thread):
