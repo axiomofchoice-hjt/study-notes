@@ -428,6 +428,7 @@ std::get<1>(a)
 
 - `std::chrono::duration<int, ratio<A, B>>` 用 int 存储时间，单位为 A / B 秒
   - 例 `std::chrono::duration<int64_t, ratio<3600, 1>>` 即 hour 单位
+- ::zero() 获取零
 - `std::chrono::duration_cast<Duration>(x)` duration 类型转换
 - `.count()` 获取该单位下的数值
 - `::period` 获取 ratio 类型的单位（`::num, ::den` 分子分母）
