@@ -248,6 +248,10 @@ sudo apt install net-tools lsof
 - `uname -a` 系统名、发行版（可能看不到）、指令架构
 - `ls /etc/*_version && cat /etc/*_version` 发行版
 
+### 日期时间
+
+date
+
 ## 5. 脚本
 
 ### 5.1. 变量
