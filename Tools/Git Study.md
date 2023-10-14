@@ -3,9 +3,10 @@
 - [1. Debian 安装](#1-debian-安装)
 - [2. git 配置](#2-git-配置)
   - [2.1. SSH 配置](#21-ssh-配置)
-  - [2.2. 设置别名](#22-设置别名)
+  - [2.2. 命令别名](#22-命令别名)
   - [2.3. 代理](#23-代理)
   - [2.4. 配置文件](#24-配置文件)
+- [克隆](#克隆)
 - [3. 查看](#3-查看)
 - [4. 提交](#4-提交)
 - [5. 回滚](#5-回滚)
@@ -55,7 +56,7 @@ HostName gitee.com
 IdentityFile ~/.ssh/id_xxx
 ```
 
-### 2.2. 设置别名
+### 2.2. 命令别名
 
 ```sh
 git config --global alias.co checkout
@@ -82,6 +83,23 @@ git config --global --unset https.proxy
 `.git/config` 项目配置
 
 `git config --global --edit` 编辑配置文件
+
+## 克隆
+
+直接克隆
+
+- `git clone $url`
+- `git clone $url $dir` 指定目录
+
+从空项目中拉取
+
+```sh
+mkdir $dir
+cd $dir
+git init
+git remote add origin $url
+
+```
 
 ## 3. 查看
 
