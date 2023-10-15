@@ -1,12 +1,78 @@
-# 链接
+# Cpp Compilation
 
-- [1. 栈](#1-栈)
-- [2. ELF](#2-elf)
-- [3. 静态链接](#3-静态链接)
+- [1. 安装](#1-安装)
+- [2. 编译命令](#2-编译命令)
+- [3. 链接](#3-链接)
+  - [3.1. 栈](#31-栈)
+  - [3.2. ELF](#32-elf)
+  - [3.3. 静态链接](#33-静态链接)
+
+## 1. 安装
+
+- ubuntu
+
+```text
+sudo apt update
+sudo apt install build-essential
+```
+
+- windows
+
+官网进入 sourceforge，选择 Files 往下拉点 x86_64-win32-seh，解压，配环境变量
+
+## 2. 编译命令
+
+编译流程
+
+- 预处理（cpp）：`g++ file.cpp -E -o file.i`，不删除注释加个 `-C`
+- 编译（ccl）：`g++ file.i -S -o file.s`
+- 汇编（as）：`g++ file.s -c -o file.o`
+- 链接（ld）：`g++ file.o -o file`
+
+编译参数
+
+- 头文件目录 `-I ./include`
+- 库目录 `-L ./lib`
+- 优化 `-Og -O0 -O1 -O2 -O3`
+- 调试信息 `-g`
+- 宏 `-D $name` `-D $name=$value`
+- 产生所有警告 `-Wall`
+
+静态库
+
+- 生成 `ar xxx.cpp -rcs lib/libxxx.a`
+- 查看包含哪些文件 `ar -t lib/libxxx.a`
+- 使用 `g++ main.cpp -o main -L lib -lxxx`
+- 使用 `g++ main.cpp -o main lib/libxxx.a`
+
+动态库
+
+- 生成 `g++ xxx.cpp -fPIC -shared -o lib/libxxx.so`
+- 使用 `g++ main.cpp -o main -L lib -lxxx`
+- 使用 `g++ main.cpp -o main lib/libxxx.so`
+
+clang 编译可以细分
+
+- `clang++ -E -Xclang -dump-tokens test.cpp` 生成 tokens
+- `clang++ -E -Xclang -ast-dump test.cpp` 生成语法树 AST
+- ... 生成中间代码 IR
+
+GNU Binutils 是一系列工具的集合
+
+- `objdump -s -d fileName.o > fileName.o.txt` 反汇编，可读性比较好
+  - `-S` 显示源码，编译时需要 -g
+  - `-C` 解析 C++ 符号名
+  - `-l` 显示文件名和行号
+  - `-r` 似乎指定这个才能显示跨翻译单元跳转，`-R` 针对动态链接跳转
+  - `-j section` 指定 section
+  - `-t` 导出符号，`-T` 针对动态链接
+- `readelf -a fileName.o > elf.txt` 阅读 elf 的工具
+
+## 3. 链接
 
 一个翻译单元由源文件和直接或间接包含的所有标头组成
 
-## 1. 栈
+### 3.1. 栈
 
 缓冲区溢出攻击：外部向 char 数组写数据时，溢出并覆盖函数返回地址，可以执行任意代码
 
@@ -16,7 +82,7 @@
 - 栈破坏检测：在函数中有 char 局部数组时，保存函数返回地址，并在调用后比较
 - 限制可执行代码区域：栈被标记为可读可写不可执行
 
-## 2. ELF
+### 3.2. ELF
 
 ELF 分类
 
@@ -59,7 +125,7 @@ typedef struct {
 } Elf64_Syrnbol;
 ```
 
-## 3. 静态链接
+### 3.3. 静态链接
 
 重名符号：
 

@@ -98,7 +98,21 @@ mkdir $dir
 cd $dir
 git init
 git remote add origin $url
+git fetch
+git checkout $branch
+```
 
+sparse checkout，可拉取指定目录
+
+```sh
+mkdir $dir
+cd $dir
+git init
+git remote add origin $url
+git config core.sparsecheckout true
+echo $sub_dir >> .git/info/sparse-checkout
+git fetch
+git checkout $branch
 ```
 
 ## 3. 查看

@@ -1,4 +1,4 @@
-# gdb
+# GDB
 
 - [VSCode](#vscode)
 
