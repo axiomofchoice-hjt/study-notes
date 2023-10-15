@@ -6,13 +6,13 @@
   - [2.2. 命令别名](#22-命令别名)
   - [2.3. 代理](#23-代理)
   - [2.4. 配置文件](#24-配置文件)
-- [克隆](#克隆)
-- [3. 查看](#3-查看)
-- [4. 提交](#4-提交)
-- [5. 回滚](#5-回滚)
-- [6. 分支](#6-分支)
-- [7. 修改已提交内容](#7-修改已提交内容)
-- [8. 其他](#8-其他)
+- [3. 克隆](#3-克隆)
+- [4. 查看](#4-查看)
+- [5. 提交](#5-提交)
+- [6. 回滚](#6-回滚)
+- [7. 分支](#7-分支)
+- [8. 修改已提交内容](#8-修改已提交内容)
+- [9. 其他](#9-其他)
 
 ## 1. Debian 安装
 
@@ -65,7 +65,7 @@ git config --global alias.ci commit
 git config --global alias.st status
 ```
 
-`up = "!git add --all && git commit -m \"=\" && git push;"`（需要进入配置文件进行配置）
+`up = "!git add --all; git commit -m \"=\"; git push;"`（需要进入配置文件进行配置）
 
 ### 2.3. 代理
 
@@ -84,7 +84,7 @@ git config --global --unset https.proxy
 
 `git config --global --edit` 编辑配置文件
 
-## 克隆
+## 3. 克隆
 
 直接克隆
 
@@ -98,10 +98,24 @@ mkdir $dir
 cd $dir
 git init
 git remote add origin $url
-
+git fetch
+git checkout $branch
 ```
 
-## 3. 查看
+sparse checkout，可拉取指定目录
+
+```sh
+mkdir $dir
+cd $dir
+git init
+git remote add origin $url
+git config core.sparsecheckout true
+echo $sub_dir >> .git/info/sparse-checkout
+git fetch
+git checkout $branch
+```
+
+## 4. 查看
 
 - `git status` 状态
 - `git diff readme.txt` 查看差别
@@ -109,11 +123,11 @@ git remote add origin $url
 - `git log --pretty=oneline` 精简日志
 - `git reflog` 操作日志
 
-## 4. 提交
+## 5. 提交
 
-- `git add . && git commit -m "message" && git push origin main -f`
+- `git add .; git commit -m "message"; git push origin main -f`
 
-## 5. 回滚
+## 6. 回滚
 
 - `git reset --soft $target` 移动 HEAD 指针，不改变文件，将文件变化体现在暂存区
 - `git reset --hard $target` 强制移动 HEAD 指针，改变文件
@@ -125,7 +139,7 @@ git remote add origin $url
 - commit id
 - `origin/main` origin/main 分支
 
-## 6. 分支
+## 7. 分支
 
 - `git branch` 查看本地分支
 - `git branch $branch` 新建分支
@@ -133,7 +147,7 @@ git remote add origin $url
 - `git checkout -b $branch $remoteBranch` 新建分支、拉取远程代码、切换
 - `git branch -D $branch` 删除分支
 
-## 7. 修改已提交内容
+## 8. 修改已提交内容
 
 1. `git rebase -i HEAD~10` 编辑文件，显示最后 10 个提交
 2. 将需要修改的提交前 pick 改成 edit
@@ -144,7 +158,7 @@ git remote add origin $url
 7. `:wq` 保存退出
 8. `git rebase --continue`
 
-## 8. 其他
+## 9. 其他
 
 cherry-pick
 

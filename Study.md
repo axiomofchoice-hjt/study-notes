@@ -12,6 +12,7 @@
 - clang timetrace：编译时间分析
 - qemu：全虚拟化平台
 - cntlm：二次代理
+- foam：vscode 笔记插件
 
 ## 1. 正则表达式
 
