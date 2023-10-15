@@ -9,7 +9,7 @@
 - 编译构建：[编译](Details/Cpp%20Compilation.md) | [CMake](Details/CMake.md) | [Makefile](Details/Makefile.md)
 - 调试：[GDB](Details/GDB.md)
 - 包管理：[vcpkg](Details/vcpkg.md)
-- 文档
+- 文档：[Doxygen](Details/Doxygen.md)
 
 第三方库
 
