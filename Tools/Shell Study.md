@@ -294,7 +294,7 @@ wget
 ### 4.3. OS
 
 - `uname -a` 系统名、发行版（可能看不到）、指令架构
-- `ls /etc/*_version && cat /etc/*_version` 发行版
+- `ls /etc/*_version && cat /etc/*_version`（/etc/*-release？）发行版
 
 ### 4.4. 日期时间
 
