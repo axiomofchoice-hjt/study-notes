@@ -290,11 +290,12 @@ wget
 
 - cpu 支持的指令集：`cat /proc/cpuinfo`
 - cache line 大小：`cat /sys/devices/system/cpu/cpu0/cache/index0/coherency_line_size`，单位字节，一般是 64
+lscpu
 
 ### 4.3. OS
 
 - `uname -a` 系统名、发行版（可能看不到）、指令架构
-- `ls /etc/*_version && cat /etc/*_version`（/etc/*-release？）发行版
+- `lsb_release -a` 发行版，需要安装 lsb
 
 ### 4.4. 日期时间
 
