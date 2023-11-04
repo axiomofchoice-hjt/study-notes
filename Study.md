@@ -13,6 +13,8 @@
 - qemu：全虚拟化平台
 - cntlm：二次代理
 - foam：vscode 笔记插件
+- valgrind：内存检测工具
+- excalidraw：手绘风格绘图工具
 
 ## 1. 正则表达式
 

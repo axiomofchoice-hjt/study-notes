@@ -7,6 +7,9 @@
   - [1.4. 链接](#14-链接)
   - [1.5. 查找文件](#15-查找文件)
   - [1.6. 文本处理](#16-文本处理)
+    - [1.6.1. grep](#161-grep)
+    - [1.6.2. sed](#162-sed)
+    - [1.6.3. awk](#163-awk)
   - [1.7. 压缩解压](#17-压缩解压)
     - [1.7.1. tar.gz](#171-targz)
     - [1.7.2. gz](#172-gz)
@@ -23,9 +26,11 @@
   - [3.3. 包管理](#33-包管理)
 - [4. 其他](#4-其他)
   - [4.1. 网络](#41-网络)
-  - [4.2. CPU](#42-cpu)
-  - [4.3. OS](#43-os)
-  - [4.4. 日期时间](#44-日期时间)
+  - [4.2. OS](#42-os)
+  - [4.3. CPU](#43-cpu)
+  - [4.4. 内存](#44-内存)
+  - [4.5. glibc](#45-glibc)
+  - [4.6. 日期时间](#46-日期时间)
 - [5. 脚本](#5-脚本)
   - [5.1. 变量](#51-变量)
   - [5.2. 注释](#52-注释)
@@ -117,7 +122,7 @@
 
 ### 1.6. 文本处理
 
-grep
+#### 1.6.1. grep
 
 - `grep pattern file` 用正则表达式匹配，查看匹配的行（子串匹配即可）
   - `-C 5` 获取结果的前后 5 行
@@ -128,7 +133,7 @@ grep
   - `-w` 要求整行匹配
   - `-R` 递归
 
-sed
+#### 1.6.2. sed
 
 - `sed command file` 按行执行操作并查看结果
   - `-i` 修改源文件
@@ -147,7 +152,7 @@ sed
     - `2,3` 表示从 2 到 3
     - `2,$` 表示从 2 到末尾
 
-awk
+#### 1.6.3. awk
 
 - `awk '/pattern/{command}' file` 按行操作
   - pattern 正则表达式
@@ -286,20 +291,48 @@ wget
 - -o 指定输出
 - -c 断点续传
 
-### 4.2. CPU
+### 4.2. OS
 
-- cpu 支持的指令集：`cat /proc/cpuinfo`
-- cache line 大小：`cat /sys/devices/system/cpu/cpu0/cache/index0/coherency_line_size`，单位字节，一般是 64
+- `uname -a` 系统名、发行版（可能看不到）
+- `lsb_release -a` 发行版，需要安装 lsb
+- `ls /etc/*release` 然后 cat 查看具体版本
+
+### 4.3. CPU
+
 lscpu
 
-### 4.3. OS
+- 架构：`lscpu` 的 Architecture
+- 支持的指令集：`lscpu` 的 Flags
+- 型号：`lscpu` 的 Model name
+- 主频：`lscpu` 的 CPU MHz
+- 核数：`lscpu` 的 CPU(s)
+- 线程数：`lscpu` 的 Thread(s) per core
+- Cache 容量：`lscpu` 的 L1d cache, L1i cache, L2 cache, L3 cache
+- 大小端：`lscpu` 的 Byte Order
 
-- `uname -a` 系统名、发行版（可能看不到）、指令架构
-- `lsb_release -a` 发行版，需要安装 lsb
+***
 
-### 4.4. 日期时间
+- Cache Line 大小：`cat /sys/devices/system/cpu/cpu0/cache/index0/coherency_line_size`，单位字节，一般是 64
+- `cat /proc/cpuinfo` 查看每个 CPU
+
+### 4.4. 内存
+
+- `cat /proc/meminfo` 查看内存大小
+- `dmidecode` 内存频率
+
+numa
+
+- numactl -H 查看numa节点和对应cpu
+- numactl --physcpubind=40-47 --membind=1 ./xxx 绑核绑内存
+
+### 4.5. glibc
+
+ldd --version
+
+### 4.6. 日期时间
 
 - `date` 日期和时间
+- `date -s "YYYY/MM/DD hh:mm:ss"` 设置系统时间
 
 ## 5. 脚本
 
@@ -327,7 +360,7 @@ lscpu
 
 ### 5.2. 注释
 
-- `#...` 单行注释
+- `#` 单行注释
 - `:<<notification` `notification` 多行注释
 
 ### 5.3. 插值
