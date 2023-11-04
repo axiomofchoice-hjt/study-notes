@@ -33,8 +33,15 @@
     - [Flask_Study.md](./GG/Back%20End/Flask%20Study.md)
     - [Gin_Study.md](./GG/Back%20End/Gin%20Study.md)
     - [Nginx_Study.md](./GG/Back%20End/Nginx%20Study.md)
+    - DB
+      - [GORM_Study.md](./GG/Back%20End/DB/GORM%20Study.md)
+      - [DB_Study.md](./GG/Back%20End/DB/DB%20Study.md)
+      - [MySQL_Study.md](./GG/Back%20End/DB/MySQL%20Study.md)
   - 一些软件
+    - [Protobuf_Study.md](./GG/一些软件/Protobuf%20Study.md)
+    - [Tools_Study.md](./GG/一些软件/Tools%20Study.md)
     - [Softwares.md](./GG/一些软件/Softwares.md)
+    - [Docker_Study.md](./GG/一些软件/Docker%20Study.md)
     - [AutoHotkey.md](./GG/一些软件/AutoHotkey.md)
     - [Vim_Study.md](./GG/一些软件/Vim%20Study.md)
     - [Scoop.md](./GG/一些软件/Scoop.md)
@@ -44,10 +51,6 @@
     - [Java_Study.md](./GG/一些语言/Java%20Study.md)
     - [Go_Study.md](./GG/一些语言/Go%20Study.md)
     - [Rust_Study.md](./GG/一些语言/Rust%20Study.md)
-  - DB
-    - [GORM_Study.md](./GG/DB/GORM%20Study.md)
-    - [DB_Study.md](./GG/DB/DB%20Study.md)
-    - [MySQL_Study.md](./GG/DB/MySQL%20Study.md)
   - 通识
     - [Web.md](./GG/通识/Web.md)
   - Game
@@ -55,13 +58,6 @@
     - [CSharp_Study.md](./GG/Game/CSharp%20Study.md)
     - [Unity_Study.md](./GG/Game/Unity%20Study.md)
     - [Godot_Study.md](./GG/Game/Godot%20Study.md)
-  - GUI
-    - [Electron_Study.md](./GG/GUI/Electron%20Study.md)
-    - [GUI.md](./GG/GUI/GUI.md)
-    - [Qt_Study.md](./GG/GUI/Qt%20Study.md)
-    - [Tauri_Study.md](./GG/GUI/Tauri%20Study.md)
-    - [Android_Study.md](./GG/GUI/Android%20Study.md)
-    - [WPF_Study.md](./GG/GUI/WPF%20Study.md)
   - Theory
     - [Geometry.md](./GG/Theory/Geometry.md)
     - [Data_Structure.md](./GG/Theory/Data%20Structure.md)
@@ -75,6 +71,13 @@
     - [Vue3_Study.md](./GG/Front%20End/Vue3%20Study.md)
     - [jQuery_Study.md](./GG/Front%20End/jQuery%20Study.md)
     - [JS_Study.md](./GG/Front%20End/JS%20Study.md)
+    - GUI
+      - [Electron_Study.md](./GG/Front%20End/GUI/Electron%20Study.md)
+      - [GUI.md](./GG/Front%20End/GUI/GUI.md)
+      - [Qt_Study.md](./GG/Front%20End/GUI/Qt%20Study.md)
+      - [Tauri_Study.md](./GG/Front%20End/GUI/Tauri%20Study.md)
+      - [Android_Study.md](./GG/Front%20End/GUI/Android%20Study.md)
+      - [WPF_Study.md](./GG/Front%20End/GUI/WPF%20Study.md)
     - [Vue_Study.md](./GG/Front%20End/Vue%20Study.md)
 - Cpp
   - WIP
@@ -86,6 +89,7 @@
     - [Cpp_Concurrency.md](./Cpp/Details/Cpp%20Concurrency.md)
     - [Makefile.md](./Cpp/Details/Makefile.md)
     - [rapidjson.md](./Cpp/Details/rapidjson.md)
+    - [OpenMP.md](./Cpp/Details/OpenMP.md)
     - [C_Syntax.md](./Cpp/Details/C%20Syntax.md)
     - [others.md](./Cpp/Details/others.md)
     - [fmt.md](./Cpp/Details/fmt.md)
@@ -105,9 +109,6 @@
     - [ML_Study.md](./Python/Machine%20Learning/ML%20Study.md)
   - [Python_Study.md](./Python/Python%20Study.md)
 - Tools
-  - [Protobuf_Study.md](./Tools/Protobuf%20Study.md)
   - [Code.md](./Tools/Code.md)
-  - [Tools_Study.md](./Tools/Tools%20Study.md)
   - [Git_Study.md](./Tools/Git%20Study.md)
-  - [Docker_Study.md](./Tools/Docker%20Study.md)
   - [Shell_Study.md](./Tools/Shell%20Study.md)

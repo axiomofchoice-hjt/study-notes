@@ -13,10 +13,7 @@
 
 ## 1. 安装
 
-```bash
-sudo apt install python-is-python3
-sudo apt install python3-pip
-```
+安装 Miniconda，起 conda 环境时选择 python 版本。
 
 ## 2. 语法
 
@@ -135,10 +132,10 @@ setuptools
 ## 4. conda 环境
 
 - `conda env list` 查看环境
-- `conda create -n envname python=3.8` 创建环境
-  - `conda create --prefix=/home/xxx/conda/envs/envname python=3.8` 指定位置
-- `conda activate envname` 激活环境
-  - `conda activate /home/xxx/conda/envs/envname` 指定位置
+- `conda create -n $envname python=3.11` 创建环境
+  - `conda create -p=/home/xxx/$envname python=3.11` 指定位置
+- `conda activate $envname` 激活环境
+  - `conda activate /home/xxx/$envname` 指定位置
 - `conda deactivate` 关闭环境
 
 ## 5. 包管理
