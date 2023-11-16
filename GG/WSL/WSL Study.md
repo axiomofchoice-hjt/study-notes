@@ -30,6 +30,7 @@ appendWindowsPath = false
 ## 2. WSL 系统操作
 
 - `wsl --list -v` 显示系统状态
+- `wsl --list --online` 官方提供的发行版
 - `wsl --unregister sysname` 删除系统
 - `wsl --set-default sysname` 设置默认系统
 - `wsl --export sysname xxx/filename.tar` 导出系统数据

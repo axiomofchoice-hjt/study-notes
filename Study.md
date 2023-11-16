@@ -15,6 +15,7 @@
 - foam：vscode 笔记插件
 - valgrind：内存检测工具
 - excalidraw：手绘风格绘图工具
+- Latex Sympy Calculator：计算 Latex 表达式
 
 ## 1. 正则表达式
 

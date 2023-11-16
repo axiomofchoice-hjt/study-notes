@@ -8,7 +8,6 @@
 - [6. 监听文件变化 watchdog](#6-监听文件变化-watchdog)
 - [7. 序列化 Protobuf](#7-序列化-protobuf)
 - [8. 序列化 Thrift](#8-序列化-thrift)
-- [9. 命令行参数 argparse](#9-命令行参数-argparse)
 
 ## 1. 自动化工具 pyautogui
 
@@ -198,32 +197,3 @@ from thriftpy2.thrift import TPayload as ThriftBaseClass
 - 调试：
   - `str(obj)` 可以得到可读的字符串，但是没有回车和缩进。
   - `from thriftpy2.protocol.json import struct_to_json，struct_to_json(obj)` 得到 dict，然后用一下 json 库就能转换到 json。
-
-## 9. 命令行参数 argparse
-
-[参考](https://doc.bccnsoft.com/docs/python-3.7.3-docs-html-cn/library/argparse.html)
-
-- `import argparse` 一个标准库的包。
-- 先创建一个 parser：
-
-```py
-parser = argparse.ArgumentParser(
-    description='Module Description'
-)
-```
-
-- 只考虑是否出现的参数：
-  - （类似 `ls -l`）
-  - `parser.add_argument('-l', action='store_true', help='xxx')`
-  - 之后用 `args.l` 得到 bool 类型。
-- 有值的参数：
-  - （格式为 `-num=1`）
-  - `parser.add_argument('-num', required=False, type=int, default=0, help='xxx')`
-  - `parser.add_argument('-name', required=False, type=str, default='', help='xxx')`
-  - 之后用 `args.num args.name` 得到值。
-- 值是一个列表的参数：
-  - （格式为 `-nums 1 2 3`）
-  - `parser.add_argument('-nums', nargs='+', type=int, help='xxx')`
-  - nargs 可以是 `*+?` 或 int value。
-- 用 `args = parser.parse_args()` 来得到参数。
-- subparsers...

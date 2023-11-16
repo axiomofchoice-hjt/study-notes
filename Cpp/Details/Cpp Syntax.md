@@ -172,6 +172,7 @@ sm.position() // 2, size_t, 子串位置
 - `std::make_optional(x)` 创建
 - `.has_value()` 判断非空
 - `.value()` 得到值
+- `.value_or(x)` 得到值，空得到 x
 
 ### 2.3. 智能指针
 
@@ -261,6 +262,17 @@ std::get<1>(a)
 std::mt19937_64 gen(std::random_device{}());
 gen() // 获得 64 位随机数
 ```
+
+随机数引擎：一般就是梅森旋转算法 std::mt19937_64，用真随机（可能）`std::random_device` 作为参数
+
+随机分布
+
+- `std::uniform_real_distribution<float> uniform(a, b);` 均匀分布，范围 `[a, b)`
+  - `uniform(gen)` 得到随机数
+- `std::uniform_int_distribution<int> uniform(a, b);` 离散的均匀分布，范围 `[a, b]`（两边都包含）
+  - `uniform(gen)` 得到随机数
+- `std::normal_distribution<float> norm(0, 1);` 正态分布，参数是平均数和标准差
+  - `norm(gen)` 得到随机数
 
 ### 2.7. 文件系统 filesystem
 

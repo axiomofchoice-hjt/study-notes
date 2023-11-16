@@ -13,11 +13,12 @@
   - [5.3. 控制语句](#53-控制语句)
 - [6. 一些变量](#6-一些变量)
 - [7. 构建](#7-构建)
-- [8. 库](#8-库)
-- [9. 执行命令](#9-执行命令)
-- [10. install](#10-install)
+- [8. 内部库](#8-内部库)
+- [9. 第三方库](#9-第三方库)
+- [10. 执行命令](#10-执行命令)
 - [11. 子目录](#11-子目录)
-- [12. 常用写法](#12-常用写法)
+- [12. 安装卸载库](#12-安装卸载库)
+- [13. 常用写法](#13-常用写法)
 
 ## 1. 安装
 
@@ -151,7 +152,7 @@ make 可以用 `cmake --build .` 代替
 cmake -B build . && cmake --build build
 ```
 
-## 8. 库
+## 8. 内部库
 
 在子目录里 CMakeLists.txt 加 `add_library`
 
@@ -163,7 +164,32 @@ target_link_libraries(${PROJECT_NAME} PUBLIC mylib)
 target_include_directories(${PROJECT_NAME} PUBLIC mylib)
 ```
 
-## 9. 执行命令
+## 9. 第三方库
+
+`mkdir third_party`
+
+添加第三方库到 third_party 目录下：
+
+```sh
+git submodule add https://github.com/fmtlib/fmt third_party/fmt
+```
+
+安装第三方库：
+
+```sh
+git submodule sync
+git submodule update --init --recursive
+```
+
+引入 CMake：
+
+```cmake
+add_subdirectory(third_party/fmt)
+target_link_libraries(${PROJECT_NAME} PRIVATE fmt)
+target_include_directories(${PROJECT_NAME} PRIVATE third_party/fmt/include)
+```
+
+## 10. 执行命令
 
 ```cmake
 execute_process(COMMAND xxx xxx xxx 
@@ -172,12 +198,6 @@ RESULT_VARIABLE result)
 ```
 
 add_custom_command add_custom_target 可以在构建的时候执行命令
-
-## 10. install
-
-`${CMAKE_INSTALL_PREFIX}` 安装目录
-
-...
 
 ## 11. 子目录
 
@@ -193,7 +213,17 @@ add_library(${PROJECT_NAME} ${${PROJECT_NAME}_SRCS})
 target_compile_options(${PROJECT_NAME} PRIVATE -Wall -g)
 ```
 
-## 12. 常用写法
+## 12. 安装卸载库
+
+`${CMAKE_INSTALL_PREFIX}` 安装目录
+
+在 build 目录
+
+安装 `make install`
+
+卸载 `xargs rm < install_manifest.txt`
+
+## 13. 常用写法
 
 ```cmake
 find_package(Threads REQUIRED)

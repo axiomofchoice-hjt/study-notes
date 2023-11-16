@@ -23,7 +23,7 @@ wsl --import Fedora $dir $tar_dir/Fedora.tar --version 2
 wsl --set-default sysname
 ```
 
-为了方面就只用 root 登录了
+为了方便就只用 root 登录了
 
 ## 2. 换源
 
@@ -45,6 +45,10 @@ sed -i "s@http://.*/pub/fedora/linux@https://mirrors.huaweicloud.com/fedora@g" /
 yum install vim nano git curl zip unzip tar
 ```
 
+```sh
+yum install net-tools iputils
+```
+
 ## 4. wsl.conf
 
 ```sh
@@ -61,7 +65,7 @@ yum install zsh zsh-syntax-highlighting util-linux-user
 chsh -s /bin/zsh
 ```
 
-~/.zsh
+`~/.zsh`
 
 ```sh
 alias git=/mnt/c/Apps/Git/bin/git.exe
@@ -74,7 +78,7 @@ PROMPT='%F{208}%n%f %F{226}%~%f -> '
 source ~/.zshkeybind
 ```
 
-~/.zshkeybind
+`~/.zshkeybind`
 
 ```sh
 # key bindings

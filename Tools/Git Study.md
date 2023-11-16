@@ -12,7 +12,8 @@
 - [6. 回滚](#6-回滚)
 - [7. 分支](#7-分支)
 - [8. 修改已提交内容](#8-修改已提交内容)
-- [9. 其他](#9-其他)
+- [9. 子模块](#9-子模块)
+- [10. 其他](#10-其他)
 
 ## 1. Debian 安装
 
@@ -158,7 +159,22 @@ git checkout $branch
 7. `:wq` 保存退出
 8. `git rebase --continue`
 
-## 9. 其他
+## 9. 子模块
+
+添加
+
+```sh
+git submodule add https://github.com/fmtlib/fmt third_party/fmt
+```
+
+更新
+
+```sh
+git submodule sync
+git submodule update --init --recursive
+```
+
+## 10. 其他
 
 cherry-pick
 

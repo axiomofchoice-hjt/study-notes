@@ -6,6 +6,7 @@
 - [4. 开机启动](#4-开机启动)
 - [5. Hosts](#5-hosts)
 - [6. 拷贝](#6-拷贝)
+- [7. oh-my-posh 终端](#7-oh-my-posh-终端)
 
 ## 1. 删除目录
 
@@ -35,3 +36,56 @@ C:\Windows\System32\drivers\etc\hosts
 ## 6. 拷贝
 
 `xcopy src dst`
+
+## 7. oh-my-posh 终端
+
+scoop 安装
+
+```powershell
+scoop install https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/oh-my-posh.json
+```
+
+某一位置新建 `hjt.omp.json` 写入：
+
+```json
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "version": 2,
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "type": "session",
+          "style": "plain",
+          "foreground": "#FF8700",
+          "template": "{{ .UserName }} "
+        },
+        {
+          "type": "path",
+          "style": "plain",
+          "foreground": "#FFFF00",
+          "template": "{{ .Path }}",
+          "properties": {
+            "folder_separator_icon": "/",
+            "style": "full"
+          }
+        },
+        {
+          "type": "text",
+          "style": "plain",
+          "foreground": "#FFFFFF",
+          "template": " -> "
+        }
+      ]
+    }
+  ]
+}
+```
+
+notepad $PROFILE 写入：
+
+```powershell
+Invoke-Expression (oh-my-posh init pwsh --config "XXX\hjt.omp.json")
+```
