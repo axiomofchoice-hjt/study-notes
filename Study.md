@@ -12,6 +12,12 @@
 - clang timetrace：编译时间分析
 - qemu：全虚拟化平台
 - cntlm：二次代理
+- foam：vscode 笔记插件
+- valgrind：内存检测工具
+- excalidraw：手绘风格绘图工具
+- Latex Sympy Calculator：计算 Latex 表达式
+- WakaTime：记录工作时间
+- broot：linux 命令行文件游览器
 
 ## 1. 正则表达式
 
