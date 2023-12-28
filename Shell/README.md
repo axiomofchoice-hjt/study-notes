@@ -14,7 +14,7 @@
   - [6.6. OS](#66-os)
 - [7. 脚本](#7-脚本)
 - [8. Shell Config](#8-shell-config)
-- [Git](#git)
+- [9. Git](#9-git)
 
 ## 1. 文件系统
 
@@ -82,6 +82,6 @@
 
 - [Shell Config](./.details/Shell%20Config.md)
 
-## Git
+## 9. Git
 
 - [Git](./.details/Git.md)

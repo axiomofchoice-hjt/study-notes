@@ -4,48 +4,43 @@
 
 仅供参考
 
-## 常用索引
+## 1. 常用索引
 
-- [Shell Study.md](./Shell/Shell%20Study.md)
-- [ASM Study.md](./高性能/ASM%20Study.md)
-- [SIMD Study.md](./高性能/SIMD%20Study.md)
-- [Git Study.md](./Shell/.details/Git.md)
-- [Cpp Study.md](./Cpp/Cpp%20Study.md)
-- [Python Study.md](./Python/Python%20Study.md)
+- [Shell](./Shell/README.md)
+- [Python](./Python/README.md)
+- [Git](./Shell/.details/Git.md)
+- [Cpp](./Cpp/README.md)
+- [ASM](./HPC/ASM.md)
+- [SIMD](./HPC/SIMD.md)
 
-## 全部索引
+## 2. 全部索引
 
 <!-- tree2md -->
 
 - Cpp
-  - [Cpp Study.md](./Cpp/Cpp%20Study.md)
+  - [README.md](./Cpp/README.md)
+- HPC
+  - [ASM.md](./HPC/ASM.md)
+  - [CUDA.md](./HPC/CUDA.md)
+  - [Hardware.md](./HPC/Hardware.md)
+  - [Profiling.md](./HPC/Profiling.md)
+  - [SIMD.md](./HPC/SIMD.md)
 - Misc
-  - Game
-    - [CSharp Study.md](./Misc/Game/CSharp%20Study.md)
-    - [Unity Study.md](./Misc/Game/Unity%20Study.md)
-    - [Unity2D Study.md](./Misc/Game/Unity2D%20Study.md)
-  - Theory
-    - [Data Structure.md](./Misc/Theory/Data%20Structure.md)
-    - [Geometry.md](./Misc/Theory/Geometry.md)
-    - [ML Study.md](./Misc/Theory/ML%20Study.md)
-    - [Theory Study.md](./Misc/Theory/Theory%20Study.md)
+  - General
+    - [Algorithm.md](./Misc/General/Algorithm.md)
+    - [Distributed Systems.md](./Misc/General/Distributed%20Systems.md)
+    - [General.md](./Misc/General/General.md)
+    - [Machine Learning.md](./Misc/General/Machine%20Learning.md)
+    - [Web.md](./Misc/General/Web.md)
   - [Windows Study.md](./Misc/Windows%20Study.md)
   - WSL
+    - [WSL Arch Get Start.md](./Misc/WSL/WSL%20Arch%20Get%20Start.md)
     - [WSL Debian Get Start.md](./Misc/WSL/WSL%20Debian%20Get%20Start.md)
     - [WSL Fedora Get Start.md](./Misc/WSL/WSL%20Fedora%20Get%20Start.md)
     - [WSL Study.md](./Misc/WSL/WSL%20Study.md)
-  - 通识
-    - [Web.md](./Misc/通识/Web.md)
 - Python
-  - [Python Study.md](./Python/Python%20Study.md)
+  - [README.md](./Python/README.md)
 - [README.md](./README.md)
 - Shell
-  - [Shell Study.md](./Shell/Shell%20Study.md)
-- [Study.md](./Study.md)
-- 高性能
-  - [ASM Study.md](./高性能/ASM%20Study.md)
-  - [CUDA Study.md](./高性能/CUDA%20Study.md)
-  - [Distributed Systems Study.md](./高性能/Distributed%20Systems%20Study.md)
-  - [SIMD Study.md](./高性能/SIMD%20Study.md)
-  - [性能分析.md](./高性能/性能分析.md)
-  - [硬件.md](./高性能/硬件.md)
+  - [README.md](./Shell/README.md)
+- [有意思的东西.md](./有意思的东西.md)

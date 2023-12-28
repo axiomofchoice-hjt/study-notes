@@ -389,3 +389,5 @@ FviiE: void(int, int)
 ## 4. useless
 
 `bool __builtin_umulll_overflow(size_t a, size_t b, size_t &c)` 用于检查乘法是否越界
+
+据 U姐姐所说，std::map 迭代器失效规则不允许 std::map 使用 b 树实现。

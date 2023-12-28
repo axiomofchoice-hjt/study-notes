@@ -9,15 +9,13 @@
 
 ## 1. x86
 
-兼容性不太好，对硬件敏感
-
 头文件 `#include <immintrin.h>`
 
 编译选项加 -msse -mavx -mavx2，或者 cmake 加 `target_compile_options(${PROJECT_NAME} PRIVATE -msse -mavx -mavx2)`
 
 [API](https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html)
 
-MMX 对应 64 位，SSE 对应 128 位，AVX 对应 256 位，不过不绝对
+MMX 对应 64 位，SSE 对应 128 位，AVX AVX2 对应 256 位，AVX512 对应 512 位，不过不绝对
 
 查看支持哪些指令集：`cat /proc/cpuinfo`
 

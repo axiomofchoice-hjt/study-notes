@@ -8,7 +8,7 @@
 - [6. 拷贝](#6-拷贝)
 - [7. oh-my-posh 终端](#7-oh-my-posh-终端)
 - [8. 消除“允许此应用对你的设备进行更改吗”](#8-消除允许此应用对你的设备进行更改吗)
-- [powershell prompt](#powershell-prompt)
+- [9. powershell prompt](#9-powershell-prompt)
 
 ## 1. 删除目录
 
@@ -96,12 +96,12 @@ Invoke-Expression (oh-my-posh init pwsh --config "XXX\hjt.omp.json")
 
 控制面板，搜索“更改用户账户控制设置”，拉到底部
 
-## powershell prompt
+## 9. powershell prompt
 
 开启脚本 `set-executionpolicy remotesigned`
 
 新建 `$PSHOME\Profile.ps1`
 
-写入 `function prompt { "$env:COMPUTERNAME $(Get-Location) ->" }`
+写入 `function prompt { "$env:COMPUTERNAME $(Get-Location) -> " }`
 
 ...

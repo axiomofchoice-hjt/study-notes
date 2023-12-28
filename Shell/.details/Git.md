@@ -66,10 +66,10 @@ IdentityFile ~/.ssh/id_xxx
 git config --global alias.co checkout
 git config --global alias.br branch
 git config --global alias.ci commit
-git config --global alias.st status
+git config --global alias.st "status -sb"
+git config --global alias.up '!git add --all; git commit -m =; git push;'
+git config --global alias.lg "log --oneline --graph"
 ```
-
-`up = "!git add --all; git commit -m \"=\"; git push;"`（需要进入配置文件进行配置）
 
 ### 2.3. 代理
 
@@ -124,6 +124,7 @@ git checkout $branch
 - `git log` 日志
   - `--oneline` 精简日志
   - `--graph` 以图的形式
+  - `--stat` 显示文件更改
 - `git reflog` 操作日志
 - `git commit -P <file>` 查看文件的 commit
 
@@ -189,10 +190,7 @@ git rm -f third_party/fmt
 
 ## 10. 其他
 
-cherry-pick
-
-`git count-objects -vH` 计算仓库大小
-
-`git revert` 反转某一 commit
-
-`git blame` 按行查看谁最后修改
+- `cherry-pick` 应用某一 commit
+- `git revert` 反转某一 commit
+- `git count-objects -vH` 计算仓库大小
+- `git blame` 按行查看谁最后修改

@@ -24,6 +24,7 @@ rm miniconda3.sh
 - `conda activate $envname` 激活环境
   - `conda activate /home/xxx/$envname` 指定位置
 - `conda deactivate` 关闭环境
+- `conda remove -n $envname --all` 删除环境
 
 ## 3. 包管理
 

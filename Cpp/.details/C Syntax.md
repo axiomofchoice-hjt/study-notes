@@ -25,4 +25,5 @@
 - 特殊宏
   - `__FILE__` 文件名
   - `__LINE__` 行号（整数）
-  - `__func__` 函数名
+  - `__func__` / `__FUNCTION__` 函数名
+  - `__PRETTY_FUNCTION__` 完整的函数接口

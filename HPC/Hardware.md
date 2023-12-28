@@ -1,4 +1,4 @@
-# 硬件
+# Hardware
 
 - [1. CPU](#1-cpu)
 - [2. Cache](#2-cache)
