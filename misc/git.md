@@ -1,0 +1,231 @@
+# git
+
+- [1. 安装](#1-安装)
+- [2. 配置](#2-配置)
+  - [2.1. 命令别名](#21-命令别名)
+  - [2.2. 代理](#22-代理)
+  - [2.3. 配置文件](#23-配置文件)
+  - [2.4. ssh 配置](#24-ssh-配置)
+- [3. 项目配置](#3-项目配置)
+  - [3.1. .gitignore](#31-gitignore)
+- [4. 克隆](#4-克隆)
+- [5. 查看](#5-查看)
+- [6. 回滚](#6-回滚)
+- [7. 分支](#7-分支)
+- [8. 更改提交](#8-更改提交)
+- [9. 子模块](#9-子模块)
+- [10. patch](#10-patch)
+- [11. 其他](#11-其他)
+- [12. commit message 规范](#12-commit-message-规范)
+
+## 1. 安装
+
+Debian: `sudo apt install git`
+
+## 2. 配置
+
+查看所有配置 `git config --list`
+
+- 用户名 `git config --global user.name "axiomofchoice-hjt"`
+- 邮箱 `git config --global user.email "1939696303@qq.com"`
+- 文件名显示中文 `git config --global core.quotepath false`
+- 取消 CRLF `git config --global core.autocrlf false`
+- pull 默认 rebase `git config --global pull.rebase true`
+- 用 vscode 编辑文件 `git config --global core.editor "code --wait"`
+
+### 2.1. 命令别名
+
+```sh
+git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.ci commit
+git config --global alias.st "status -sb"
+git config --global alias.up '!git add --all; git commit -m =; git push;'
+git config --global alias.lg "log --oneline --graph"
+```
+
+### 2.2. 代理
+
+```sh
+git config --global http.proxy http://127.0.0.1:xxxx
+git config --global https.proxy http://127.0.0.1:xxxx
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+```
+
+### 2.3. 配置文件
+
+- `~/.gitconfig` 用户配置
+- `.git/config` 项目配置
+- `git config --global --edit` 编辑配置文件
+
+### 2.4. ssh 配置
+
+1. `ssh-keygen -t rsa -C "1939696303@qq.com"`
+2. `~/.ssh/id_rsa.pub` 文件内容复制后到 github 添加 SSH 公钥
+3. `ssh -T git@github.com` 验证
+
+如果失败且 `~/.ssh/known_hosts` 文件不存在，执行 `ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts`
+
+如果还失败，编辑 `~/.ssh/config` 如下：
+
+```text
+# 配置 github.com
+Host github.com
+HostName github.com
+IdentityFile ~/.ssh/id_rsa
+
+# 配置 gitee
+Host gitee.com
+HostName gitee.com
+IdentityFile ~/.ssh/id_xxx
+```
+
+## 3. 项目配置
+
+### 3.1. .gitignore
+
+注释：`#` 必须是在行首
+
+## 4. 克隆
+
+直接克隆
+
+- `git clone $url`
+- `git clone $url $dir` 指定目录
+
+从空项目中拉取
+
+```sh
+mkdir $dir
+cd $dir
+git init
+git remote add origin $url
+git fetch
+git checkout $branch
+```
+
+depth 克隆
+
+```sh
+git clone $URL --depth=1 # 只有 master 的最新版本
+cd $dir
+git remote set-branches origin $branch # 准备该分支
+git fetch --all
+git checkout $branch
+```
+
+sparse checkout，可拉取指定目录
+
+```sh
+mkdir $dir
+cd $dir
+git init
+git remote add origin $url
+git config core.sparsecheckout true
+echo $sub_dir >> .git/info/sparse-checkout
+git fetch
+git checkout $branch
+```
+
+## 5. 查看
+
+- `git status` 状态
+- `git diff <file>` 查看差别
+- `git log` 日志
+  - `--oneline` 精简日志
+  - `--graph` 以图的形式
+  - `--stat` 显示文件更改
+- `git reflog` 操作日志
+- `git commit -P <file>` 查看文件的 commit
+
+## 6. 回滚
+
+- `git reset --soft $target` 移动 HEAD 指针，不改变文件，将文件变化体现在暂存区
+- `git reset --hard $target` 强制移动 HEAD 指针，改变文件
+
+目标 `$target` 可以是：
+
+- `HEAD^` 上一个提交
+- `HEAD~10` 往前第 10 个提交
+- commit id
+- `origin/main` origin/main 分支
+
+## 7. 分支
+
+- `git branch` 查看本地分支
+- `git branch $branch` 新建分支
+- `git checkout $branch` 切换分支
+- `git checkout -b $branch $remoteBranch` 新建分支、拉取远程代码、切换
+- `git branch -D $branch` 删除分支
+- `git remote prune origin` 删除远程已经删除的分支
+- `git fetch --all` 更新所有 remote 分支
+
+## 8. 更改提交
+
+如果编辑器设为 vscode 且装了 gitlens 插件就可以图形化操作
+
+编辑单个提交：
+
+1. `git rebase -i HEAD~10` 编辑文件，显示最后 10 个提交
+2. 将需要修改的提交前 pick 改成 edit，保存退出
+3. 修改文件并 `git add xxx`
+4. `git commit --amend`
+5. 修改提交消息，保存退出
+6. 可以重复多次 3, 4, 5
+7. `git rebase --continue`
+
+合并提交：第二步将被合并的提交前 pick 改成 squash
+
+排序：第二步直接调整提交的顺序
+
+## 9. 子模块
+
+添加
+
+```sh
+git submodule add https://github.com/fmtlib/fmt third_party/fmt
+```
+
+更新
+
+```sh
+git submodule sync
+git submodule update --init --recursive
+```
+
+删除，比较复杂
+
+```sh
+git submodule deinit -f third_party/fmt
+rm -rf .git/modules/third_party/fmt
+git rm -f third_party/fmt
+git rm -f third_party/fmt
+```
+
+## 10. patch
+
+- 打 patch：`git diff $COMMIT $COMMIT > patch`
+- 应用 patch：`git apply patch`
+
+## 11. 其他
+
+- `cherry-pick` 应用某一 commit
+- `git revert` 反转某一 commit
+- `git count-objects -vH` 计算仓库大小
+- `git blame` 按行查看谁最后修改
+- `git clean -fd` 清除 untrack 文件和目录
+
+## 12. commit message 规范
+
+- feat 新功能
+- fix 修复 bug
+- docs 文档
+- style 格式
+- refactor 重构
+- perf 性能优化
+- test 测试
+- chore 工具
+- revert 回滚
+- merge 合并
+- sync 分支同步的 bug

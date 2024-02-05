@@ -1,0 +1,53 @@
+# hardware
+
+- [1. cpu](#1-cpu)
+- [2. cache](#2-cache)
+- [3. 内存](#3-内存)
+  - [3.1. 测带宽](#31-测带宽)
+  - [3.2. 测延迟](#32-测延迟)
+
+## 1. cpu
+
+超线程维护了两套寄存器、中断，共用其他硬件，ALU、L1 等。
+
+die 是晶圆上切下的一个单元，
+
+## 2. cache
+
+- L1 Cache：4 个周期
+- L2 Cache：10 个周期
+- L3 Cache：50 个周期
+- 主存：上百个周期
+- 硬盘：几千万个周期
+
+一个空的缓存称为冷缓存，对冷缓存的不命中称为冷不命中
+
+发生不命中就会执行放置策略
+
+## 3. 内存
+
+numa：非一致内存访问架构。（用于大内存服务器）
+
+numa 节点之间有连接，有不同的距离（时延）和带宽。
+
+一个节点内包含多个核心以及连接了内存条，同一 numa 的内核访问内存最快。
+
+用 numactl 来绑核、绑内存。
+
+### 3.1. 测带宽
+
+[STREAM](https://github.com/jeffhammond/STREAM)
+
+```cpp
+// export OMP_NUM_THREADS=8
+gcc stream.c -o stream -fopenmp -O3 -DSTREAM_ARRAY_SIZE=150000000 && ./stream
+```
+
+### 3.2. 测延迟
+
+[lmbench](https://github.com/intel/lmbench)
+
+```sh
+chmod +x scripts/*
+make build
+```

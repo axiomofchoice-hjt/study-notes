@@ -1,0 +1,125 @@
+# json
+
+- [1. nlohmann\_json](#1-nlohmann_json)
+  - [1.1. 安装](#11-安装)
+  - [1.2. 使用](#12-使用)
+- [2. rapidjson](#2-rapidjson)
+  - [2.1. 安装](#21-安装)
+  - [2.2. Document](#22-document)
+  - [2.3. 基本类型](#23-基本类型)
+  - [2.4. object](#24-object)
+  - [2.5. array](#25-array)
+
+## 1. nlohmann_json
+
+### 1.1. 安装
+
+```sh
+git submodule add https://github.com/nlohmann/json third_party/nlohmann_json
+```
+
+```cmake
+set(JSON_ImplicitConversions OFF)
+add_subdirectory(third_party/nlohmann_json)
+target_link_libraries(${PROJECT_NAME} PRIVATE nlohmann_json::nlohmann_json)
+```
+
+### 1.2. 使用
+
+```cpp
+#include <nlohmann/json.hpp>
+```
+
+对象
+
+```cpp
+nlohmann::json data;
+data["key"] = "value"; // 直接调函数
+data["a"]["b"] = "value"; // 可以创多级对象
+data = nlohmann::json::object(); // 空对象
+data.count("key");
+```
+
+列表
+
+```cpp
+nlohmann::json data;
+data.push_back("value"); // 直接调函数
+data = nlohmann::json(std::vector<int>{1, 2, 3});
+data = nlohmann::json::array(); // 空列表
+```
+
+查询
+
+```cpp
+data.get<std::string>(); // 得到特定类型的数据
+data.type(); // nlohmann::json::value_t::?
+data.is_null();
+data.is_boolean();
+data.is_number();
+data.is_object();
+data.is_array();
+data.is_string();
+```
+
+## 2. rapidjson
+
+### 2.1. 安装
+
+```sh
+vcpkg install rapidjson
+```
+
+```cmake
+find_package(RapidJSON CONFIG REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE rapidjson)
+```
+
+### 2.2. Document
+
+- `#include <rapidjson/document.h>`
+- 定义 `rapidjson::Document doc;`
+- 反序列化 `doc.Parse("{ \"id\": 1 }");`
+- 序列化
+
+```cpp
+#include <rapidjson/stringbuffer.h>
+#include <rapidjson/writer.h>
+rapidjson::StringBuffer jsonBuffer;
+rapidjson::Writer<rapidjson::StringBuffer> writer(jsonBuffer);
+doc.Accept(writer);
+printf("%s\n", jsonBuffer.GetString());
+```
+
+### 2.3. 基本类型
+
+- `.IsString()` `.GetString()` `.SetString("");`
+- `.IsInt()`
+- `.IsInt64()`
+- `.IsDouble()`
+- `.IsBool()`
+- `.IsNull()`
+
+### 2.4. object
+
+- `doc.IsObject()`
+- 提取
+  - `doc.HasMember("id")`
+  - `doc["id"]`
+- 遍历 `for (auto& i : doc.GetObject())`
+  - `i.name.GetString()` 得到键
+  - `i.value` 得到值
+- 创建
+  - `doc.SetObject();`
+  - `doc.AddMember("name", "aa", doc.GetAllocator());`
+
+### 2.5. array
+
+- `doc.IsArray()`
+- 提取
+  - `doc.Size()`
+  - `doc[0]`
+- 遍历 `for (auto& i : doc.GetArray)`
+- 创建
+  - `doc.SetArray();`
+  - `doc.PushBack(x);`
