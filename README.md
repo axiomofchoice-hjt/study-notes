@@ -1,6 +1,7 @@
 # study-notes
 
-学习笔记
+学习笔记 ext
+
 <!-- tree2md -->
 
 - back-end
@@ -8,7 +9,6 @@
     - [data-base.md](./back-end/data-base/data-base.md)
     - [gorm.md](./back-end/data-base/gorm.md)
     - [mysql.md](./back-end/data-base/mysql.md)
-  - [flask.md](./back-end/flask.md)
   - [gin.md](./back-end/gin.md)
   - [nginx.md](./back-end/nginx.md)
 - [code.md](./code.md)
@@ -41,7 +41,6 @@
   - [rust.md](./一些语言/rust.md)
   - [zig.md](./一些语言/zig.md)
 - 一些软件
-  - [docker.md](./一些软件/docker.md)
   - [protobuf.md](./一些软件/protobuf.md)
   - [softwares.md](./一些软件/softwares.md)
   - [tools.md](./一些软件/tools.md)
