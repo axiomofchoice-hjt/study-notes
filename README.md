@@ -26,7 +26,6 @@
   - [others.md](./front-end/others.md)
   - [react.md](./front-end/react.md)
   - [three.md](./front-end/three.md)
-  - [vscode-extensions.md](./front-end/vscode-extensions.md)
   - [vue.md](./front-end/vue.md)
   - [vue3.md](./front-end/vue3.md)
 - game
