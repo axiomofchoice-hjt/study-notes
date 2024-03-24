@@ -4,10 +4,13 @@
 - [2. 动态参数](#2-动态参数)
 - [3. 魔法函数](#3-魔法函数)
 - [4. 读写文件](#4-读写文件)
+- [5. codegen](#5-codegen)
+- [6. 方法](#6-方法)
 
 ## 1. python 命令
 
 - `python -c "print(1)"` 执行临时 python 语句
+- `python -m module` 执行 module
 
 ## 2. 动态参数
 
@@ -94,3 +97,18 @@ __new__
   - `f.readlines()` 返回 `List[str]`，按行读所有内容
 - `with open(path, "w") as f: ...`
   - `f.write(str)` 写内容
+
+## 5. codegen
+
+1. 生成字符串 `code = 'def func(...): ...'`
+2. `code = compile(code, '', 'exec')`，可指定优化等级
+3. `vars = { ... }`
+4. `exec(code, vars)`
+5. `vars['func']` 得到函数
+
+## 6. 方法
+
+方法是绑定了 self 的函数
+
+- 绑定：`foo.bar = func.__get__(foo, foo.__class__)`
+- 解绑定：`foo.bar.__func__`

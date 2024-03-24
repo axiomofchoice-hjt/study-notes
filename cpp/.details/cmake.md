@@ -36,7 +36,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_executable(${PROJECT_NAME} main.cc)
 
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_20)
-target_compile_options(${PROJECT_NAME} PRIVATE -Wall)
+target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wpedantic)
 
 find_package(Threads REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE Threads::Threads)
@@ -207,7 +207,7 @@ project(File)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR} ${PROJECT_NAME}_SRCS)
 
 add_library(${PROJECT_NAME} ${${PROJECT_NAME}_SRCS})
-target_compile_options(${PROJECT_NAME} PRIVATE -Wall -g)
+target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wpedantic)
 ```
 
 ## 12. 安装卸载库

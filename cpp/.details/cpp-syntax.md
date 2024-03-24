@@ -17,7 +17,8 @@
   - [2.5. 时钟 chrono](#25-时钟-chrono)
   - [2.6. 随机数 random](#26-随机数-random)
   - [2.7. 文件系统 filesystem](#27-文件系统-filesystem)
-  - [pmr](#pmr)
+  - [2.8. algorithm](#28-algorithm)
+  - [2.9. pmr](#29-pmr)
 - [3. 20 之后版本](#3-20-之后版本)
 - [4. 编译器扩展](#4-编译器扩展)
 - [5. 规则](#5-规则)
@@ -25,8 +26,10 @@
   - [5.2. sso 优化](#52-sso-优化)
   - [5.3. 单一定义规则 odr](#53-单一定义规则-odr)
   - [5.4. 重载决议](#54-重载决议)
-  - [5.5. name mangling 符号生成规则](#55-name-mangling-符号生成规则)
-- [6. useless](#6-useless)
+- [6. ABI](#6-abi)
+  - [6.1. Itanium C++ ABI](#61-itanium-c-abi)
+  - [6.2. name mangling 符号生成规则](#62-name-mangling-符号生成规则)
+- [7. useless](#7-useless)
 
 ## 1. 基础语法
 
@@ -115,12 +118,15 @@ replacement new，在指定位置调用构造函数 `auto ptr = malloc(sizeof T)
 
 在指定位置调用析构函数 `ptr->~T()`，此处的 T 不要加命名空间
 
+成员指针很可能的实现是 16 字节，包含成员函数偏移、多继承 this 的偏移
+
 ### 1.6. 变参模板
 
 `sizeof...(Args)` 得到参数个数，可以用 if constexpr 判断：
 
 ```cpp
-template <class ...Args> void f(Args ...args) {
+template <class ...Args>
+void f(Args ...args) {
     cout << sizeof...(Args) << endl;
 }
 ```
@@ -129,7 +135,8 @@ template <class ...Args> void f(Args ...args) {
 
 ```cpp
 void print() {}
-template <class T, class ...Args> void print(T head, Args ...rest) {
+template <class T, class ...Args>
+void print(T head, Args ...rest) {
    cout << head << endl;
    print(rest...);
 }
@@ -144,7 +151,8 @@ template <class T, class ...Args> void print(T head, Args ...rest) {
   - `(I op ... op E)` becomes `((((I op E1) op E2) op ...) op EN)`
 
 ```cpp
-template <class ...Args> auto sum(Args ...x) {
+template <class ...Args>
+auto sum(Args ...x) {
     return (x + ...);
 }
 ```
@@ -321,7 +329,12 @@ fs::directory_iterator/fs::recursive_directory_iterator 类
 - 迭代器，(递归)遍历目录和文件
 - `for (fs::directory_entry i : fs::directory_iterator(fs::current_path()))`
 
-### pmr
+### 2.8. algorithm
+
+- `std::sort` 主体使用快速排序，范围小用插入排序，递归层数太深用堆排序
+- `std::nth_element` 类似 `std::sort`，类快速排序 + 插入排序 + 堆
+
+### 2.9. pmr
 
 ```cpp
 #include <memory_resource>
@@ -397,7 +410,13 @@ most vexing
 2. 从该集合去除函数，只保留可行函数
 3. 分析可行函数集合，以确定唯一的最佳可行函数（可能会涉及隐式转换序列的排行）
 
-### 5.5. name mangling 符号生成规则
+## 6. ABI
+
+### 6.1. Itanium C++ ABI
+
+[Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+
+### 6.2. name mangling 符号生成规则
 
 没有统一的约定，只考虑 gcc 编译器
 
@@ -436,7 +455,7 @@ FviiE: void(int, int)
 
 demangling 工具 `c++filt`
 
-## 6. useless
+## 7. useless
 
 `bool __builtin_umulll_overflow(size_t a, size_t b, size_t &c)` 用于检查乘法是否越界
 

@@ -36,7 +36,8 @@ sudo apt install build-essential
 - 优化 `-Og -O0 -O1 -O2 -O3`
 - 调试信息 `-g`
 - 宏 `-D $name` `-D $name=$value`
-- 产生所有警告 `-Wall`
+- 增强警告 `-Wall -Wextra -Wpedantic`
+- 传给链接器 `-Wl,...,...`
 
 静态库
 

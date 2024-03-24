@@ -3,7 +3,7 @@
 ## 1. 语法
 
 - [语法](.details/cpp-syntax.md)
-- [并发](.details/cpp-concurrency.md) | [openmp](.details/openmp.md)
+- [并发](.details/cpp-concurrency.md)
 
 ## 2. 工具链
 
@@ -23,14 +23,15 @@
 
 - cctz：日期库 cctz
 - sanitize：编译选项，用于 c++ 内存越界、ub 等问题
-- c++ insights：c++ 编译细节
+- c++ insights：编译细节
 - clang timetrace：编译时间分析
-- mpark/patterns：c++ 模式匹配库
-- weggli：c++ 代码语义搜索
-- valgrind：用于 c++ 内存越界等问题
+- mpark/patterns：模式匹配库
+- weggli：代码语义搜索
+- valgrind：用于内存越界等问题
+- gmp：大整数库
 
 c++ 项目依赖的一些方法
 
 1. 使用 vcpkg 等包管理工具
 2. 使用 git submodule
-3. 使用 cmake ExternalProject，据说是依托构思
+3. 使用 cmake ExternalProject

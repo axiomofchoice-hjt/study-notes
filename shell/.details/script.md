@@ -21,8 +21,10 @@
 - `"$foo"` 双引号内的变量会被替换（单引号不会）
 - `${#foo}` 字符串长度
 - `${foo:1:2}` 子串，从 1 开始长度为 2
-- `${foo% *}` 字符串取第一个空格之前的部分
+- `${foo%% *}` 字符串取第一个空格之前的部分
+- `${foo% *}` 字符串取最后一个空格之前的部分
 - `${foo#* }` 字符串取第一个空格之后的部分
+- `${foo##* }` 字符串取最后一个空格之后的部分
 
 ***
 
@@ -163,5 +165,30 @@ function check() {
         echo -e "\e[31merror\e[0m"
         # exit 1
     fi
+}
+```
+
+C++ 编译相关
+
+```sh
+function run() {
+    if [[ !-f $1 ]]; then
+        return 1
+    fi
+    out=$(realpath ${1%%.*})
+    g++ "$@" -Wall -Wextra -Wpedantic -march=native -o $out && \
+        $out && \
+        rm $out
+}
+
+function asm() {
+    if [[ ! -f $1 ]]; then
+        return 1
+    fi
+    stem=$(realpath ${1%%.*})
+    g++ "$@" -Wall -Wextra -Wpedantic -march=native -o $stem.o -c && \
+        objdump $stem.o -dSCr > $stem.o.txt && \
+        rm $stem.o && \
+        code $stem.o.txt
 }
 ```

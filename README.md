@@ -29,6 +29,9 @@ todo: 做一个查找脚本，优先匹配标题
     - [machine-learning.md](./misc/general/machine-learning.md)
     - [web.md](./misc/general/web.md)
   - [git.md](./misc/git.md)
+  - tools
+    - [docker.md](./misc/tools/docker.md)
+    - [vscode.md](./misc/tools/vscode.md)
   - [windows.md](./misc/windows.md)
   - wsl
     - [wsl-arch-get-start.md](./misc/wsl/wsl-arch-get-start.md)

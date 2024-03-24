@@ -10,7 +10,7 @@
   - [3.1. .gitignore](#31-gitignore)
 - [4. 克隆](#4-克隆)
 - [5. 查看](#5-查看)
-- [6. 回滚](#6-回滚)
+- [6. 提交](#6-提交)
 - [7. 分支](#7-分支)
 - [8. 更改提交](#8-更改提交)
 - [9. 子模块](#9-子模块)
@@ -132,15 +132,19 @@ git checkout $branch
 
 - `git status` 状态
 - `git diff <file>` 查看差别
-- `git log` 日志
+- `git log` 日志，可指定文件 / commit
   - `--oneline` 精简日志
   - `--graph` 以图的形式
   - `--stat` 显示文件更改
+  - `-p` `--patch` 查看 diff
 - `git reflog` 操作日志
-- `git commit -P <file>` 查看文件的 commit
 
-## 6. 回滚
+## 6. 提交
 
+- `git add $path` 暂存更改
+- `git commit -m "$message"` 提交更改
+- `git reset HEAD $path` 取消暂存
+- `git checkout $path` 删除更改（会丢失）
 - `git reset --soft $target` 移动 HEAD 指针，不改变文件，将文件变化体现在暂存区
 - `git reset --hard $target` 强制移动 HEAD 指针，改变文件
 
@@ -151,6 +155,11 @@ git checkout $branch
 - commit id
 - `origin/main` origin/main 分支
 
+标签
+
+- `git tag` 查看标签
+- `git tag $tagname` 打标签
+
 ## 7. 分支
 
 - `git branch` 查看本地分支
@@ -160,6 +169,8 @@ git checkout $branch
 - `git branch -D $branch` 删除分支
 - `git remote prune origin` 删除远程已经删除的分支
 - `git fetch --all` 更新所有 remote 分支
+
+rebase 后推送要用 `git push --force-with-lease`
 
 ## 8. 更改提交
 
@@ -194,23 +205,21 @@ git submodule sync
 git submodule update --init --recursive
 ```
 
-删除，比较复杂
+删除
 
 ```sh
 git submodule deinit -f third_party/fmt
-rm -rf .git/modules/third_party/fmt
-git rm -f third_party/fmt
-git rm -f third_party/fmt
+git rm --cached third_party/fmt
 ```
 
 ## 10. patch
 
-- 打 patch：`git diff $COMMIT $COMMIT > patch`
-- 应用 patch：`git apply patch`
+- 打 patch：`git diff $COMMIT $COMMIT > $file`
+- 应用 patch：`git apply $file`
 
 ## 11. 其他
 
-- `cherry-pick` 应用某一 commit
+- `git cherry-pick` 应用某一 commit
 - `git revert` 反转某一 commit
 - `git count-objects -vH` 计算仓库大小
 - `git blame` 按行查看谁最后修改

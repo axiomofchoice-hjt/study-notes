@@ -2,8 +2,8 @@
 
 ```python
 import json
-json.dumps(dict | list, indent=2) 将 python 对象编码成 json 字符串
-json.loads(str) 将已编码的 json 字符串解码为 python 对象
+json.dumps(dict | list, indent=2) # 编码
+json.loads(str) # 解码
 ```
 
 重写 json 类实现 datetime 的输出

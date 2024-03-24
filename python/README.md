@@ -14,6 +14,6 @@
 
 ## 3. 其他
 
-- 模板引擎 [jinja2](./.details/jinja2.md)
+- 模板引擎，代码生成 [jinja2](./.details/jinja2.md)
 - 深度学习 [pytorch](./.details/pytorch.md)
-- c++ 调用 [pybind11](./.details/pybind11.md)
+- c++ 绑定 [pybind11](./.details/pybind11.md)

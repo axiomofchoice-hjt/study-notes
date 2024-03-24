@@ -1,22 +1,24 @@
 # package-manager
 
 - [1. fedora](#1-fedora)
-  - [1.1. yum](#11-yum)
-  - [1.2. dnf](#12-dnf)
 - [2. debian](#2-debian)
 
 ## 1. fedora
 
-### 1.1. yum
+yum
 
 - `yum update`
 - `yum install`
 
 [华为源](https://mirrors.huaweicloud.com/home)
 
-### 1.2. dnf
+dnf
 
-- `dnf update`
+- `dnf install $package`
+- `dnf remove $package`
+- `dnf search $package` 查找包
+- `dnf list installed` 查看已安装的包
+- `dnf update` 更新所有软件
 
 ## 2. debian
 

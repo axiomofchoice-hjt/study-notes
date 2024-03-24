@@ -13,6 +13,10 @@
   - [3.4. 内存模型](#34-内存模型)
   - [3.5. 内存屏障](#35-内存屏障)
 - [4. 协程](#4-协程)
+- [5. openmp](#5-openmp)
+  - [5.1. 开始](#51-开始)
+  - [5.2. 函数](#52-函数)
+  - [5.3. 语法](#53-语法)
 
 ## 1. 线程
 
@@ -357,7 +361,7 @@ class SpinLock {
 - 获取-释放序列(consume, acquire, release, acq_rel)
 - 自由序列(relaxed)
 
-原子序对架构敏感。对于 x86 架构，一般的指令可以保证获取-释放序列、排序一致序列的读操作，对排序一致的写操作有额外消耗
+对于 x86 架构，一般的指令可以保证获取-释放序列、排序一致序列的读操作，对排序一致的写操作有额外消耗
 
 几个关系
 
@@ -391,3 +395,56 @@ c++20 coroutine
 是一个可以被挂机 / 再执行的函数
 
 create / yield / resume 纳秒级别，非常快
+
+## 5. openmp
+
+并行编程框架
+
+### 5.1. 开始
+
+```cpp
+#include <omp.h>
+
+#include <cstdio>
+
+void axpy(float a, const float *x, float *y, size_t n) {
+#pragma omp parallel for
+    for (size_t i = 0; i < n; i++) {
+        y[i] = a * x[i] + y[i];
+    }
+}
+
+int main() {
+    float x[] = {1, 2, 3, 4}, y[] = {2, 3, 4, 5};
+    axpy(2, x, y, 4);
+    for (int i = 0; i < 4; i++) {
+        printf("%f ", y[i]);
+    }
+    printf("\n");
+    return 0;
+}
+```
+
+需要加编译参数 `-fopenmp`（gcc），或者 cmake 如下
+
+```cmake
+find_package(OpenMP REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE OpenMP::OpenMP_CXX)
+```
+
+### 5.2. 函数
+
+- `omp_set_num_threads(8);` 设置线程数
+- `omp_get_thread_num()` 得到线程编号（0 到最大线程数 - 1）
+- `omp_get_nun_threads()` 得到当前线程数
+- `omp_get_max_threads()` 得到最大线程数
+
+### 5.3. 语法
+
+- `#pragma omp parallel` 下一行语句会并行执行
+- `#pragma omp parallel for` 下一个 for 语句会用并行优化
+  - 对 for 循环范围进行均匀划分，每个线程负责连续的一个范围
+  - `collapse(3)` 可以划分 3 重循环
+  - `schedule(static, 4)` 指定粒度为 4
+- `#pragma omp barrier` 所有线程同步一次
+- `#pragma omp simd` 下一个语句进行向量优化，一些简单的代码（比如拷贝）可以优化

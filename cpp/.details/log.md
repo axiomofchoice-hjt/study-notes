@@ -12,6 +12,8 @@
 
 ### 1.1. Get Start
 
+问题：按顺序包含 `fmt/core.h` `spdlog/spdlog.h` 会报错？？
+
 ```sh
 git submodule add https://github.com/gabime/spdlog third_party/spdlog
 ```

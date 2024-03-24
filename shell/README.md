@@ -11,30 +11,30 @@
   - [2.3. sed](#23-sed)
   - [2.4. awk](#24-awk)
   - [2.5. vim](#25-vim)
-  - [3. nano](#3-nano)
-- [4. 解压](#4-解压)
-  - [4.1. tar.gz](#41-targz)
-  - [4.2. gz](#42-gz)
-  - [4.3. zip](#43-zip)
-  - [4.4. tar.xz](#44-tarxz)
-  - [4.5. tar.bz2](#45-tarbz2)
-- [5. 进程](#5-进程)
-  - [5.1. 查看进程](#51-查看进程)
-  - [5.2. 杀进程](#52-杀进程)
-  - [5.3. 后台运行](#53-后台运行)
-- [6. 硬件](#6-硬件)
-  - [6.1. cpu](#61-cpu)
-  - [6.2. 内存](#62-内存)
-  - [6.3. 硬盘](#63-硬盘)
-- [7. 网络](#7-网络)
-- [8. 其他](#8-其他)
-  - [8.1. 环境变量](#81-环境变量)
-  - [8.2. 日期时间](#82-日期时间)
-  - [8.3. 动态链接](#83-动态链接)
-  - [8.4. 包管理](#84-包管理)
-  - [8.5. os](#85-os)
-- [9. 脚本](#9-脚本)
-- [10. settings](#10-settings)
+  - [2.6. nano](#26-nano)
+- [3. 压缩](#3-压缩)
+  - [3.1. tar.gz](#31-targz)
+  - [3.2. gz](#32-gz)
+  - [3.3. zip](#33-zip)
+  - [3.4. tar.xz](#34-tarxz)
+  - [3.5. tar.bz2](#35-tarbz2)
+- [4. 进程](#4-进程)
+  - [4.1. 查看进程](#41-查看进程)
+  - [4.2. 杀进程](#42-杀进程)
+  - [4.3. 后台运行](#43-后台运行)
+- [5. 硬件](#5-硬件)
+  - [5.1. cpu](#51-cpu)
+  - [5.2. 内存](#52-内存)
+  - [5.3. 硬盘](#53-硬盘)
+- [6. 网络](#6-网络)
+- [7. 其他](#7-其他)
+  - [7.1. 环境变量](#71-环境变量)
+  - [7.2. 日期时间](#72-日期时间)
+  - [7.3. 动态链接](#73-动态链接)
+  - [7.4. 包管理](#74-包管理)
+  - [7.5. os](#75-os)
+- [8. 脚本](#8-脚本)
+- [9. settings](#9-settings)
 
 ## 1. 文件系统
 
@@ -55,39 +55,40 @@
 
 ### 1.2. 目录操作
 
-- `touch file` 新建文件
+- `touch $file` 新建文件
 - `ls` 列出文件/目录，后面可以指定目录
   - `-A` 包含点号开头的隐藏文件/目录
   - `-d` 仅显示目录
   - `-l` 详细信息
   - `-R` 递归目录
-- `cd` 切换当前目录
+- `cd $dir` 切换当前目录
+  - `pushd $dir` `popd` 可以临时到一个目录里操作，末尾加 `> /dev/null` 屏蔽输出
 - `pwd` 当前目录
   - `-P` 真实目录，而非 link 路径
 - `mkdir` 新建目录
   - `-p` 新建多级目录，已存在不报错
   - `-m 777` 配置权限
-- `cp src1 src2 ... dst` 复制文件或目录
+- `cp $src1 $src2 ... $dst` 复制文件或目录
   - `-a` 相当于 `-pdr`
   - `-i` 已存在询问是否覆盖
   - `-r` 递归
   - `-u` 较新时覆盖
-- `rm file` 删除文件或目录
+- `rm $fileOrDir ...` 删除文件或目录
   - `-r` 递归
-- `mv src1 src2 ... dst` 移动文件或目录（dst 不是目录会顺带重命名）
+- `mv $src1 $src2 ... $dst` 移动文件或目录（dst 不是目录会顺带重命名）
   - `-i` 已存在询问是否覆盖
   - `-u` 较新时覆盖
 
 ### 1.3. 链接
 
-- `ln -s fileOrDir link` 软链接，注意 fileOrDir 用绝对/相对路径的效果不同
-- `ln fileOrDir link` 硬链接
+- `ln -s $fileOrDir $newLink` 软链接，注意 fileOrDir 用绝对/相对路径的效果不同
+- `ln $fileOrDir $newLink` 硬链接
 
-删除软链接：`rm link`，不要在链接末尾加 "/"，不加才是链接本身
+删除软链接：`rm $link`，不要在链接末尾加 "/"，不加才是链接本身
 
 ### 1.4. 查找文件
 
-- `find dir` dir 省略表示当前目录
+- `find $dir $filters` dir 省略表示当前目录
   - `-name "*.c"` 按文件名查找
   - `-iname "*.c"` 文件名忽略大小写
   - `-type c` 文件类型，如数据文件、目录等
@@ -104,11 +105,11 @@
 
 ### 2.1. 文件查看
 
-- `cat file1 file2 ...` 查看文件
+- `cat $file1 $file2 ...` 查看文件
   - `-A` 相当于 `-vET`，分别是 特殊字符、行末 (\$)、tab (\^I)
   - `-b` 行号（非空行）
   - `-n` 行号（所有行）
-  - `cat src1 src2 > dst` 拼接
+  - `cat $src1 $src2 > $dst` 拼接
 - `tac` 倒着查看文件
 - `nl` 查看文件，显示行号
 - `more` 一页页翻，空格下翻一页，回车下翻一行，`/str` 查找 str
@@ -117,7 +118,7 @@
 
 ### 2.2. grep
 
-- `grep pattern file` 用正则表达式匹配，查看匹配的行（子串匹配即可）
+- `grep $pattern $file` 用正则表达式匹配，查看匹配的行（子串匹配即可）
   - `-C 5` 获取结果的前后 5 行
   - `-c` 仅统计匹配的行数
   - `-i` 大小写不敏感
@@ -128,7 +129,7 @@
 
 ### 2.3. sed
 
-- `sed command file` 按行执行操作并查看结果
+- `sed command $file` 按行执行操作并查看结果
   - `-i` 修改源文件
   - s 命令 `s/pattern/replacement/flags` 将 pattern 替换为 replacement，字符 `/` 需要用 `\/` 表示，s 前可以加数字表示仅操作某行
     - flags 留空，表示替换每行第一个
@@ -147,7 +148,7 @@
 
 ### 2.4. awk
 
-- `awk '/pattern/{command}' file` 按行操作
+- `awk '/pattern/{command}' $file` 按行操作
   - pattern 正则表达式
   - 没有匹配规则（`'{command}'`）就匹配所有行
   - `$0` 整行
@@ -192,80 +193,59 @@ set smartindent
 - 保存并退出 `:wq` / `ZZ`
 - 转到第 100 行 `:100`
 
-### 3. nano
+### 2.6. nano
 
 - 保存并退出：Ctrl+S，Ctrl+X
 - 清空内容：Ctrl+Home，Alt+T
 - 撤销：Alt+U
 
-## 4. 解压
+## 3. 压缩
 
 [万能解压脚本](https://github.com/zqb-all/git-dot-files/blob/master/.autoex.sh)
 
 unar 工具
 
-### 4.1. tar.gz
+### 3.1. tar.gz
 
-解压
-
-- `tar zxf $input.tar.gz` 解压到同级目录里
+- 解压 `tar zxf $file.tar.gz` 解压到同级目录里
   - `v` 打印处理的文件
   - `-C $dst` 指定解压路径
   - `tar tvf $file.tar.gz` 查看内部文件但不解压
   - `--strip-components 1` 删除最外层目录（`$input/`）
+- 压缩 `tar zcf $file.tar.gz $fileOrDir...` tar.gz 压缩
 
-压缩
+### 3.2. gz
 
-- `tar zcf $output.tar.gz $fileOrDir...` tar.gz 压缩
+- 解压 `gunzip $file.gz -c > $file`
+- 压缩 `gzip $file -c > $file.gz`
 
-### 4.2. gz
+### 3.3. zip
 
-解压
+- 解压 `unzip $file.zip` 解压到同级目录
+- 压缩 `zip $file.zip $fileOrDir... -rq`
 
-- `gunzip file.gz -c > file`
+### 3.4. tar.xz
 
-压缩
+- 解压 `tar Jxf $file.tar.xz` 解压到同级目录
 
-- `gzip file -c > file.gz`
-  - `-9` 最大程度压缩
+### 3.5. tar.bz2
 
-### 4.3. zip
+- 解压 `tar jxf $file.tar.bz2` 解压到同级目录
 
-解压
+## 4. 进程
 
-- `unzip $file.zip` 解压到同级目录
-  - `-d $dst` 指定目录
-
-压缩
-
-- `zip $file.zip $src -rq`
-
-### 4.4. tar.xz
-
-解压
-
-- `tar Jxf $file.tar.xz` 解压到同级目录
-
-### 4.5. tar.bz2
-
-解压
-
-- `tar -jxf $file.tar.bz2` 解压到同级目录
-
-## 5. 进程
-
-### 5.1. 查看进程
+### 4.1. 查看进程
 
 - `ps` 查看进程
   - `ps -ef`
 - `top` 动态地查看进程
 - `htop` 更好地查看运行情况
 
-### 5.2. 杀进程
+### 4.2. 杀进程
 
 kill
 
-### 5.3. 后台运行
+### 4.3. 后台运行
 
 - `Ctrl+Z` 暂停当前任务
 - `jobs` 查看正在运行的任务
@@ -273,9 +253,9 @@ kill
 - `fg 1`（也可能是 `fg [1]`）任务 1 转到前台运行
 - 似乎是其他终端不可见的
 
-## 6. 硬件
+## 5. 硬件
 
-### 6.1. cpu
+### 5.1. cpu
 
 lscpu
 
@@ -293,7 +273,7 @@ lscpu
 - cache line 大小：`cat /sys/devices/system/cpu/cpu0/cache/index0/coherency_line_size`，单位字节，一般是 64
 - `cat /proc/cpuinfo` 查看每个 CPU
 
-### 6.2. 内存
+### 5.2. 内存
 
 - `cat /proc/meminfo` 查看内存大小
 - `dmidecode` 内存频率
@@ -301,9 +281,9 @@ lscpu
 numa
 
 - `numactl -H` 查看 numa 节点和对应 cpu
-- `numactl --physcpubind=40-47 --membind=1 ./xxx.sh` 绑核绑内存
+- `numactl --C=0-7 --membind=0 ./xxx` 绑核绑内存
 
-### 6.3. 硬盘
+### 5.3. 硬盘
 
 - `df -h` 查看硬盘大小和占用情况
 - `du -hs` 查看当前目录的空间占用
@@ -313,7 +293,7 @@ numa
 
 启动时挂载：修改 `/etc/fstab`
 
-## 7. 网络
+## 6. 网络
 
 ```sh
 sudo apt install net-tools lsof
@@ -329,47 +309,49 @@ wget
 - -o 指定输出
 - -c 断点续传
 
-## 8. 其他
+## 7. 其他
 
 - `watch "ps -ef"` 每两秒执行命令并显示
 
-### 8.1. 环境变量
+### 7.1. 环境变量
 
-- `env | grep xxx` 查找某个环境变量
-- `export xxx=yyy` 设置环境变量
-- `unset xxx` 取消环境变量
+- `env | grep foo` 查找某个环境变量
+- `export foo=bar` 设置环境变量
+- `unset foo` 取消环境变量
+- `foo=bar ./xxx` 临时设置环境变量
+- `source xxx.sh` 执行文件并继承环境，缩写为 `. xxx.sh`
 
 添加 path
 
-- `code /home/xxx/.bashrc`
+- `code ~/.bashrc`
 - 末尾添加 `export PATH=xxx:$PATH`
 
-### 8.2. 日期时间
+### 7.2. 日期时间
 
 - `date` 日期和时间
 - `date -s "YYYY/MM/DD hh:mm:ss"` 设置系统时间
 
-### 8.3. 动态链接
+### 7.3. 动态链接
 
 - 查找文件的符号 `strings $file | grep $xxx`
 - glibc 版本 `ldd --version`
 
-### 8.4. 包管理
+### 7.4. 包管理
 
 - [包管理](./.details/package-manager.md)
 - `which CMD` 查看 CMD 的文件路径
 - `whereis package` 查看 package 的路径
 
-### 8.5. os
+### 7.5. os
 
 - `uname -a` 系统名、发行版（可能看不到）
 - `lsb_release -a` 发行版，需要安装 lsb
 - `ls /etc/*release` 然后 cat 查看具体版本
 
-## 9. 脚本
+## 8. 脚本
 
 - [脚本](./.details/script.md)
 
-## 10. settings
+## 9. settings
 
 - [settings](./.details/settings.md)
