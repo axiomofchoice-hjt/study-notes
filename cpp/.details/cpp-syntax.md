@@ -178,6 +178,8 @@ auto sum(Args ...x) {
 auto max_i = static_cast<const int &(*)(const int &, const int &)>(std::max);
 ```
 
+协变：指针和引用支持协变，`Derived *` 可以隐式转换成 `Base *`，`T *` 可以隐式转换成 `const T *`。两级指针、STL 容器不行
+
 ## 2. 标准库
 
 ### 2.1. 正则表达式 regex
