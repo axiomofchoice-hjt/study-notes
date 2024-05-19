@@ -41,3 +41,5 @@ rm miniconda3.sh
 - `pip uninstall $package`
 - `pip list` 查看所有包
 - `conda install $package -c conda-forge` 通过 conda-forge 源安装
+
+如果一个包卸载不掉，删除 `env/lib/pythonx.x/site-packages/easy-install.pth`

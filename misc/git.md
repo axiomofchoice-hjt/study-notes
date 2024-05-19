@@ -210,6 +210,7 @@ git submodule update --init --recursive
 ```sh
 git submodule deinit -f third_party/fmt
 git rm --cached third_party/fmt
+# 然后删除 .gitmodules 里的字段
 ```
 
 ## 10. patch

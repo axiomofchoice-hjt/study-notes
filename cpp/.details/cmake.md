@@ -46,7 +46,8 @@ target_link_libraries(${PROJECT_NAME} PRIVATE Threads::Threads)
 
 ```sh
 mkdir -p build
-cmake -B build . && cmake --build build
+cmake -B build . -DCMAKE_BUILD_TYPE=Release &&
+    cmake --build build -j$(nproc)
 ```
 
 ## 3. vscode 配置
@@ -76,14 +77,24 @@ format
 
 ### 4.3. 编译选项
 
-- 头文件目录 `target_include_directories(${PROJECT_NAME} PUBLIC $incl)`
-- 链接 `target_link_libraries(${PROJECT_NAME} PUBLIC $lib)`
-  - 如果找不到 $lib，会链接到 $lib 子目录
-- 指定编译选项 `target_compile_options(${PROJECT_NAME} PRIVATE -Wall)`
+头文件
+
+- 头文件目录 `target_include_directories(${PROJECT_NAME} PRIVATE $incl)`
+
+编译选项
+
+- 编译选项 `target_compile_options(${PROJECT_NAME} PRIVATE -Wall)`
 - 指定标准 `target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_20)`
 - 指定 BUILD_TYPE (Debug, Release)
   - `$<$<CONFIG:Debug>:xxx>` 如果是 Debug 就得到字符串 `xxx`
   - cmake 编译选项 `-DCMAKE_BUILD_TYPE=Debug`（Debug 开启后似乎自动 `-g`）
+
+链接
+
+- 链接目录 `target_link_directories(${PROJECT_NAME} PRIVATE $path)`
+- 链接库 `target_link_libraries(${PROJECT_NAME} PRIVATE $lib)`
+  - $lib 可以是 `xxx/xxx.a` `xxx/xxx.so` `-lxxx` `xxx`
+- 链接选项 `target_link_options(${PROJECT_NAME} PRIVATE xxx)`
 
 ## 5. 脚本
 
@@ -160,8 +171,8 @@ cmake -B build . && cmake --build build
 
 ```cmake
 add_subdirectory(mylib)
-target_link_libraries(${PROJECT_NAME} PUBLIC mylib)
-target_include_directories(${PROJECT_NAME} PUBLIC mylib)
+target_link_libraries(${PROJECT_NAME} PRIVATE mylib)
+target_include_directories(${PROJECT_NAME} PRIVATE mylib)
 ```
 
 ## 9. 第三方库

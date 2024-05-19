@@ -13,6 +13,7 @@
 #include <unistd.h>
 
 #include <cstdint>
+#include <cstring>
 #include <memory>
 #include <string>
 
@@ -31,7 +32,9 @@ class SharedMemory {
             printf("shared memory create %s failed\n", name.c_str());
             return nullptr;
         }
-        return open(name, nbytes);
+        open(name, nbytes);
+        std::memset(bytes, 0, nbytes);  // 将内存固定在当前 NUMA node
+        return bytes;
     }
 
     void *open(const std::string &name, int nbytes) {

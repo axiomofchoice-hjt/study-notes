@@ -26,7 +26,7 @@
 '负号 -self' __neg__ '正号 +self' __pos__
 '幂 self ** b' __pow__
 '绝对值 abs(self)' __abs__
-'' __round__
+'四舍五入 round(self, n)' __round__
 '右加 b + self' __radd__
 '自加 self += b' __iadd__
 ```
@@ -92,10 +92,10 @@ __new__
 
 ## 4. 读写文件
 
-- `with open(path, "r") as f: ...`
+- `with open(path, 'r') as f: ...`
   - `f.read()` 返回 `str`，读所有内容
   - `f.readlines()` 返回 `List[str]`，按行读所有内容
-- `with open(path, "w") as f: ...`
+- `with open(path, 'w') as f: ...`
   - `f.write(str)` 写内容
 
 ## 5. codegen
@@ -110,5 +110,23 @@ __new__
 
 方法是绑定了 self 的函数
 
-- 绑定：`foo.bar = func.__get__(foo, foo.__class__)`
-- 解绑定：`foo.bar.__func__`
+绑定
+
+```py
+def func(self): pass
+class A: pass
+a = A()
+a.func = func.__get__(a, a.__class__)
+print(func)  # <function func at 0x114514>
+print(a.func)  # <bound method func of <__main__.A object at 0x1919810>>
+```
+
+解绑定
+
+```py
+class A:
+    def func(self): pass
+print(A().func)  # <bound method func of <__main__.A object at 0x1919810>>
+print(A.func)  # <function func at 0x114514>
+print(A().func.__func__)  # <function func at 0x114514>
+```

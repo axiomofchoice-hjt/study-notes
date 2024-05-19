@@ -23,17 +23,17 @@ import clang.cindex as cx
 from pathlib import Path
 
 
-def traverse(node: cx.Cursor, prefix=""):
-    text = f"{str(node.kind).removeprefix('CursorKind.')}: {node.spelling}"
+def traverse(node: cx.Cursor, prefix=''):
+    text = f'{str(node.kind).removeprefix("CursorKind.")}: {node.spelling}'
     if node.kind == cx.CursorKind.INTEGER_LITERAL:
         text += list(node.get_tokens())[0].spelling
-    print(f"{prefix}* {text}")
+    print(f'{prefix}* {text}')
     for child in node.get_children():
-        traverse(child, prefix + "  ")
+        traverse(child, prefix + '  ')
 
 
 index = cx.Index.create(excludeDecls=True)
-tu = index.parse((Path(__file__).parent / "main.cc").as_posix(), args=["-std=c++20"])
+tu = index.parse((Path(__file__).parent / 'main.cc').as_posix(), args=['-std=c++20'])
 traverse(tu.cursor)
 ```
 

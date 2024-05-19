@@ -6,6 +6,10 @@
   - [1.3. 运行测试](#13-运行测试)
   - [1.4. 覆盖率](#14-覆盖率)
   - [1.5. 语法](#15-语法)
+- [2. benchmark](#2-benchmark)
+  - [2.1. Get Start](#21-get-start)
+  - [2.2. 暂停恢复](#22-暂停恢复)
+  - [2.3. 参数](#23-参数)
 
 ## 1. gtest
 
@@ -78,3 +82,82 @@ TEST(xxx, yyy) {
 一些检查 `EXPECT_EQ` `EXPECT_LE` `EXPECT_TRUE`，也可以用 ASSERT_XXX（出错会终止）
 
 输出可以在 LastTest.log 里找到
+
+## 2. benchmark
+
+### 2.1. Get Start
+
+```sh
+git submodule add https://github.com/google/benchmark third_party/benchmark
+```
+
+benchmark 依赖 googletest，要先包含子目录 googletest
+
+```cmake
+add_subdirectory(third_party/googletest)
+add_subdirectory(third_party/benchmark)
+target_link_libraries(${PROJECT_NAME} PRIVATE benchmark::benchmark)
+```
+
+```cpp
+#include <benchmark/benchmark.h>
+
+static void BM_StringCopy(benchmark::State &state) {
+    std::string x = "hello";
+    for (auto _ : state) {
+        std::string copy(x);
+    }
+}
+BENCHMARK(BM_StringCopy);
+
+BENCHMARK_MAIN();
+```
+
+测性能需要 Release 编译
+
+### 2.2. 暂停恢复
+
+```cpp
+static void bm_map_insert(benchmark::State &state) {
+    auto map = std::map<int, int>();
+    for (auto _ : state) {
+        for (int i = 0; i < 10; i++) {
+            map.insert({i, i});
+        }
+        state.PauseTiming();
+        map.clear();
+        state.ResumeTiming();
+    }
+}
+BENCHMARK(bm_map_insert);
+```
+
+### 2.3. 参数
+
+只能传整数
+
+```cpp
+static void bm_vector_push_back(benchmark::State &state) {
+    auto arr = std::vector<int>(state.range(0));
+    for (auto _ : state) {
+        for (int i = 0; i < state.range(1); i++) {
+            arr.push_back(i);
+        }
+        state.PauseTiming();
+        arr.resize(state.range(0));
+        state.ResumeTiming();
+    }
+}
+BENCHMARK(bm_vector_push_back)->Args({10, 10})->Args({100, 100});
+```
+
+参数生成器
+
+```cpp
+static void custom_args(benchmark::internal::Benchmark *b) {
+    for (int i = 100; i <= 1000; i += 100) {
+        b->Args({i, i});
+    }
+}
+BENCHMARK(bm_vector_push_back)->Apply(custom_args);
+```

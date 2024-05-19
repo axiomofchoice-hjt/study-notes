@@ -22,10 +22,11 @@
 - [3. 20 之后版本](#3-20-之后版本)
 - [4. 编译器扩展](#4-编译器扩展)
 - [5. 规则](#5-规则)
-  - [5.1. 返回值优化 rvo](#51-返回值优化-rvo)
-  - [5.2. sso 优化](#52-sso-优化)
-  - [5.3. 单一定义规则 odr](#53-单一定义规则-odr)
-  - [5.4. 重载决议](#54-重载决议)
+  - [5.1. 未定义行为](#51-未定义行为)
+  - [5.2. 返回值优化 rvo](#52-返回值优化-rvo)
+  - [5.3. sso 优化](#53-sso-优化)
+  - [5.4. 单一定义规则 odr](#54-单一定义规则-odr)
+  - [5.5. 重载决议](#55-重载决议)
 - [6. ABI](#6-abi)
   - [6.1. Itanium C++ ABI](#61-itanium-c-abi)
   - [6.2. name mangling 符号生成规则](#62-name-mangling-符号生成规则)
@@ -178,6 +179,8 @@ auto sum(Args ...x) {
 auto max_i = static_cast<const int &(*)(const int &, const int &)>(std::max);
 ```
 
+协变：指针和引用支持协变，`Derived *` 可以隐式转换成 `Base *`，`T *` 可以隐式转换成 `const T *`。两级指针、STL 容器不行
+
 ## 2. 标准库
 
 ### 2.1. 正则表达式 regex
@@ -255,7 +258,10 @@ p.lock(); // 转换到 shared_ptr
 std::variant<std::monostate, int, std::string> a{std::in_place_index<1>, 1};
 a.index()
 std::get<1>(a)
+std::get<int>(a)
 ```
+
+std::monostate 无状态的类型
 
 ### 2.5. 时钟 chrono
 
@@ -365,19 +371,46 @@ pod 类型
 
 most vexing
 
-### 5.1. 返回值优化 rvo
+### 5.1. 未定义行为
+
+[cppref](https://en.cppreference.com/w/cpp/language/ub)
+
+标准行为
+
+- C++ 标准明确定义的行为
+
+实现定义行为 (implementation-defined behavior)
+
+- 行为由平台 / 编译器定义
+- 如 `sizeof(int)`
+
+未指定行为 (unspecified behavior)
+
+- 未定义，但有限制
+- 如 `a() + b() + c()` 的计算顺序
+
+未定义行为 UB (undefined behavior)
+
+- 未定义且无限制
+- 如有符号数溢出
+
+UBTWIP (undefined behavior that works in practice)
+
+- 标准不提供方法，但又是刚需，很多人在用，造成了一种特殊的 UB
+
+### 5.2. 返回值优化 rvo
 
 - 在允许的情况下，编译器会把将被返回的变量构造在返回值处
 - 不允许就优先用移动语义
 - 具名返回值优化 nrvo 是 c++11 标准内容，c++17 要求强制优化
 
-### 5.2. sso 优化
+### 5.3. sso 优化
 
 据群友说是 std::string n 个字节，1 个字节标志是 sso，其他 n-1 个字节用来存放字符串，省去分配释放内存开销。但是实测 std::string 有 32 字节，只能存放 16 字节（包括末尾 `\0`），开头 8 个字节存了 begin，然后 8 个字节存了 length。
 
 而其他容器没有类似机制。
 
-### 5.3. 单一定义规则 odr
+### 5.4. 单一定义规则 odr
 
 非 inline 函数 / 变量，整个程序只允许一个定义，odr 式使用了 inline 函数 / 变量的每个翻译单元都需要一个定义
 
@@ -404,7 +437,7 @@ most vexing
   - 声明 `template<> class C<int>;`
   - 定义 `template<> class C<int> { ... };`
 
-### 5.4. 重载决议
+### 5.5. 重载决议
 
 1. 建立候选函数集合
 2. 从该集合去除函数，只保留可行函数

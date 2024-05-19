@@ -83,7 +83,7 @@ i 的取值
 
 文档：[官方 acle 手册](https://developer.arm.com/documentation/100987/0000/?lang=en)；[指令可视化](https://dougallj.github.io/asil/index.html)
 
-sve 是可扩展向量，其二进制可以对硬件不敏感
+sve 是可扩展向量，如果编译时不指定向量宽度，二进制可以跑在所有宽度的机器上。但大多数时候会指定宽度，这样仍然有很好的可移植性。
 
 32 个向量寄存器 z0..z31
 

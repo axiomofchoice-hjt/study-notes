@@ -10,10 +10,15 @@
 
 - [文件系统](./.details/filesystem.md)
 - [json](./.details/json.md)
-- 命令行参数 [argparse](./.details/argparse.md)
+- [命令行参数 argparse](./.details/argparse.md)
+- [打包 setuptools](./.details/setuptools.md)
 
 ## 3. 其他
 
-- 模板引擎，代码生成 [jinja2](./.details/jinja2.md)
-- 深度学习 [pytorch](./.details/pytorch.md)
-- c++ 绑定 [pybind11](./.details/pybind11.md)
+- [代码生成 jinja2](./.details/jinja2.md)
+- [深度学习 pytorch](./.details/pytorch.md)
+- [c++ 绑定 pybind11](./.details/pybind11.md)
+
+***
+
+- Nuitka - python 编译到可执行文件

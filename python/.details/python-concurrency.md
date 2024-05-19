@@ -16,7 +16,7 @@ class MineThread(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
     def run(self): # start() 后调用的函数
-        print("233")
+        print('233')
 mineThread = MineThread()
 mineThread.start() # 运行线程
 mineThread.join() # 等待该线程结束
@@ -53,15 +53,15 @@ mineThread.join() # 等待该线程结束
 
 ### 3.1. run
 
-- `subprocess.run(["ls", "-l"])` 用列表表示命令
-- `subprocess.run("ls -l", shell=True)` 设置 shell 后可以用字符串表示
+- `subprocess.run(['ls', '-l'])` 用列表表示命令
+- `subprocess.run('ls -l', shell=True)` 设置 shell 后可以用字符串表示
 
 ### 3.2. Popen
 
 可以完成复杂任务
 
-- `subprocess.Popen(["ls", "-l"])` 异步执行
-  - `shell=True` 用字符串作为命令 `"ls -l"`
+- `subprocess.Popen(['ls', '-l'])` 异步执行
+  - `shell=True` 用字符串作为命令 `'ls -l'`
   - `check=True` 状态码非 0 时抛出异常
   - `stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE` 重定向
   - `stdin=p.stdout` stdin 重定向为前一个命令的 stdout

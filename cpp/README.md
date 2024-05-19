@@ -10,7 +10,7 @@
 - 编译构建：[编译](.details/cpp-compilation.md) | [cmake](.details/cmake.md) | [makefile](.details/makefile.md)
 - 包管理：[包管理](.details/package-manager.md)
 - 调试：[gdb](.details/gdb.md)
-- 文档：[doxygen](.details/doxygen.md)
+- 开发工具：[dev](.details/dev.md)
 
 ## 3. 第三方库
 

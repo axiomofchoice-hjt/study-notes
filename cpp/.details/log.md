@@ -73,6 +73,11 @@ int main(int argc, char **argv) {
     FLAGS_log_dir = "log";
     google::InitGoogleLogging(argv[0]);
 }
+```
+
+只在终端打印
+
+```cpp
 int main(int argc, char **argv) {
     FLAGS_minloglevel = 0;
     FLAGS_logtostderr = 1;

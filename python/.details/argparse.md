@@ -18,7 +18,7 @@ def parse_args():
     parser = argparse.ArgumentParser(
         description='Module Description'
     )
-    parser.add_argument('size', type=int, help="size")
+    parser.add_argument('size', type=int, help='size')
     return parser.parse_args()
 
 if __name__ == '__main__':

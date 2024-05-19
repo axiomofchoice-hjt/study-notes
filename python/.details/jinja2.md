@@ -30,6 +30,6 @@ for `{% for i in expr %}...{% endfor %}`
 
 raw `{% raw %}...{% endraw %}`
 
-设置变量 `{% set var = "abc" %}`
+设置变量 `{% set var = 'abc' %}`
 
 加减号可以移除空白符，`{%-` 可以去掉语法块之前的空白符，`-%}`

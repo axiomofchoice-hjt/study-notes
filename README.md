@@ -39,12 +39,15 @@ todo: 做一个查找脚本，优先匹配标题
     - [wsl-fedora-get-start.md](./misc/wsl/wsl-fedora-get-start.md)
     - [wsl.md](./misc/wsl/wsl.md)
   - [有意思的东西.md](./misc/有意思的东西.md)
-- perf
-  - [asm.md](./perf/asm.md)
-  - [cuda.md](./perf/cuda.md)
-  - [hardware.md](./perf/hardware.md)
-  - [profiling.md](./perf/profiling.md)
-  - [simd.md](./perf/simd.md)
+  - [群友名言.md](./misc/群友名言.md)
+- performance
+  - [asm.md](./performance/asm.md)
+  - [cpu.md](./performance/cpu.md)
+  - [cuda.md](./performance/cuda.md)
+  - [memory.md](./performance/memory.md)
+  - [mpi.md](./performance/mpi.md)
+  - [profiling.md](./performance/profiling.md)
+  - [simd.md](./performance/simd.md)
 - python
   - [README.md](./python/README.md)
 - [README.md](./README.md)

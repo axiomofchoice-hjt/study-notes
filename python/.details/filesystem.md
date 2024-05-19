@@ -12,7 +12,7 @@
 - `.exists()` 是否存在
 - `.is_dir() .is_file()` 是否是目录 / 文件
 - `for i in path.iterdir(): ...` 遍历
-- `.glob("**/*.py")` glob 匹配
+- `.glob('**/*.py')` glob 匹配
 - `.absolute()` 转换为绝对路径
 - `.resolve()` 转换为无链接的路径
 - `.as_posix()` 转换为字符串

@@ -41,9 +41,9 @@ namespace py = pybind11;
 int add(int i, int j) { return i + j; }
 
 PYBIND11_MODULE(example, m) {
-    m.doc() = "example bindings";
+    m.doc() = 'example bindings';
 
-    m.def("add", &add, "A function which adds two numbers");
+    m.def('add', &add, 'A function which adds two numbers');
 }
 ```
 
@@ -61,7 +61,7 @@ cmake 构建后，在 build 目录下会生成 `example.cpython-xxx-x86_64-linux
 在虚拟环境中安装
 
 ```sh
-pip install "pybind11[global]"
+pip install pybind11
 ```
 
 cmake 配置
@@ -88,7 +88,7 @@ cmake 配置
 int add(int i, int j) { return i + j; }
 
 PYBIND11_MODULE(example, m) {
-    m.def("add", &add, "A function which adds two numbers");
+    m.def('add', &add, 'A function which adds two numbers');
 }
 ```
 
@@ -102,8 +102,8 @@ example.add(1, 2)
 ### 4.2. 关键字参数
 
 ```cpp
-m.def("add", &add, py::arg("i"), py::arg("j"),
-      "A function which adds two numbers");
+m.def('add', &add, py::arg('i'), py::arg('j'),
+      'A function which adds two numbers');
 ```
 
 python 调用
@@ -116,8 +116,8 @@ example.add(i=1, j=2)
 ### 4.3. 默认参数
 
 ```cpp
-m.def("add", &add, py::arg("i") = 1, py::arg("j") = 2,
-      "A function which adds two numbers");
+m.def('add', &add, py::arg('i') = 1, py::arg('j') = 2,
+      'A function which adds two numbers');
 ```
 
 python 调用
@@ -132,7 +132,7 @@ example.add()
 静态变量
 
 ```cpp
-m.def("func", &func, py::return_value_policy::reference);
+m.def('func', &func, py::return_value_policy::reference);
 ```
 
 ...
@@ -144,7 +144,7 @@ m.def("func", &func, py::return_value_policy::reference);
 字符串
 
 ```cpp
-py::object str = py::cast("xxx");
+py::object str = py::cast('xxx');
 ```
 
 ## 6. 面向对象
@@ -159,10 +159,10 @@ struct Pet {
 };
 
 PYBIND11_MODULE(example, m) {
-    py::class_<Pet>(m, "Pet")
+    py::class_<Pet>(m, 'Pet')
         .def(py::init<const std::string &>())
-        .def("setName", &Pet::setName)
-        .def("getName", &Pet::getName);
+        .def('setName', &Pet::setName)
+        .def('getName', &Pet::getName);
 }
 ```
 
@@ -171,6 +171,13 @@ PYBIND11_MODULE(example, m) {
 getter, setter
 
 ```cpp
-class_<MyClass>(m, "MyClass")
-    .def_property("data", &MyClass::getData, &MyClass::setData);
+py::class_<MyClass>(m, 'MyClass')
+    .def_property('data', &MyClass::getData, &MyClass::setData);
+```
+
+魔法函数
+
+```cpp
+py::class_<MyClass>(m, 'MyClass')
+    .def('__getattr__', &MyClass::__getattr__, py::is_operator());
 ```
