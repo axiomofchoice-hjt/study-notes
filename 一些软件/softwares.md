@@ -16,8 +16,6 @@
 
 ## 2. 工具
 
-- [wgestures](https://yingdev.com/projects/wgestures)：鼠标手势
-- [obs-studio](https://github.com/obsproject/obs-studio/releases)：视频录制
 - [JJDown](http://client.jijidown.com/)：b 站下载视频
 - [mp3 文件音量调整](https://mp3gain.sourceforge.net/download.php)
 - [图像编辑](https://www.gimp.org/)
