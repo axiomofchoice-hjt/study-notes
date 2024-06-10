@@ -18,6 +18,8 @@ SceneTree 场景树
 
 ## 2. 脚本
 
+编辑器设置里搜索缩进，类型改为 space
+
 ```gdscript
 func _init():
     print("Hello world")
