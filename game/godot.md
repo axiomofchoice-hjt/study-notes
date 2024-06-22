@@ -9,8 +9,6 @@
   - [5.2. Sprite2D](#52-sprite2d)
 - [6. 事件](#6-事件)
 - [7. 输入](#7-输入)
-  - [7.1. 鼠标](#71-鼠标)
-  - [7.2. 键盘](#72-键盘)
 
 ## 1. 下载
 
@@ -68,17 +66,43 @@ public override void _Input(InputEvent evt) { }
 
 ## 7. 输入
 
-### 7.1. 鼠标
-
-### 7.2. 键盘
-
-_Input，可以检测按下和释放。按住不动可能触发多次按下。
+使用 _Input 方法
 
 ```cs
 public override void _Input(InputEvent evt) {
     if (evt is InputEventKey key) {
-        if (key.Pressed) GD.Print("pressed: " + key.Keycode);
-        else GD.Print("released: " + key.Keycode);
+        if (key.Pressed) {  // 按下事件；按住不动可能触发多次
+            GD.Print("press: " + key.Keycode);
+        } else {
+            GD.Print("release: " + key.Keycode);
+        }
+        if (key.Keycode == Key.A) { }
+        if (key.Keycode == Key.A && key.CtrlPressed) { }
+    }
+    if (evt is InputEventMouseMotion mouse_motion) {
+        GD.Print("mouse move: " + mouse_motion.Position);
+    }
+    if (evt is InputEventMouseButton mouse_button) {
+        if (mouse_button.Pressed) {
+            GD.Print("press: " + mouse_button.ButtonIndex);
+        } else {
+            GD.Print("release: " + mouse_button.ButtonIndex);
+        }
+        if (mouse_button.ButtonIndex == MouseButton.Left) { }
+        if (mouse_button.ButtonIndex == MouseButton.WheelUp) { }
+    }
+}
+```
+
+使用 Input
+
+```cs
+public override void _Process(double delta) {
+    if (Input.IsPhysicalKeyPressed(Key.A) && Input.IsPhysicalKeyPressed(Key.Ctrl)) {  // 按下状态，不是按下事件
+        GD.Print("press Ctrl+A");
+    }
+    if (Input.IsMouseButtonPressed(MouseButton.Left)) {
+        GD.Print("press MouseButtonLeft");
     }
 }
 ```
