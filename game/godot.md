@@ -4,10 +4,13 @@
 - [2. 配置](#2-配置)
 - [3. 节点和场景](#3-节点和场景)
 - [4. 调试](#4-调试)
-- [5. 操作 Godot 对象](#5-操作-godot-对象)
+- [5. Godot 对象](#5-godot-对象)
+  - [5.1. 操作属性](#51-操作属性)
+  - [5.2. Sprite2D](#52-sprite2d)
 - [6. 事件](#6-事件)
-- [7. 鼠标](#7-鼠标)
-- [8. 键盘](#8-键盘)
+- [7. 输入](#7-输入)
+  - [7.1. 鼠标](#71-鼠标)
+  - [7.2. 键盘](#72-键盘)
 
 ## 1. 下载
 
@@ -31,23 +34,51 @@ vscode 安装 C# 插件
 GD.Print("Hello World");
 ```
 
-## 5. 操作 Godot 对象
+## 5. Godot 对象
+
+### 5.1. 操作属性
 
 ```cs
-Position = Position with { X = 1.0f };
-Position += new Vector2(1, 0);
-// 不允许 Position.X = 1.f;
+o.Position = o.Position with { X = 1.0f };
+o.Position += new Vector2(1, 0);
+// 不允许 o.Position.X = 1.f;
 ```
 
 读写属性会与 C++ 核心通信，应用本地变量暂存减少通信数。
+
+### 5.2. Sprite2D
+
+```cs
+var texture = (Texture2D)GD.Load("res://icon.svg");
+var root = GetTree().Root;
+var sprite = new Sprite2D {
+    Texture = texture,
+    Position = new Vector2(0, 0)
+};
+root.AddChild(sprite);
+```
 
 ## 6. 事件
 
 ```cs
 public override void _Ready() { }
 public override void _Process(double delta) { }
+public override void _Input(InputEvent evt) { }
 ```
 
-## 7. 鼠标
+## 7. 输入
 
-## 8. 键盘
+### 7.1. 鼠标
+
+### 7.2. 键盘
+
+_Input，可以检测按下和释放。按住不动可能触发多次按下。
+
+```cs
+public override void _Input(InputEvent evt) {
+    if (evt is InputEventKey key) {
+        if (key.Pressed) GD.Print("pressed: " + key.Keycode);
+        else GD.Print("released: " + key.Keycode);
+    }
+}
+```
