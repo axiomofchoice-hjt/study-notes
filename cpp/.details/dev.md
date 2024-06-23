@@ -11,7 +11,12 @@
 
 vscode 安装 clangd 插件
 
-导出项目配置：CMakeLists.txt 加入 `set(CMAKE_EXPORT_COMPILE_COMMANDS ON)`
+cmake 导出项目配置：
+
+```cmake
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_CXX_STANDARD_INCLUDE_DIRECTORIES ${CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES})
+```
 
 安装 clang 编译器
 

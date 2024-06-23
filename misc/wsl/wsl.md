@@ -5,11 +5,13 @@
 - [2. WSL 系统操作](#2-wsl-系统操作)
   - [2.1. WSL 基础操作](#21-wsl-基础操作)
 - [3. vscode 连接 WSL](#3-vscode-连接-wsl)
-- [5. proxy 问题](#5-proxy-问题)
+- [4. 网络问题 - 用 clash 内核](#4-网络问题---用-clash-内核)
 
 ## 1. 安装
 
-默认安装：`wsl --install`
+不安装系统 `wsl --install --no-distribution`
+
+安装系统 `wsl --install Distro` 或导入系统 `wsl --import name path file`
 
 重启电脑，自动跳出窗口，设置用户名和密码
 
@@ -50,8 +52,30 @@ appendWindowsPath = false
 
 点左下角，选择 New WSL Window 即可
 
-## 5. proxy 问题
+## 4. 网络问题 - 用 clash 内核
 
-防火墙添加规则，管理员执行命令 `New-NetFirewallRule -DisplayName "WSL" -Direction Inbound  -InterfaceAlias "vEthernet (WSL)"  -Action Allow`
+[参考](https://docs.gtk.pw/contents/linux/clash-cli.html)
 
-尚未解决
+[下载](https://github.com/netboy1024/clash/releases)，解压得到可执行
+
+运行得到 `~/.config/clash` 目录
+
+下载 xxx.yaml，替换 `~/.config/clash/config.yaml`
+
+`sudo vim /etc/systemd/system/clash.service`
+
+```ini
+[Unit]
+Description=Clash Daemon
+
+[Service]
+ExecStart=/xxx/clash -d /home/xxx/.config/clash/
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+```
+
+开机启动 `sudo systemctl enable clash.service`
+
+手动启动 `sudo systemctl start clash.service`

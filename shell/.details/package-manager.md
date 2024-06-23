@@ -1,9 +1,17 @@
 # package-manager
 
-- [1. fedora](#1-fedora)
-- [2. debian](#2-debian)
+- [1. manjaro](#1-manjaro)
+- [2. fedora](#2-fedora)
+- [3. debian](#3-debian)
 
-## 1. fedora
+## 1. manjaro
+
+- `yay -Syu` 更新
+- `yay -Sy $package` 安装
+- `yay -Ru $package` 卸载
+- `yay -Ss $package` 搜索
+
+## 2. fedora
 
 yum
 
@@ -20,7 +28,7 @@ dnf
 - `dnf list installed` 查看已安装的包
 - `dnf update` 更新所有软件
 
-## 2. debian
+## 3. debian
 
 - `suto apt update`
 - `sudo apt upgrade`

@@ -4,6 +4,7 @@
 
 - [语法](.details/cpp-syntax.md)
 - [并发](.details/cpp-concurrency.md)
+- [UB 合集](.details/awesome-undefined-behavior.md)
 
 ## 2. 工具链
 

@@ -29,6 +29,7 @@ todo: 做一个查找脚本，优先匹配标题
     - [machine-learning.md](./misc/general/machine-learning.md)
     - [web.md](./misc/general/web.md)
   - [git.md](./misc/git.md)
+  - [gui.md](./misc/gui.md)
   - tools
     - [docker.md](./misc/tools/docker.md)
     - [vscode.md](./misc/tools/vscode.md)
@@ -37,6 +38,7 @@ todo: 做一个查找脚本，优先匹配标题
     - [wsl-arch-get-start.md](./misc/wsl/wsl-arch-get-start.md)
     - [wsl-debian-get-start.md](./misc/wsl/wsl-debian-get-start.md)
     - [wsl-fedora-get-start.md](./misc/wsl/wsl-fedora-get-start.md)
+    - [wsl-manjaro-get-start.md](./misc/wsl/wsl-manjaro-get-start.md)
     - [wsl.md](./misc/wsl/wsl.md)
   - [有意思的东西.md](./misc/有意思的东西.md)
   - [群友名言.md](./misc/群友名言.md)
