@@ -43,3 +43,7 @@ rm miniconda3.sh
 - `conda install $package -c conda-forge` 通过 conda-forge 源安装
 
 如果一个包卸载不掉，删除 `env/lib/pythonx.x/site-packages/easy-install.pth`
+
+## 调试
+
+`python -m pdb xxx.py`
