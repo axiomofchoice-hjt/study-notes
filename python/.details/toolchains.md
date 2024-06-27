@@ -4,6 +4,7 @@
 - [2. vscode 配置](#2-vscode-配置)
 - [3. conda 环境](#3-conda-环境)
 - [4. 包管理](#4-包管理)
+- [调试](#调试)
 
 ## 1. 安装 miniconda
 
@@ -46,4 +47,11 @@ rm miniconda3.sh
 
 ## 调试
 
-`python -m pdb xxx.py`
+启动 `python -m pdb xxx.py`
+
+- run 重新运行
+- c 继续
+- n, s, p, b
+- return 运行直到退出函数
+- b 查看所有断点
+- clear 清空断点
