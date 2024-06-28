@@ -15,7 +15,7 @@
 - slots：指令需要的资源
 - uops：基本的指令
 
-## 1. perf
+## 1. perf stat
 
 - counting mode，统计一定时间内事件个数，比如 perf stat
 - sampling mode，当事件计数溢出时进行采样，比如 perf record
@@ -50,3 +50,11 @@ FLOPs：一次加法或乘法
 计算强度I：单位内存交换进行了多少次计算
 
 计算强度上限Imax：π/β
+
+## 火焰图
+
+git clone https://github.com/brendangregg/FlameGragh
+perf record -F 99 -p $pid -g -- sleep 5
+perf script -i perf.data &> perf.unfold
+./FlameGragh/stackcollapse-perf.pl perf.unfold > perf folded
+./FlameGragh/FlameGragh.pl perf.folded > out.svg
