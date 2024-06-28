@@ -127,6 +127,7 @@ expr（计算器）
   - `$COMMAND > /dev/null` 抛弃输出
 - `$COMMAND >> file` 追加模式
 - `$COMMAND 2>&1` stderr 输出到 stdout 里
+- `$COMMAND &> file` stdout 和 stderr 重定向
 - `A | B` 前者输出作为后者输入
 - `xargs` 将标准输入转换为参数
 
