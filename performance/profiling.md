@@ -68,7 +68,7 @@ git clone https://github.com/brendangregg/FlameGragh
 perf report -n --stdio > output.txt
 ```
 
-生成火焰图
+生成火焰图，可用游览器打开
 
 ```sh
 perf script -i perf.data &> perf.unfold
