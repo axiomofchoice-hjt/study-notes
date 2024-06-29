@@ -114,10 +114,9 @@ git checkout $branch
 depth 克隆
 
 ```sh
-git clone $url --depth=1 # 只有 master 的最新版本
+git clone $url --depth=1 # 只有 master 的最新版
 cd $dir
-git remote set-branches origin $branch # 准备该分支
-git fetch --all
+git fetch --depth=1 origin $branch # 拉取分支的最新版
 git checkout $branch
 ```
 
