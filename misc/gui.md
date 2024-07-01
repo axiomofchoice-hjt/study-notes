@@ -70,17 +70,17 @@ npm install -g @tauri-apps/cli
   - version 版本号
 - tauri
   - windows[] 窗口配置
-    - `label`: string 标签，字母数字组成
-    - `center`: boolean 居中
-    - `x, y`: number 左上角的坐标
-    - `width, minWidth, maxWidth`: number
-    - `height, minHeight, maxHeight`: number
-    - `resizable`: boolean 是否可调整大小
-    - `title`: string 标题
-    - `fullscreen`: boolean 全屏
-    - `maximized`: boolean 最大化
-    - `decorations`: boolean 有边框
-    - `url`: string index.html 路径或者网址
+    - `label: string` 标签，字母数字组成
+    - `center: boolean` 居中
+    - `x, y: number` 左上角的坐标
+    - `width, minWidth, maxWidth: number`
+    - `height, minHeight, maxHeight: number`
+    - `resizable: boolean` 是否可调整大小
+    - `title: string` 标题
+    - `fullscreen: boolean` 全屏
+    - `maximized: boolean` 最大化
+    - `decorations: boolean` 有边框
+    - `url: string` index.html 路径或者网址
 - plugins
 
 ### 2.5. 应用图标
