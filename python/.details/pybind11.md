@@ -14,6 +14,7 @@
   - [4.4. 返回值策略](#44-返回值策略)
 - [5. 数据类型](#5-数据类型)
 - [6. 面向对象](#6-面向对象)
+- [7. 子模块](#7-子模块)
 
 ## 1. Get Start: 子模块
 
@@ -182,4 +183,8 @@ py::class_<MyClass>(m, 'MyClass')
     .def('__getattr__', &MyClass::__getattr__, py::is_operator());
 ```
 
-REGISTER_SUBMODULE
+## 7. 子模块
+
+```cpp
+auto submodule = m.def_submodule("name", "description")
+```
