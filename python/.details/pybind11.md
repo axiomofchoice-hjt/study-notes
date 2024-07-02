@@ -181,3 +181,5 @@ py::class_<MyClass>(m, 'MyClass')
 py::class_<MyClass>(m, 'MyClass')
     .def('__getattr__', &MyClass::__getattr__, py::is_operator());
 ```
+
+REGISTER_SUBMODULE
