@@ -32,6 +32,7 @@ apt, conda 都可安装
 cmake_minimum_required(VERSION 3.10)
 project(main VERSION 1.0)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_CXX_STANDARD_INCLUDE_DIRECTORIES ${CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES})
 
 add_executable(${PROJECT_NAME} main.cc)
 

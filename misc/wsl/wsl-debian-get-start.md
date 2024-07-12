@@ -22,9 +22,11 @@ wsl --install Debian
 
 ## 2. WSL 配置
 
-```sh
-echo "[interop]
-appendWindowsPath = false" | sudo tee /etc/wsl.conf
+/etc/wsl.conf
+
+```ini
+[interop]
+appendWindowsPath = false
 ```
 
 ## 3. 修改软件源
@@ -36,11 +38,13 @@ sudo apt update
 ```
 
 ```text
-deb https://repo.huaweicloud.com/debian bullseye main
-deb https://repo.huaweicloud.com/debian bullseye-updates main
-deb https://repo.huaweicloud.com/debian-security bullseye-security main
-deb https://repo.huaweicloud.com/debian bullseye-backports main
+deb https://mirrors.huaweicloud.com/debian bookworm main
+deb https://mirrors.huaweicloud.com/debian bookworm-updates main
+deb https://mirrors.huaweicloud.com/debian-security bookworm-security main
+deb https://mirrors.huaweicloud.com/debian bookworm-backports main
 ```
+
+错误：出现认证问题，将 sources.list 的 https 改成 http，安装 apt-transport-https ca-certificates 后再改回来
 
 ## 4. 基础软件
 

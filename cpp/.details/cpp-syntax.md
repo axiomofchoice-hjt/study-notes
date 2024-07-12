@@ -1,40 +1,45 @@
 # cpp-syntax
 
-- [1. 基础语法](#1-基础语法)
-  - [1.1. 宏](#11-宏)
-  - [1.2. 模板](#12-模板)
-  - [1.3. c 风格变参函数](#13-c-风格变参函数)
-  - [1.4. lambda](#14-lambda)
-  - [1.5. 面向对象](#15-面向对象)
-  - [1.6. 变参模板](#16-变参模板)
-  - [1.7. 移动语义](#17-移动语义)
-  - [1.8. 类型转换](#18-类型转换)
-- [2. 标准库](#2-标准库)
-  - [2.1. 正则表达式 regex](#21-正则表达式-regex)
-  - [2.2. 可空类型 optional](#22-可空类型-optional)
-  - [2.3. 智能指针](#23-智能指针)
-  - [2.4. 带数据枚举 variant](#24-带数据枚举-variant)
-  - [2.5. 时钟 chrono](#25-时钟-chrono)
-  - [2.6. 随机数 random](#26-随机数-random)
-  - [2.7. 文件系统 filesystem](#27-文件系统-filesystem)
-  - [2.8. algorithm](#28-algorithm)
-  - [2.9. pmr](#29-pmr)
-- [3. 20 之后版本](#3-20-之后版本)
-- [4. 编译器扩展](#4-编译器扩展)
-- [5. 规则](#5-规则)
-  - [5.1. 未定义行为](#51-未定义行为)
-  - [5.2. 返回值优化 rvo](#52-返回值优化-rvo)
-  - [5.3. sso 优化](#53-sso-优化)
-  - [5.4. 单一定义规则 odr](#54-单一定义规则-odr)
-  - [5.5. 重载决议](#55-重载决议)
-- [6. ABI](#6-abi)
-  - [6.1. Itanium C++ ABI](#61-itanium-c-abi)
-  - [6.2. name mangling 符号生成规则](#62-name-mangling-符号生成规则)
-- [7. useless](#7-useless)
+- [1. 一些资料](#1-一些资料)
+- [2. 基础语法](#2-基础语法)
+  - [2.1. 宏](#21-宏)
+  - [2.2. 模板](#22-模板)
+  - [2.3. c 风格变参函数](#23-c-风格变参函数)
+  - [2.4. lambda](#24-lambda)
+  - [2.5. 面向对象](#25-面向对象)
+  - [2.6. 变参模板](#26-变参模板)
+  - [2.7. 移动语义](#27-移动语义)
+  - [2.8. 类型转换](#28-类型转换)
+- [3. 标准库](#3-标准库)
+  - [3.1. 正则表达式 regex](#31-正则表达式-regex)
+  - [3.2. 可空类型 optional](#32-可空类型-optional)
+  - [3.3. 智能指针](#33-智能指针)
+  - [3.4. 带数据枚举 variant](#34-带数据枚举-variant)
+  - [3.5. 时钟 chrono](#35-时钟-chrono)
+  - [3.6. 随机数 random](#36-随机数-random)
+  - [3.7. 文件系统 filesystem](#37-文件系统-filesystem)
+  - [3.8. algorithm](#38-algorithm)
+  - [3.9. pmr](#39-pmr)
+- [4. 20 之后版本](#4-20-之后版本)
+- [5. 编译器扩展](#5-编译器扩展)
+- [6. 规则](#6-规则)
+  - [6.1. 未定义行为](#61-未定义行为)
+  - [6.2. 返回值优化 rvo](#62-返回值优化-rvo)
+  - [6.3. sso 优化](#63-sso-优化)
+  - [6.4. 单一定义规则 odr](#64-单一定义规则-odr)
+  - [6.5. 重载决议](#65-重载决议)
+- [7. ABI](#7-abi)
+  - [7.1. Itanium C++ ABI](#71-itanium-c-abi)
+  - [7.2. name mangling 符号生成规则](#72-name-mangling-符号生成规则)
+- [8. useless](#8-useless)
 
-## 1. 基础语法
+## 1. 一些资料
 
-### 1.1. 宏
+[编译器支持的特性](https://en.cppreference.com/w/cpp/compiler_support)
+
+## 2. 基础语法
+
+### 2.1. 宏
 
 - `#A` 加双引号
 - `A##B` 拼接
@@ -46,7 +51,7 @@
   - `__func__` / `__FUNCTION__` 函数名
   - `__PRETTY_FUNCTION__` 完整的函数接口
 
-### 1.2. 模板
+### 2.2. 模板
 
 - 函数**不能**偏特化，但可以套模板类来实现
 
@@ -84,11 +89,11 @@ int main() {
 }
 ```
 
-### 1.3. c 风格变参函数
+### 2.3. c 风格变参函数
 
 类型提升：比 int 短的整数提升到 int，比 double 短的浮点数提升到 double
 
-### 1.4. lambda
+### 2.4. lambda
 
 通用捕获（c++14）
 
@@ -99,7 +104,7 @@ std::string s;
 
 mutable
 
-### 1.5. 面向对象
+### 2.5. 面向对象
 
 虚继承：菱形继承重复的基类只在内存出现一次
 
@@ -121,7 +126,7 @@ replacement new，在指定位置调用构造函数 `auto ptr = malloc(sizeof T)
 
 成员指针很可能的实现是 16 字节，包含成员函数偏移、多继承 this 的偏移
 
-### 1.6. 变参模板
+### 2.6. 变参模板
 
 `sizeof...(Args)` 得到参数个数，可以用 if constexpr 判断：
 
@@ -158,14 +163,14 @@ auto sum(Args ...x) {
 }
 ```
 
-### 1.7. 移动语义
+### 2.7. 移动语义
 
 - `type &&` 只能绑定右值，可变
 - `std::move(x)` 等价于 `static_cast<type &&>(x)`
 - `template <typename T> void foo(T &&t)` 既可以接受左值也可以接受右值
   - 完美转发：用 `std::forward<T>(t)` 可以保持左 / 右值属性（直接用 t 会变成左值）
 
-### 1.8. 类型转换
+### 2.8. 类型转换
 
 - `static_cast<T>` 常规的类型转换
 - `reinterpret_cast<T>` 二进制数据的强制转换，用于指针或引用
@@ -181,9 +186,9 @@ auto max_i = static_cast<const int &(*)(const int &, const int &)>(std::max);
 
 协变：指针和引用支持协变，`Derived *` 可以隐式转换成 `Base *`，`T *` 可以隐式转换成 `const T *`。两级指针、STL 容器不行
 
-## 2. 标准库
+## 3. 标准库
 
-### 2.1. 正则表达式 regex
+### 3.1. 正则表达式 regex
 
 ```c++
 std::string a = "a[a-z]{2}a", b = "ababcac";
@@ -196,7 +201,7 @@ sm.suffix() // "c", string
 sm.position() // 2, size_t, 子串位置
 ```
 
-### 2.2. 可空类型 optional
+### 3.2. 可空类型 optional
 
 `#include <optional>`
 
@@ -206,7 +211,7 @@ sm.position() // 2, size_t, 子串位置
 - `.value()` 得到值
 - `.value_or(x)` 得到值，空得到 x
 
-### 2.3. 智能指针
+### 3.3. 智能指针
 
 unique_ptr
 
@@ -252,7 +257,7 @@ p.expired(); // shared_ptr 不存在
 p.lock(); // 转换到 shared_ptr
 ```
 
-### 2.4. 带数据枚举 variant
+### 3.4. 带数据枚举 variant
 
 ```cpp
 std::variant<std::monostate, int, std::string> a{std::in_place_index<1>, 1};
@@ -263,7 +268,7 @@ std::get<int>(a)
 
 std::monostate 无状态的类型
 
-### 2.5. 时钟 chrono
+### 3.5. 时钟 chrono
 
 - `#include <chrono>`
 - `std::chrono::system_clock` 系统时钟
@@ -289,7 +294,7 @@ std::monostate 无状态的类型
   - `std::chrono::microseconds` 微秒
   - `std::chrono::nanoseconds` 纳秒
 
-### 2.6. 随机数 random
+### 3.6. 随机数 random
 
 ```cpp
 #include <random>
@@ -309,7 +314,7 @@ gen() // 获得 64 位随机数
 - `std::normal_distribution<float> norm(0, 1);` 正态分布，参数是平均数和标准差
   - `norm(gen)` 得到随机数
 
-### 2.7. 文件系统 filesystem
+### 3.7. 文件系统 filesystem
 
 ```cpp
 #include <filesystem>
@@ -335,12 +340,12 @@ fs::directory_iterator/fs::recursive_directory_iterator 类
 - 迭代器，(递归)遍历目录和文件
 - `for (fs::directory_entry i : fs::directory_iterator(fs::current_path()))`
 
-### 2.8. algorithm
+### 3.8. algorithm
 
 - `std::sort` 主体使用快速排序，范围小用插入排序，递归层数太深用堆排序
 - `std::nth_element` 类似 `std::sort`，类快速排序 + 插入排序 + 堆
 
-### 2.9. pmr
+### 3.9. pmr
 
 ```cpp
 #include <memory_resource>
@@ -350,11 +355,11 @@ fs::directory_iterator/fs::recursive_directory_iterator 类
 
 `std::pmr::vector<int>` 等
 
-## 3. 20 之后版本
+## 4. 20 之后版本
 
 - 推导 this：成员函数可替代 this，lambda 可用于递归
 
-## 4. 编译器扩展
+## 5. 编译器扩展
 
 - `__attribute__((cleanup($func)))`：清除局部变量时执行函数，可用于关闭文件、释放锁等
 - `__attribute__((weak))`：标记一个函数为弱符号
@@ -363,7 +368,7 @@ fs::directory_iterator/fs::recursive_directory_iterator 类
 - `__attribute__((always_inline))`：强制内联
 - c 的 restrict：在 c++ 中可能是 `__restrict__`，修饰函数参数，表示这段内存只能用该指针来访问。
 
-## 5. 规则
+## 6. 规则
 
 空基类优化
 
@@ -371,7 +376,7 @@ pod 类型
 
 most vexing
 
-### 5.1. 未定义行为
+### 6.1. 未定义行为
 
 [cppref](https://en.cppreference.com/w/cpp/language/ub)
 
@@ -398,19 +403,19 @@ UBTWIP (undefined behavior that works in practice)
 
 - 标准不提供方法，但又是刚需，很多人在用，造成了一种特殊的 UB
 
-### 5.2. 返回值优化 rvo
+### 6.2. 返回值优化 rvo
 
 - 在允许的情况下，编译器会把将被返回的变量构造在返回值处
 - 不允许就优先用移动语义
 - 具名返回值优化 nrvo 是 c++11 标准内容，c++17 要求强制优化
 
-### 5.3. sso 优化
+### 6.3. sso 优化
 
 据群友说是 std::string n 个字节，1 个字节标志是 sso，其他 n-1 个字节用来存放字符串，省去分配释放内存开销。但是实测 std::string 有 32 字节，只能存放 16 字节（包括末尾 `\0`），开头 8 个字节存了 begin，然后 8 个字节存了 length。
 
 而其他容器没有类似机制。
 
-### 5.4. 单一定义规则 odr
+### 6.4. 单一定义规则 odr
 
 非 inline 函数 / 变量，整个程序只允许一个定义，odr 式使用了 inline 函数 / 变量的每个翻译单元都需要一个定义
 
@@ -437,19 +442,19 @@ UBTWIP (undefined behavior that works in practice)
   - 声明 `template<> class C<int>;`
   - 定义 `template<> class C<int> { ... };`
 
-### 5.5. 重载决议
+### 6.5. 重载决议
 
 1. 建立候选函数集合
 2. 从该集合去除函数，只保留可行函数
 3. 分析可行函数集合，以确定唯一的最佳可行函数（可能会涉及隐式转换序列的排行）
 
-## 6. ABI
+## 7. ABI
 
-### 6.1. Itanium C++ ABI
+### 7.1. Itanium C++ ABI
 
 [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
-### 6.2. name mangling 符号生成规则
+### 7.2. name mangling 符号生成规则
 
 没有统一的约定，只考虑 gcc 编译器
 
@@ -488,7 +493,7 @@ FviiE: void(int, int)
 
 demangling 工具 `c++filt`
 
-## 7. useless
+## 8. useless
 
 `bool __builtin_umulll_overflow(size_t a, size_t b, size_t &c)` 用于检查乘法是否越界
 

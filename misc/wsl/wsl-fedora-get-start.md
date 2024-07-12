@@ -81,7 +81,7 @@ dnf install gcc gcc-c++ cmake
 
 ### 6.2. clangd
 
-[clangd-16.0.2](https://github.com/clangd/clangd/releases/download/16.0.2/clangd-linux-16.0.2.zip)
+[clangd](https://github.com/clangd/clangd/releases)
 
 ```sh
 unzip clangd-linux-16.0.2.zip -d ~

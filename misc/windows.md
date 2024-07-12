@@ -9,6 +9,7 @@
 - [7. oh-my-posh 终端](#7-oh-my-posh-终端)
 - [8. 消除“允许此应用对你的设备进行更改吗”](#8-消除允许此应用对你的设备进行更改吗)
 - [9. powershell prompt](#9-powershell-prompt)
+- [10. 查看文件夹被哪个进程占用](#10-查看文件夹被哪个进程占用)
 
 ## 1. 删除目录
 
@@ -105,3 +106,7 @@ Invoke-Expression (oh-my-posh init pwsh --config "XXX\hjt.omp.json")
 写入 `function prompt { "$env:COMPUTERNAME $(Get-Location) -> " }`
 
 ...
+
+## 10. 查看文件夹被哪个进程占用
+
+任务管理器 -> 性能 -> 资源监视器 -> CPU 标签 -> 关联的句柄，搜索目录

@@ -2,7 +2,7 @@
 
 - [1. Get Start](#1-get-start)
 
-x86 JIT 汇编器
+x86 JIT 汇编器，arm 版本是 xbyak_aarch64
 
 ## 1. Get Start
 

@@ -11,6 +11,7 @@
   - [8.1. 颜色](#81-颜色)
   - [8.2. 样式](#82-样式)
 - [9. 一些写法](#9-一些写法)
+- [10. zshrc](#10-zshrc)
 
 ## 1. 变量
 
@@ -126,6 +127,7 @@ expr（计算器）
   - `$COMMAND > /dev/null` 抛弃输出
 - `$COMMAND >> file` 追加模式
 - `$COMMAND 2>&1` stderr 输出到 stdout 里
+- `$COMMAND &> file` stdout 和 stderr 重定向
 - `A | B` 前者输出作为后者输入
 - `xargs` 将标准输入转换为参数
 
@@ -191,5 +193,49 @@ function asm() {
         objdump $stem.o -dSCr > $stem.o.txt && \
         rm $stem.o && \
         code $stem.o.txt
+}
+```
+
+## 10. zshrc
+
+```zsh
+alias git=/mnt/c/Apps/Git/bin/git.exe
+
+function study() {
+    if [[ "$1" = "up" ]]; then
+        pushd ~/workspace/study-notes > /dev/null
+        git up
+        popd > /dev/null
+    elif [[ "$1" = "pull" ]]; then
+        pushd ~/workspace/study-notes > /dev/null
+        git pull
+        popd > /dev/null
+    else
+        cd ~/workspace/study-notes
+    fi
+}
+
+function run() {
+    if [[ -f "$1" ]]; then
+        out=$(realpath ${1%%.*})
+        g++ "$@" -Wall -Wextra -Wpedantic -march=native -o $out && \
+            $out && \
+            rm $out
+    elif [[ -f package.json ]]; then
+        yarn dev
+    else
+        chmod +x run.sh
+        ./run.sh "$@"
+    fi
+}
+
+function gup() {
+    if [[ -z "$1" ]]; then
+        git up
+    else
+        pushd "$1" > /dev/null
+        git up
+        popd > /dev/null
+    fi
 }
 ```

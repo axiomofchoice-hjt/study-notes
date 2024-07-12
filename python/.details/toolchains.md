@@ -2,8 +2,9 @@
 
 - [1. 安装 miniconda](#1-安装-miniconda)
 - [2. vscode 配置](#2-vscode-配置)
-- [3. conda 环境](#3-conda-环境)
-- [4. 包管理](#4-包管理)
+- [3. conda](#3-conda)
+- [4. pip](#4-pip)
+- [5. 调试](#5-调试)
 
 ## 1. 安装 miniconda
 
@@ -23,7 +24,7 @@ rm miniconda3.sh
 
 如果无法格式化，安装插件 black formatter
 
-## 3. conda 环境
+## 3. conda
 
 - `conda env list` 查看环境
 - `conda create -n $envname python=3.11` 创建环境
@@ -33,13 +34,27 @@ rm miniconda3.sh
 - `conda deactivate` 关闭环境
 - `conda remove -n $envname --all` 删除环境
 - `conda create -n $dstenv --clone $srcenv` 克隆环境
+- `conda install $package -c conda-forge` 通过 conda-forge 源安装
+- `conda env update -f env.yml` 通过 env.yml 安装
+- `conda env create -f env.yml` 通过 env.yml 创建环境
 
-## 4. 包管理
+## 4. pip
 
 - `pip install -r requirements.txt` 安装 requirements.txt
 - `pip install $package==$version` 安装特定版本
 - `pip uninstall $package`
 - `pip list` 查看所有包
-- `conda install $package -c conda-forge` 通过 conda-forge 源安装
 
 如果一个包卸载不掉，删除 `env/lib/pythonx.x/site-packages/easy-install.pth`
+
+## 5. 调试
+
+启动 `python -m pdb xxx.py`
+
+- `run` 重新运行
+- `c` 继续
+- n, s, p, b
+- `return` 单步运行，跳出函数
+- `b` 查看所有断点
+- `clear` 清空断点
+- `!xxx` 执行语句

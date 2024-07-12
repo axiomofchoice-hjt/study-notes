@@ -12,11 +12,12 @@
 - [5. 查看](#5-查看)
 - [6. 提交](#6-提交)
 - [7. 分支](#7-分支)
-- [8. 更改提交](#8-更改提交)
-- [9. 子模块](#9-子模块)
-- [10. patch](#10-patch)
-- [11. 其他](#11-其他)
-- [12. commit message 规范](#12-commit-message-规范)
+- [8. tag](#8-tag)
+- [9. 更改提交](#9-更改提交)
+- [10. 子模块](#10-子模块)
+- [11. patch](#11-patch)
+- [12. 其他](#12-其他)
+- [13. commit message 规范](#13-commit-message-规范)
 
 ## 1. 安装
 
@@ -26,12 +27,14 @@ Debian: `sudo apt install git`
 
 查看所有配置 `git config --list`
 
-- 用户名 `git config --global user.name "axiomofchoice-hjt"`
-- 邮箱 `git config --global user.email "1939696303@qq.com"`
-- 文件名显示中文 `git config --global core.quotepath false`
-- 取消 CRLF `git config --global core.autocrlf false`
-- pull 默认 rebase `git config --global pull.rebase true`
-- 用 vscode 编辑文件 `git config --global core.editor "code --wait"`
+```sh
+git config --global user.name "axiomofchoice-hjt" # 用户名
+git config --global user.email "Axiomofchoice@163.com" # 邮箱
+git config --global core.quotepath false # 文件名显示中文
+git config --global core.autocrlf false # 取消 CRLF
+git config --global pull.rebase true # pull 默认 rebase
+git config --global core.editor "code --wait" # 编辑器默认 vscode
+```
 
 ### 2.1. 命令别名
 
@@ -75,9 +78,9 @@ Host github.com
 HostName github.com
 IdentityFile ~/.ssh/id_rsa
 
-# 配置 gitee
-Host gitee.com
-HostName gitee.com
+# 配置其他网站
+Host xxx.com
+HostName xxx.com
 IdentityFile ~/.ssh/id_xxx
 ```
 
@@ -85,7 +88,11 @@ IdentityFile ~/.ssh/id_xxx
 
 ### 3.1. .gitignore
 
-注释：`#` 必须是在行首
+注释 `#` 必须是在行首，不能跟在内容后，下面的写法不合法
+
+```gitignore
+build  # comment
+```
 
 ## 4. 克隆
 
@@ -108,10 +115,9 @@ git checkout $branch
 depth 克隆
 
 ```sh
-git clone $URL --depth=1 # 只有 master 的最新版本
+git clone $url --depth=1 # 只有 master 的最新版
 cd $dir
-git remote set-branches origin $branch # 准备该分支
-git fetch --all
+git fetch --depth=1 origin $branch # 拉取分支的最新版
 git checkout $branch
 ```
 
@@ -172,7 +178,12 @@ git checkout $branch
 
 rebase 后推送要用 `git push --force-with-lease`
 
-## 8. 更改提交
+## 8. tag
+
+- `git checkout $tagname` ？
+- `git pull origin --tags $tagname` 当前分支拉取 tag
+
+## 9. 更改提交
 
 如果编辑器设为 vscode 且装了 gitlens 插件就可以图形化操作
 
@@ -190,7 +201,7 @@ rebase 后推送要用 `git push --force-with-lease`
 
 排序：第二步直接调整提交的顺序
 
-## 9. 子模块
+## 10. 子模块
 
 添加
 
@@ -213,12 +224,12 @@ git rm --cached third_party/fmt
 # 然后删除 .gitmodules 里的字段
 ```
 
-## 10. patch
+## 11. patch
 
 - 打 patch：`git diff $COMMIT $COMMIT > $file`
 - 应用 patch：`git apply $file`
 
-## 11. 其他
+## 12. 其他
 
 - `git cherry-pick` 应用某一 commit
 - `git revert` 反转某一 commit
@@ -226,16 +237,23 @@ git rm --cached third_party/fmt
 - `git blame` 按行查看谁最后修改
 - `git clean -fd` 清除 untrack 文件和目录
 
-## 12. commit message 规范
+## 13. commit message 规范
+
+```text
+type: Subject
+
+body
+
+footer
+```
+
+type
 
 - feat 新功能
-- fix 修复 bug
+- fix 修复错误
 - docs 文档
 - style 格式
 - refactor 重构
 - perf 性能优化
 - test 测试
-- chore 工具
-- revert 回滚
-- merge 合并
-- sync 分支同步的 bug
+- chore 项目构建配置
