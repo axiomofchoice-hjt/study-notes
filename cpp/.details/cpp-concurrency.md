@@ -17,6 +17,7 @@
   - [5.1. 开始](#51-开始)
   - [5.2. 函数](#52-函数)
   - [5.3. 语法](#53-语法)
+- [6. 嵌套](#6-嵌套)
 
 ## 1. 线程
 
@@ -357,11 +358,11 @@ class SpinLock {
 
 分为三类
 
-- 排序一致序列(sequentially consistent)
+- 顺序一致序列(sequentially consistent)
 - 获取-释放序列(consume, acquire, release, acq_rel)
 - 自由序列(relaxed)
 
-对于 x86 架构，一般的指令可以保证获取-释放序列、排序一致序列的读操作，对排序一致的写操作有额外消耗
+对于 x86 架构，一般的指令可以保证获取-释放序列、顺序一致序列的读操作，对顺序一致的写操作有额外消耗
 
 几个关系
 
@@ -435,7 +436,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE OpenMP::OpenMP_CXX)
 ### 5.2. 函数
 
 - `omp_set_num_threads(8);` 设置线程数
-- `omp_get_thread_num()` 得到线程编号（0 到最大线程数 - 1）
+- `omp_get_thread_num()` 得到线程编号（0 到当前线程数 - 1）
 - `omp_get_nun_threads()` 得到当前线程数
 - `omp_get_max_threads()` 得到最大线程数
 
@@ -446,5 +447,20 @@ target_link_libraries(${PROJECT_NAME} PRIVATE OpenMP::OpenMP_CXX)
   - 对 for 循环范围进行均匀划分，每个线程负责连续的一个范围
   - `collapse(3)` 可以划分 3 重循环
   - `schedule(static, 4)` 指定粒度为 4
+  - `num_threads(8)` 临时指定线程数
 - `#pragma omp barrier` 所有线程同步一次
 - `#pragma omp simd` 下一个语句进行向量优化，一些简单的代码（比如拷贝）可以优化
+
+## 6. 嵌套
+
+可以指定线程数并嵌套实现局部同步的效果
+
+```cpp
+#pragma omp parallel for num_threads(4)
+    for (int i = 0; i < 4; i++) {
+#pragma omp parallel for num_threads(4)
+        for (int j = 0; j < 4; j++) {
+            // ...
+        }
+    }
+```

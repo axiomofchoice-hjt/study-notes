@@ -11,15 +11,16 @@
   - [2.7. 移动语义](#27-移动语义)
   - [2.8. 类型转换](#28-类型转换)
 - [3. 标准库](#3-标准库)
-  - [3.1. 正则表达式 regex](#31-正则表达式-regex)
-  - [3.2. 可空类型 optional](#32-可空类型-optional)
-  - [3.3. 智能指针](#33-智能指针)
-  - [3.4. 带数据枚举 variant](#34-带数据枚举-variant)
-  - [3.5. 时钟 chrono](#35-时钟-chrono)
-  - [3.6. 随机数 random](#36-随机数-random)
-  - [3.7. 文件系统 filesystem](#37-文件系统-filesystem)
-  - [3.8. algorithm](#38-algorithm)
-  - [3.9. pmr](#39-pmr)
+  - [3.1. 类型萃取 type\_traits](#31-类型萃取-type_traits)
+  - [3.2. 正则表达式 regex](#32-正则表达式-regex)
+  - [3.3. 可空类型 optional](#33-可空类型-optional)
+  - [3.4. 智能指针](#34-智能指针)
+  - [3.5. 带数据枚举 variant](#35-带数据枚举-variant)
+  - [3.6. 时钟 chrono](#36-时钟-chrono)
+  - [3.7. 随机数 random](#37-随机数-random)
+  - [3.8. 文件系统 filesystem](#38-文件系统-filesystem)
+  - [3.9. algorithm](#39-algorithm)
+  - [3.10. pmr](#310-pmr)
 - [4. 20 之后版本](#4-20-之后版本)
 - [5. 编译器扩展](#5-编译器扩展)
 - [6. 规则](#6-规则)
@@ -55,23 +56,14 @@
 
 - 函数**不能**偏特化，但可以套模板类来实现
 
-头文件 type_traits
-
-- `std::is_same<T, U>::value` 判断两个类型是否相同，得到编译期 bool 值
-- `std::is_base_of<Base, Derived>::value` 检查 Base 是否是 Derived 的基类
-- `std::enable_if<B, T>::type` 如果 B 的值为 true，则展开为 T，否则展开失败
-- `std::invoke_result<Func, Args...>::type`（c++17）函数类型 Func 在 Args... 参数下的返回值
-  - 类似功能的 `std::result_of` 在 c++20 中移除
-  - 还有 `std::invokable` 等一系列模板
-
 一个只能用于函数的装饰器
 
 ```cpp
-#define gen(name, dec, f)                                               \
-    template <typename... Args>                                         \
-    std::invoke_result<decltype(dec), decltype(f), Args...>::type name( \
-        Args... args) {                                                 \
-        return (dec)(f, args...);                                       \
+#define gen(name, dec, f)                                           \
+    template <typename... Args>                                     \
+    std::invoke_result_t<decltype(dec), decltype(f), Args...> name( \
+        Args... args) {                                             \
+        return (dec)(f, args...);                                   \
     }
 void dec1(void (*f)()) {
     f();
@@ -90,6 +82,28 @@ int main() {
 ```
 
 ### 2.3. c 风格变参函数
+
+```cpp
+#include <cstdarg>
+#include <cstdio>
+#include <cstring>
+void print(int num, ...) {
+    va_list list;
+    va_start(list, num);  // 传入可变参数前的参数名
+    for (int i = 0; i < num; i++) {
+        char *type = va_arg(list, char *);
+        if (strcmp(type, "i") == 0) {
+            printf("%d", va_arg(list, int));
+        } else if (strcmp(type, "f") == 0) {
+            printf("%f", va_arg(list, double));
+        } else if (strcmp(type, "s") == 0) {
+            printf("%s", va_arg(list, char *));
+        }
+    }
+    va_end(list);
+}
+int main() { print(3, "i", 233, "s", " ", "f", 1.2f); }
+```
 
 类型提升：比 int 短的整数提升到 int，比 double 短的浮点数提升到 double
 
@@ -188,7 +202,18 @@ auto max_i = static_cast<const int &(*)(const int &, const int &)>(std::max);
 
 ## 3. 标准库
 
-### 3.1. 正则表达式 regex
+### 3.1. 类型萃取 type_traits
+
+`#include <type_traits>`
+
+- `std::is_same_v<T, U>` 判断两个类型是否相同，得到编译期 bool 值
+- `std::is_base_of_v<Base, Derived>` 检查 Base 是否是 Derived 的基类
+- `std::enable_if_t<B, T>` 如果 B 的值为 true，则展开为 T，否则展开失败
+- `std::invoke_result_t<Func, Args...>`（c++17）函数类型 Func 在 Args... 参数下的返回值
+  - 类似功能的 `std::result_of` 在 c++20 中移除
+  - 还有 `std::invokable` 等一系列模板
+
+### 3.2. 正则表达式 regex
 
 ```c++
 std::string a = "a[a-z]{2}a", b = "ababcac";
@@ -201,7 +226,7 @@ sm.suffix() // "c", string
 sm.position() // 2, size_t, 子串位置
 ```
 
-### 3.2. 可空类型 optional
+### 3.3. 可空类型 optional
 
 `#include <optional>`
 
@@ -211,7 +236,7 @@ sm.position() // 2, size_t, 子串位置
 - `.value()` 得到值
 - `.value_or(x)` 得到值，空得到 x
 
-### 3.3. 智能指针
+### 3.4. 智能指针
 
 unique_ptr
 
@@ -257,7 +282,7 @@ p.expired(); // shared_ptr 不存在
 p.lock(); // 转换到 shared_ptr
 ```
 
-### 3.4. 带数据枚举 variant
+### 3.5. 带数据枚举 variant
 
 ```cpp
 std::variant<std::monostate, int, std::string> a{std::in_place_index<1>, 1};
@@ -268,7 +293,7 @@ std::get<int>(a)
 
 std::monostate 无状态的类型
 
-### 3.5. 时钟 chrono
+### 3.6. 时钟 chrono
 
 - `#include <chrono>`
 - `std::chrono::system_clock` 系统时钟
@@ -294,7 +319,7 @@ std::monostate 无状态的类型
   - `std::chrono::microseconds` 微秒
   - `std::chrono::nanoseconds` 纳秒
 
-### 3.6. 随机数 random
+### 3.7. 随机数 random
 
 ```cpp
 #include <random>
@@ -303,7 +328,7 @@ std::mt19937_64 gen(std::random_device{}());
 gen() // 获得 64 位随机数
 ```
 
-随机数引擎：一般就是梅森旋转算法 std::mt19937_64，用真随机（可能）`std::random_device` 作为参数
+随机数引擎：一般就是梅森旋转算法 `std::mt19937_64`，用真随机（可能）`std::random_device` 作为参数
 
 随机分布
 
@@ -314,7 +339,7 @@ gen() // 获得 64 位随机数
 - `std::normal_distribution<float> norm(0, 1);` 正态分布，参数是平均数和标准差
   - `norm(gen)` 得到随机数
 
-### 3.7. 文件系统 filesystem
+### 3.8. 文件系统 filesystem
 
 ```cpp
 #include <filesystem>
@@ -335,21 +360,19 @@ fs::directory_entry 类
 - `.is_regular_file()` 是文件
 - `.is_directory()` 是目录
 
-fs::directory_iterator/fs::recursive_directory_iterator 类
+fs::directory_iterator / fs::recursive_directory_iterator 类
 
 - 迭代器，(递归)遍历目录和文件
 - `for (fs::directory_entry i : fs::directory_iterator(fs::current_path()))`
 
-### 3.8. algorithm
+### 3.9. algorithm
 
 - `std::sort` 主体使用快速排序，范围小用插入排序，递归层数太深用堆排序
 - `std::nth_element` 类似 `std::sort`，类快速排序 + 插入排序 + 堆
 
-### 3.9. pmr
+### 3.10. pmr
 
-```cpp
-#include <memory_resource>
-```
+`#include <memory_resource>`
 
 多态内存分配器，可以认为是无类型的内存分配器
 
