@@ -126,7 +126,7 @@ mutable
 class A: virtual public B { ... }
 ```
 
-多继承，基类和派生类指针的值可能不同。编译时的信息足够时，通过 C 风格强转或 static_cast 可以正确转换；否则需要 dynamic_cast
+多继承，基类和派生类指针的值可能不同。编译期的信息足够时，通过 C 风格强转或 static_cast 可以正确转换；否则需要 dynamic_cast
 
 虚析构函数：在虚函数多态时保证子类析构函数可以运行
 

@@ -13,8 +13,8 @@
 - `set args xxx` 设置命令行参数
 - `l` 查看源码
 - `b <breakpoint>` 设置断点
-  - `b line` 当前文件+行号
-  - `b file:line` 文件名+行号
+  - `b line` 当前文件 + 行号
+  - `b file:line` 文件名 + 行号
   - `b symbol` 符号名
 - `tb <breakpoint>` 设置临时端点（只停一次）
 - `info <x>` 查看
