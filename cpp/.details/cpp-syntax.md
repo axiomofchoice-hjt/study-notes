@@ -11,16 +11,17 @@
   - [2.7. 移动语义](#27-移动语义)
   - [2.8. 类型转换](#28-类型转换)
 - [3. 标准库](#3-标准库)
-  - [3.1. 类型萃取 type\_traits](#31-类型萃取-type_traits)
-  - [3.2. 正则表达式 regex](#32-正则表达式-regex)
-  - [3.3. 可空类型 optional](#33-可空类型-optional)
-  - [3.4. 智能指针](#34-智能指针)
-  - [3.5. 带数据枚举 variant](#35-带数据枚举-variant)
-  - [3.6. 时钟 chrono](#36-时钟-chrono)
-  - [3.7. 随机数 random](#37-随机数-random)
-  - [3.8. 文件系统 filesystem](#38-文件系统-filesystem)
-  - [3.9. algorithm](#39-algorithm)
-  - [3.10. pmr](#310-pmr)
+  - [3.1. stdlib](#31-stdlib)
+  - [3.2. 类型萃取 type\_traits](#32-类型萃取-type_traits)
+  - [3.3. 正则表达式 regex](#33-正则表达式-regex)
+  - [3.4. 可空类型 optional](#34-可空类型-optional)
+  - [3.5. 智能指针](#35-智能指针)
+  - [3.6. 带数据枚举 variant](#36-带数据枚举-variant)
+  - [3.7. 时钟 chrono](#37-时钟-chrono)
+  - [3.8. 随机数 random](#38-随机数-random)
+  - [3.9. 文件系统 filesystem](#39-文件系统-filesystem)
+  - [3.10. algorithm](#310-algorithm)
+  - [3.11. pmr](#311-pmr)
 - [4. 20 之后版本](#4-20-之后版本)
 - [5. 编译器扩展](#5-编译器扩展)
 - [6. 规则](#6-规则)
@@ -202,7 +203,14 @@ auto max_i = static_cast<const int &(*)(const int &, const int &)>(std::max);
 
 ## 3. 标准库
 
-### 3.1. 类型萃取 type_traits
+### 3.1. stdlib
+
+`#include <cstdlib>`
+
+- `const char *path = std::getenv("PATH");` 获取环境变量，不存在得到空指针
+- `int *p = static_cast<int*>(std::aligned_alloc(4096, size));` (C++17) 对齐的 malloc，用 free 释放
+
+### 3.2. 类型萃取 type_traits
 
 `#include <type_traits>`
 
@@ -213,7 +221,7 @@ auto max_i = static_cast<const int &(*)(const int &, const int &)>(std::max);
   - 类似功能的 `std::result_of` 在 c++20 中移除
   - 还有 `std::invokable` 等一系列模板
 
-### 3.2. 正则表达式 regex
+### 3.3. 正则表达式 regex
 
 ```c++
 std::string a = "a[a-z]{2}a", b = "ababcac";
@@ -226,7 +234,7 @@ sm.suffix() // "c", string
 sm.position() // 2, size_t, 子串位置
 ```
 
-### 3.3. 可空类型 optional
+### 3.4. 可空类型 optional
 
 `#include <optional>`
 
@@ -236,7 +244,7 @@ sm.position() // 2, size_t, 子串位置
 - `.value()` 得到值
 - `.value_or(x)` 得到值，空得到 x
 
-### 3.4. 智能指针
+### 3.5. 智能指针
 
 unique_ptr
 
@@ -282,7 +290,7 @@ p.expired(); // shared_ptr 不存在
 p.lock(); // 转换到 shared_ptr
 ```
 
-### 3.5. 带数据枚举 variant
+### 3.6. 带数据枚举 variant
 
 ```cpp
 std::variant<std::monostate, int, std::string> a{std::in_place_index<1>, 1};
@@ -293,7 +301,7 @@ std::get<int>(a)
 
 std::monostate 无状态的类型
 
-### 3.6. 时钟 chrono
+### 3.7. 时钟 chrono
 
 - `#include <chrono>`
 - `std::chrono::system_clock` 系统时钟
@@ -319,7 +327,7 @@ std::monostate 无状态的类型
   - `std::chrono::microseconds` 微秒
   - `std::chrono::nanoseconds` 纳秒
 
-### 3.7. 随机数 random
+### 3.8. 随机数 random
 
 ```cpp
 #include <random>
@@ -339,7 +347,7 @@ gen() // 获得 64 位随机数
 - `std::normal_distribution<float> norm(0, 1);` 正态分布，参数是平均数和标准差
   - `norm(gen)` 得到随机数
 
-### 3.8. 文件系统 filesystem
+### 3.9. 文件系统 filesystem
 
 ```cpp
 #include <filesystem>
@@ -365,12 +373,12 @@ fs::directory_iterator / fs::recursive_directory_iterator 类
 - 迭代器，(递归)遍历目录和文件
 - `for (fs::directory_entry i : fs::directory_iterator(fs::current_path()))`
 
-### 3.9. algorithm
+### 3.10. algorithm
 
 - `std::sort` 主体使用快速排序，范围小用插入排序，递归层数太深用堆排序
 - `std::nth_element` 类似 `std::sort`，类快速排序 + 插入排序 + 堆
 
-### 3.10. pmr
+### 3.11. pmr
 
 `#include <memory_resource>`
 
@@ -409,13 +417,13 @@ most vexing
 
 实现定义行为 (implementation-defined behavior)
 
-- 行为由平台 / 编译器定义
+- 行为由平台或编译器定义
 - 如 `sizeof(int)`
 
 未指定行为 (unspecified behavior)
 
-- 未定义，但有限制
-- 如 `a() + b() + c()` 的计算顺序
+- 有限制的行为
+- 如 `a() + b() + c()` 的计算顺序，变量的具体地址
 
 未定义行为 UB (undefined behavior)
 
