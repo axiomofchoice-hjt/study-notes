@@ -181,9 +181,19 @@ auto sum(Args ...x) {
 ### 2.7. 移动语义
 
 - `type &&` 只能绑定右值，可变
-- `std::move(x)` 等价于 `static_cast<type &&>(x)`
-- `template <typename T> void foo(T &&t)` 既可以接受左值也可以接受右值
-  - 完美转发：用 `std::forward<T>(t)` 可以保持左 / 右值属性（直接用 t 会变成左值）
+- `std::move(x)` 等价于 `static_cast<type &&>(x)`，只是将类型转换了，真正的移动发生在移动构造函数里
+- 万能引用 `template <typename T> void foo(T &&t)` 既可以接受左值也可以接受右值
+  - 完美转发：用 `std::forward<T>(t)` 可以保持左 / 右值属性（右值引用是左值）
+- 被移动后的变量，只有析构是实现定义行为，如果要继续使用要先调用析构函数再调用构造函数（虽然直接用也没什么问题）
+
+copy-and-swap idiom
+
+```cpp
+T& operator=(T other) {
+    swap(*this, other);
+    return *this;
+}
+```
 
 ### 2.8. 类型转换
 
