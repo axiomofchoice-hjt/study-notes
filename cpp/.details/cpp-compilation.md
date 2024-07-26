@@ -69,6 +69,7 @@ gnu binutils 是一系列工具的集合
   - `-j section` 指定 section
   - `-t` 导出符号，`-T` 针对动态链接
   - objdump -D -b binary -mi386:x86-64 bin file > result 反汇编独立的符号
+  - -M intel 用 intel style
 - `readelf -a fileName.o > elf.txt` 阅读 elf 的工具
 
 lto：链接时优化，因为比较慢可能不常用
