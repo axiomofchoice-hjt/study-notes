@@ -68,6 +68,7 @@ gnu binutils 是一系列工具的集合
   - `-r` 似乎指定这个才能显示跨翻译单元跳转，`-R` 针对动态链接跳转
   - `-j section` 指定 section
   - `-t` 导出符号，`-T` 针对动态链接
+  - objdump -D -b binary -mi386:x86-64 bin file > result 反汇编独立的符号
 - `readelf -a fileName.o > elf.txt` 阅读 elf 的工具
 
 lto：链接时优化，因为比较慢可能不常用
