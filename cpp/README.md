@@ -9,8 +9,8 @@
 
 - 编译构建：[编译](.details/cpp-compilation.md) | [cmake](.details/cmake.md) | [makefile](.details/makefile.md)
 - [包管理](.details/package-manager.md)
-- [调试](.details/gdb.md)
-- [开发工具](.details/dev.md)
+- [调试 gdb](.details/gdb.md)
+- [开发工具 dev](.details/dev.md)
 - [Linux API](.details/linux-api.md)
 - valgrind 分析内存越界等问题
 - weggli 代码语义搜索
