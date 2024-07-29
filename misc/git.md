@@ -119,6 +119,7 @@ git clone $url --depth=1 # 只有 master 的最新版
 cd $dir
 git fetch --depth=1 origin $branch # 拉取分支的最新版
 git checkout $branch
+git fetch --unshallow # 拉取当前分支的完整历史
 ```
 
 sparse checkout，可拉取指定目录
