@@ -54,7 +54,7 @@ FLOPs：一次加法或乘法
 下载 FlameGraph
 
 ```sh
-git clone https://github.com/brendangregg/FlameGragh
+git clone https://github.com/brendangregg/FlameGraph
 ```
 
 生成数据
