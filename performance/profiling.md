@@ -73,5 +73,5 @@ perf report -n --stdio > output.txt
 ```sh
 perf script -i perf.data &> perf.unfold
 ./FlameGraph/stackcollapse-perf.pl perf.unfold > perf.folded
-./FlameGraph/FlameGraph.pl perf.folded > out.svg
+./FlameGraph/flamegraph.pl perf.folded > out.svg
 ```
