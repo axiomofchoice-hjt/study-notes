@@ -52,8 +52,11 @@
 
 - `__FILE__` 文件名
 - `__LINE__` 行号（整数）
-- `__func__` / `__FUNCTION__` 函数名
-- `__PRETTY_FUNCTION__` 完整的函数接口
+- `__func__` / `__FUNCTION__` 函数名，非标
+- `__PRETTY_FUNCTION__` 完整的函数接口，非标
+- `__DATE__` 编译日期
+- `__TIME__` 编译时间
+
 
 ### 2.2. 模板
 
