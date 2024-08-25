@@ -108,25 +108,21 @@ __new__
 
 ## 6. 方法
 
-方法是绑定了 self 的函数
+类的方法绑定只需要 A.func = func
 
-绑定
+对象的方法绑定 / 解绑，需要额外操作
 
 ```py
-def func(self): pass
-class A: pass
+def func(self):
+    pass
+class A:
+    pass
+
+# 绑定
 a = A()
 a.func = func.__get__(a, a.__class__)
 print(func)  # <function func at 0x114514>
 print(a.func)  # <bound method func of <__main__.A object at 0x1919810>>
-```
-
-解绑定
-
-```py
-class A:
-    def func(self): pass
-print(A().func)  # <bound method func of <__main__.A object at 0x1919810>>
-print(A.func)  # <function func at 0x114514>
-print(A().func.__func__)  # <function func at 0x114514>
+# 解绑
+print(a.func.__func__)  # <function func at 0x114514>
 ```

@@ -1,8 +1,9 @@
 # setuptools
 
 - [1. Get Start](#1-get-start)
-- [2. 构建命令](#2-构建命令)
-- [3. 生成可执行脚本](#3-生成可执行脚本)
+- [2. setup 参数](#2-setup-参数)
+- [3. 构建命令](#3-构建命令)
+- [4. 生成可执行脚本](#4-生成可执行脚本)
 
 ## 1. Get Start
 
@@ -40,7 +41,11 @@ setup(
 
 `pip install .` 即可
 
-## 2. 构建命令
+## 2. setup 参数
+
+- `package=find_packages()` 在当前目录下找 python 模块（`__init__.py`）并安装。`find_packages` 可以传根目录
+
+## 3. 构建命令
 
 |            旧命令             |           新命令           |
 | :---------------------------: | :------------------------: |
@@ -49,7 +54,7 @@ setup(
 |    `python setup.py sdist`    |     `python -m build`      |
 | `python setup.py bdist_wheel` |     `python -m build`      |
 
-## 3. 生成可执行脚本
+## 4. 生成可执行脚本
 
 [参考](https://setuptools.pypa.io/en/latest/userguide/entry_point.html)
 

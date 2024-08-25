@@ -30,6 +30,7 @@ todo: 做一个查找脚本，优先匹配标题
     - [web.md](misc/general/web.md)
   - [git.md](misc/git.md)
   - [gui.md](misc/gui.md)
+  - [markdown.md](misc/markdown.md)
   - tools
     - [docker.md](misc/tools/docker.md)
     - [vscode.md](misc/tools/vscode.md)
@@ -40,8 +41,8 @@ todo: 做一个查找脚本，优先匹配标题
     - [wsl-fedora-get-start.md](misc/wsl/wsl-fedora-get-start.md)
     - [wsl-manjaro-get-start.md](misc/wsl/wsl-manjaro-get-start.md)
     - [wsl.md](misc/wsl/wsl.md)
+  - [名人名言.md](misc/名人名言.md)
   - [有意思的东西.md](misc/有意思的东西.md)
-  - [群友名言.md](misc/群友名言.md)
 - performance
   - [asm.md](performance/asm.md)
   - [cpu.md](performance/cpu.md)

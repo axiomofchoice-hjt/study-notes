@@ -2,6 +2,7 @@
 
 - [1. cpu](#1-cpu)
 - [2. cache](#2-cache)
+- [3. 时延](#3-时延)
 
 ## 1. cpu
 
@@ -10,6 +11,8 @@
 die 是晶圆上切下的一个单元。
 
 各种 aarch64 cpu 支持的指令集表 [AArch64 SoC features](https://gpages.juszkiewicz.com.pl/arm-socs-table/arm-socs.html)
+
+频率：`lscpu` 可以查看最大最小频率，`perf stat ls` 查看运行时频率
 
 ## 2. cache
 
@@ -22,3 +25,17 @@ die 是晶圆上切下的一个单元。
 一个空的缓存称为冷缓存，对冷缓存的不命中称为冷不命中
 
 发生不命中就会执行放置策略
+
+## 3. 时延
+
+|     操作      |  时延  |
+| :-----------: | :----: |
+|   L1 cache    |  1 ns  |
+|   分支惩罚    |  3 ns  |
+|   L2 cache    |  4 ns  |
+|     Mutex     | 17 ns  |
+|     内存      | 100 ns |
+| 内存访问 1 MB | 10 us  |
+|      SSD      | 20 us  |
+| SSD 访问 1 MB |  1 ms  |
+| HDD 访问 1 MB |  5 ms  |

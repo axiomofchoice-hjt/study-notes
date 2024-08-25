@@ -54,7 +54,7 @@ FLOPs：一次加法或乘法
 下载 FlameGraph
 
 ```sh
-git clone https://github.com/brendangregg/FlameGragh
+git clone https://github.com/brendangregg/FlameGraph
 ```
 
 生成数据
@@ -72,6 +72,6 @@ perf report -n --stdio > output.txt
 
 ```sh
 perf script -i perf.data &> perf.unfold
-./FlameGragh/stackcollapse-perf.pl perf.unfold > perf.folded
-./FlameGragh/FlameGragh.pl perf.folded > out.svg
+./FlameGraph/stackcollapse-perf.pl perf.unfold > perf.folded
+./FlameGraph/flamegraph.pl perf.folded > out.svg
 ```

@@ -59,15 +59,20 @@ clang 编译可以细分
 - `clang++ -E -Xclang -ast-dump test.cpp` 生成语法树 AST
 - ... 生成中间代码 IR
 
-gnu binutils 是一系列工具的集合
+objdump
 
 - `objdump -s -d fileName.o > fileName.o.txt` 反汇编，可读性比较好
-  - `-S` 显示源码，编译时需要 -g
-  - `-C` 解析 c++ 符号名
-  - `-l` 显示文件名和行号
-  - `-r` 似乎指定这个才能显示跨翻译单元跳转，`-R` 针对动态链接跳转
-  - `-j section` 指定 section
-  - `-t` 导出符号，`-T` 针对动态链接
+- `-S` 显示源码，编译时需要 -g
+- `-C` 解析 c++ 符号名
+- `-l` 显示文件名和行号
+- `-r` 似乎指定这个才能显示跨翻译单元跳转，`-R` 针对动态链接跳转
+- `-j section` 指定 section
+- `-t` 导出符号，`-T` 针对动态链接
+- `-M intel` 用 intel style
+- `objdump -D -b binary -mi386:x86-64 bin file > result` 反汇编独立的符号
+
+readelf
+
 - `readelf -a fileName.o > elf.txt` 阅读 elf 的工具
 
 lto：链接时优化，因为比较慢可能不常用

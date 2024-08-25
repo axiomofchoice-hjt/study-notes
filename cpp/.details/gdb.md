@@ -12,22 +12,24 @@
 
 - `set args xxx` 设置命令行参数
 - `l` 查看源码
-- `b <breakpoint>` 设置断点
-  - `b line` 当前文件+行号
-  - `b file:line` 文件名+行号
+- `b <position>` 设置断点
+  - `b line` 当前文件 + 行号
+  - `b file:line` 文件名 + 行号
   - `b symbol` 符号名
-- `tb <breakpoint>` 设置临时端点（只停一次）
-- `info <x>` 查看
+- `tb <position>` 设置临时端点（只停一次）
+- `info ...` 查看
   - `info b` 查看断点
   - `info args` 查看参数
   - `info locals` 查看局部变量
-- `delete 1` 删除第一个断点
+- `delete <number>` 删除第 number 个断点
 - `r` 开始运行
 - `p <var>` 查看变量
 - `display <var>` 每步查看一次变量
   - `display /10i $pc` 显示 pc 寄存器后的 10 条指令
 - `n` 单步运行，不进入函数
+- `n <step>` 运行 step 行
 - `s` 单步运行，进入函数
+- `u <position>` 运行到指定位置
 - `finish` 单步运行，跳出函数
 - `c` 继续运行
 - `si` 运行一条指令
