@@ -15,10 +15,8 @@
 import argparse
 
 def parse_args():
-    parser = argparse.ArgumentParser(
-        description='Module Description'
-    )
-    parser.add_argument('size', type=int, help='size')
+    parser = argparse.ArgumentParser()
+    parser.add_argument('size', type=int)
     return parser.parse_args()
 
 if __name__ == '__main__':
@@ -53,4 +51,7 @@ if __name__ == '__main__':
 
 ## 6. subparsers
 
+- `subparsers = parser.add_subparsers()`
+- `subparsers = subparsers.add_subparser("run")`
+- `subparser.add_argument(...)`
 - ...

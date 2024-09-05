@@ -250,16 +250,22 @@ auto max_i = static_cast<const int &(*)(const int &, const int &)>(std::max);
 
 ### 3.3. 正则表达式 regex
 
-```c++
-std::string a = "a[a-z]{2}a", b = "ababcac";
-std::smatch sm; std::regex_search(b, sm, regex(a)); // 第一个匹配的子串，如果全串匹配用 regex_match
-std::cmatch cm; std::regex_search(b.c_str(), cm, regex(a)); // 如果是 c 的字符数组
-
-sm.str() // "abca", string
-sm.prefix() // "ab", string
-sm.suffix() // "c", string
-sm.position() // 2, size_t, 子串位置
+```cpp
+#include <iostream>
+#include <regex>
+int main() {
+    std::string pattern = R"end(a[a-z]{2}a)end";
+    std::string text = "ababcac";
+    std::smatch result;
+    std::regex_search(text, result, std::regex(pattern));
+    std::cout << result.str() << " " << result.position() << "\n";
+}
 ```
+
+- `std::smatch` text 是 `std::string`
+- `std::cmatch` text 是 `const char *`
+- `std::regex_search` 匹配第一个子串
+- `std::regex_match` 匹配全串
 
 ### 3.4. 可空类型 optional
 

@@ -1,19 +1,17 @@
 # study-notes
 
-个人学习笔记
-
-仅供参考
+个人学习笔记，仅供参考
 
 todo: 做一个查找脚本，优先匹配标题
 
 ## 1. 常用索引
 
-- [shell](./shell/README.md)
-- [python](./python/README.md)
-- [git](./misc/git.md)
-- [cpp](./cpp/README.md)
-- [asm](./perf/asm.md)
-- [simd](./perf/simd.md)
+- [shell](shell/README.md)
+- [cpp](cpp/README.md)
+- [python](python/README.md)
+- [git](misc/git.md)
+- [asm](perf/asm.md)
+- [simd](perf/simd.md)
 
 ## 2. 全部索引
 

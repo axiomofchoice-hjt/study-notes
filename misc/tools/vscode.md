@@ -2,10 +2,11 @@
 
 - [1. 设置](#1-设置)
 - [2. 项目配置](#2-项目配置)
-- [3. vscode-extension](#3-vscode-extension)
-  - [3.1. Get Start](#31-get-start)
-  - [3.2. 结构](#32-结构)
-  - [3.3. 参考](#33-参考)
+- [3. 插件](#3-插件)
+- [4. 插件开发](#4-插件开发)
+  - [4.1. Get Start](#41-get-start)
+  - [4.2. 结构](#42-结构)
+  - [4.3. 参考](#43-参考)
 
 ## 1. 设置
 
@@ -27,9 +28,11 @@
 - 任务：顶部菜单 终端 -> 配置默认生成任务，Ctrl+Shift+B 执行任务
 - 调试：侧边栏 运行和调试 -> 创建 lauch.json 文件，F5 调试
 
-## 3. vscode-extension
+## 3. 插件
 
-### 3.1. Get Start
+## 4. 插件开发
+
+### 4.1. Get Start
 
 ```sh
 npm install -g yo generator-code
@@ -40,13 +43,13 @@ yo code
 
 用 vscode 打开项目，按 F5 就能调试运行
 
-### 3.2. 结构
+### 4.2. 结构
 
 src/extention.ts 是入口文件，可以注册命令的逻辑
 
 package.json contributes 可以注册命令、键绑定等
 
-### 3.3. 参考
+### 4.3. 参考
 
 [API](https://code.visualstudio.com/api/references/vscode-api)
 
