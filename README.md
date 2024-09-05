@@ -20,21 +20,16 @@ todo: 做一个查找脚本，优先匹配标题
 - cpp
   - [README.md](cpp/README.md)
 - misc
-  - general
-    - [algorithm.md](misc/general/algorithm.md)
-    - [distributed-systems.md](misc/general/distributed-systems.md)
-    - [general.md](misc/general/general.md)
-    - [machine-learning.md](misc/general/machine-learning.md)
-    - [web.md](misc/general/web.md)
+  - [algorithm.md](misc/algorithm.md)
   - [git.md](misc/git.md)
   - [gui.md](misc/gui.md)
   - [markdown.md](misc/markdown.md)
+  - [regex.md](misc/regex.md)
   - tools
     - [docker.md](misc/tools/docker.md)
     - [vscode.md](misc/tools/vscode.md)
   - [windows.md](misc/windows.md)
   - wsl
-    - [wsl-arch-get-start.md](misc/wsl/wsl-arch-get-start.md)
     - [wsl-debian-get-start.md](misc/wsl/wsl-debian-get-start.md)
     - [wsl-fedora-get-start.md](misc/wsl/wsl-fedora-get-start.md)
     - [wsl-manjaro-get-start.md](misc/wsl/wsl-manjaro-get-start.md)
