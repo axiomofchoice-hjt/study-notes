@@ -273,8 +273,8 @@ int main() {
 
 - `std::nullopt` 空值
 - `std::make_optional(x)` 创建
-- `.has_value()` 判断非空
-- `.value()` 得到值
+- `.operator bool()` `.has_value()` 判断非空
+- `.operator*()` `.value()` 得到值
 - `.value_or(x)` 得到值，空得到 x
 
 ### 3.5. 智能指针
