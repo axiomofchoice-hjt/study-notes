@@ -2,10 +2,11 @@
 
 - [1. Get Start](#1-get-start)
 - [2. 位置参数](#2-位置参数)
-- [3. 可选参数](#3-可选参数)
-- [4. 值参数](#4-值参数)
-- [5. 列表参数](#5-列表参数)
-- [6. subparsers](#6-subparsers)
+- [3. 选项](#3-选项)
+- [4. 值](#4-值)
+- [5. 枚举](#5-枚举)
+- [6. 列表](#6-列表)
+- [7. subparsers](#7-subparsers)
 
 [参考](https://docs.python.org/3/library/argparse.html)
 
@@ -42,18 +43,19 @@ if __name__ == '__main__':
 - 获取 `args.size`
 - 命令行 `python xxx.py --size 123` 或 `--size=123`
 
-## 枚举
+## 5. 枚举
 
 - choices
 
-## 5. 列表
+## 6. 列表
 
 - `parser.add_argument('--nums', nargs='+', type=int)`
   - nargs 可以是 `*+?` 或数字
+  - 当 nargs 是 `?` ...
 - 获取 `args.nums`
 - 命令行 `python xxx.py --nums 1 2 3`
 
-## 6. subparsers
+## 7. subparsers
 
 - `subparsers = parser.add_subparsers()`
 - `subparsers = subparsers.add_subparser("run")`
