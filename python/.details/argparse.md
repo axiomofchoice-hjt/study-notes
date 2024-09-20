@@ -30,19 +30,23 @@ if __name__ == '__main__':
 - 获取 `args.size`
 - 命令行 `python xxx.py 123`
 
-## 3. 可选参数
+## 3. 选项
 
 - `parser.add_argument('-l', action='store_true')`
 - 获取 `args.l`
 - 命令行 `python xxx.py -l`
 
-## 4. 值参数
+## 4. 值
 
 - `parser.add_argument('--size', type=int, default=0)`
 - 获取 `args.size`
 - 命令行 `python xxx.py --size 123` 或 `--size=123`
 
-## 5. 列表参数
+## 枚举
+
+- choices
+
+## 5. 列表
 
 - `parser.add_argument('--nums', nargs='+', type=int)`
   - nargs 可以是 `*+?` 或数字
