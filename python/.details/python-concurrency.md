@@ -53,8 +53,18 @@ mineThread.join() # 等待该线程结束
 
 ### 3.1. run
 
+阻塞
+
 - `subprocess.run(['ls', '-l'])` 用列表表示命令
 - `subprocess.run('ls -l', shell=True)` 设置 shell 后可以用字符串表示
+
+捕获输出
+
+```py
+proc = subprocess.run(['ls'], capture_output=True, text=True)
+
+print(proc.stdout)
+```
 
 ### 3.2. Popen
 
