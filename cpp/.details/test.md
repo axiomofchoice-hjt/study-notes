@@ -10,6 +10,7 @@
   - [2.1. Get Start](#21-get-start)
   - [2.2. 暂停恢复](#22-暂停恢复)
   - [2.3. 参数](#23-参数)
+  - [2.4. 运行命令](#24-运行命令)
 
 ## 1. gtest
 
@@ -91,10 +92,10 @@ TEST(xxx, yyy) {
 git submodule add https://github.com/google/benchmark third_party/benchmark
 ```
 
-benchmark 依赖 googletest，要先包含子目录 googletest
+benchmark 依赖 googletest，要先包含子目录 googletest，或者关闭 cmake 变量 BENCHMARK_ENABLE_GTEST_TESTS
 
 ```cmake
-add_subdirectory(third_party/googletest)
+add_subdirectory(third_party/googletest) # 或者 set(BENCHMARK_ENABLE_GTEST_TESTS OFF)
 add_subdirectory(third_party/benchmark)
 target_link_libraries(${PROJECT_NAME} PRIVATE benchmark::benchmark)
 ```
@@ -161,3 +162,8 @@ static void custom_args(benchmark::internal::Benchmark *b) {
 }
 BENCHMARK(bm_vector_push_back)->Apply(custom_args);
 ```
+
+### 2.4. 运行命令
+
+- `--benchmark_repetitions=10` 重复次数，同时输出平均值、中位数、标准差、CV
+- `--benchmark_enable_random_interleaving=true` 随机测试减少误差
