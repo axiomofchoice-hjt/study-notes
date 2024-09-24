@@ -53,7 +53,7 @@ mineThread.join() # 等待该线程结束
 
 ### 3.1. run
 
-阻塞
+阻塞运行命令
 
 - `subprocess.run(['ls', '-l'])` 用列表表示命令
 - `subprocess.run('ls -l', shell=True)` 设置 shell 后可以用字符串表示
@@ -68,7 +68,7 @@ print(proc.stdout)
 
 ### 3.2. Popen
 
-可以完成复杂任务
+可以完成复杂任务，不阻塞运行
 
 - `subprocess.Popen(['ls', '-l'])` 异步执行
   - `shell=True` 用字符串作为命令 `'ls -l'`
