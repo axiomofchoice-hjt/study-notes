@@ -236,6 +236,7 @@ auto max_i = static_cast<const int &(*)(const int &, const int &)>(std::max);
 
 - `const char *path = std::getenv("PATH");` 获取环境变量，不存在得到空指针
 - `int *p = static_cast<int*>(std::aligned_alloc(4096, size));` (C++17) 对齐的 malloc，用 free 释放
+- `std::atexit(func)` 注册函数，程序正常退出时调用
 
 ### 3.2. 类型萃取 type_traits
 
@@ -431,6 +432,7 @@ fs::directory_iterator / fs::recursive_directory_iterator 类
 - `__attribute__((aligned($n)))`：用 n 字节对齐
 - `__attribute__((always_inline))`：强制内联
 - c 的 restrict：在 c++ 中可能是 `__restrict__`，修饰函数参数，表示这段内存只能用该指针来访问。
+- `__attribute__((constructor))` 或 `[[gnu::constructor]]`：函数在程序开始时调用
 
 ## 6. 规则
 
