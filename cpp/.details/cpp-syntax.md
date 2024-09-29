@@ -30,10 +30,14 @@
   - [6.3. sso 优化](#63-sso-优化)
   - [6.4. 单一定义规则 odr](#64-单一定义规则-odr)
   - [6.5. 重载决议](#65-重载决议)
-- [7. ABI](#7-abi)
-  - [7.1. Itanium C++ ABI](#71-itanium-c-abi)
-  - [7.2. name mangling 符号生成规则](#72-name-mangling-符号生成规则)
-- [8. useless](#8-useless)
+  - [6.6. SFINAE](#66-sfinae)
+- [7. 最佳实践](#7-最佳实践)
+  - [7.1. Pimpl](#71-pimpl)
+  - [7.2. Magic Static](#72-magic-static)
+- [8. ABI](#8-abi)
+  - [8.1. Itanium C++ ABI](#81-itanium-c-abi)
+  - [8.2. name mangling 符号生成规则](#82-name-mangling-符号生成规则)
+- [9. useless](#9-useless)
 
 ## 1. 一些资料
 
@@ -434,6 +438,8 @@ fs::directory_iterator / fs::recursive_directory_iterator 类
 - c 的 restrict：在 c++ 中可能是 `__restrict__`，修饰函数参数，表示这段内存只能用该指针来访问。
 - `__attribute__((constructor))` 或 `[[gnu::constructor]]`：函数在程序开始时调用
 
+`bool __builtin_umulll_overflow(size_t a, size_t b, size_t &c)` 用于检查乘法是否越界
+
 ## 6. 规则
 
 空基类优化，no_unique_address
@@ -514,13 +520,21 @@ UBTWIP (undefined behavior that works in practice)
 2. 从该集合去除函数，只保留可行函数
 3. 分析可行函数集合，以确定唯一的最佳可行函数（可能会涉及隐式转换序列的排行）
 
-## 7. ABI
+### 6.6. SFINAE
 
-### 7.1. Itanium C++ ABI
+## 7. 最佳实践
+
+### 7.1. Pimpl
+
+### 7.2. Magic Static
+
+## 8. ABI
+
+### 8.1. Itanium C++ ABI
 
 [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
-### 7.2. name mangling 符号生成规则
+### 8.2. name mangling 符号生成规则
 
 没有统一的约定，只考虑 gcc 编译器
 
@@ -557,10 +571,8 @@ FviiE: void(int, int)
 
 运行时分析：`abi::__cxa_demangle`
 
-demangling 工具 `c++filt`
+demangling 命令行工具 `c++filt`
 
-## 8. useless
-
-`bool __builtin_umulll_overflow(size_t a, size_t b, size_t &c)` 用于检查乘法是否越界
+## 9. useless
 
 据群友所说，std::map 迭代器失效规则不允许 std::map 使用 b 树实现。
