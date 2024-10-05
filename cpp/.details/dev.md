@@ -38,6 +38,16 @@ set(CMAKE_CXX_STANDARD_INCLUDE_DIRECTORIES ${CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTOR
 }
 ```
 
+***
+
+clang-tidy
+
+项目根目录 .clang-tidy 文件
+
+```yml
+Checks: '-*,modernize-*,-modernize-use-trailing-return-type'
+```
+
 ## 2. clang-format
 
 ```sh
