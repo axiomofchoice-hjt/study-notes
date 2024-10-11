@@ -526,6 +526,18 @@ UBTWIP (undefined behavior that works in practice)
 
 ### 7.1. Pimpl
 
+```cpp
+struct A {
+    struct Impl;
+    std::unique_ptr<Impl> impl;
+};
+```
+
+实现细节隐藏在 Impl 中。大量用于 codegen。
+
+1. ABI 稳定：类只有 impl 一个成员，布局不变，Impl 增加成员变量不会导致使用方的重新编译。
+2. 隔离，防止使用的人干坏事。
+
 ### 7.2. Magic Static
 
 ## 8. ABI
