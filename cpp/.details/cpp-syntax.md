@@ -31,6 +31,7 @@
   - [6.4. 单一定义规则 odr](#64-单一定义规则-odr)
   - [6.5. 重载决议](#65-重载决议)
   - [6.6. SFINAE](#66-sfinae)
+  - [6.7. ADL](#67-adl)
 - [7. 最佳实践](#7-最佳实践)
   - [7.1. Pimpl](#71-pimpl)
   - [7.2. Magic Static](#72-magic-static)
@@ -521,6 +522,10 @@ UBTWIP (undefined behavior that works in practice)
 3. 分析可行函数集合，以确定唯一的最佳可行函数（可能会涉及隐式转换序列的排行）
 
 ### 6.6. SFINAE
+
+### 6.7. ADL
+
+根据参数来定位 unqualified 函数，例如 `endl(std::cout)` 可以根据 std::cout 找到 std::endl。
 
 ## 7. 最佳实践
 
