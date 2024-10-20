@@ -58,3 +58,4 @@ rm miniconda3.sh
 - `b` 查看所有断点
 - `clear` 清空断点
 - `!xxx` 执行语句
+- `until xxx` 执行到指定位置，until 要打全

@@ -30,10 +30,15 @@
   - [6.3. sso 优化](#63-sso-优化)
   - [6.4. 单一定义规则 odr](#64-单一定义规则-odr)
   - [6.5. 重载决议](#65-重载决议)
-- [7. ABI](#7-abi)
-  - [7.1. Itanium C++ ABI](#71-itanium-c-abi)
-  - [7.2. name mangling 符号生成规则](#72-name-mangling-符号生成规则)
-- [8. useless](#8-useless)
+  - [6.6. SFINAE](#66-sfinae)
+  - [6.7. ADL](#67-adl)
+- [7. 最佳实践](#7-最佳实践)
+  - [7.1. Pimpl](#71-pimpl)
+  - [7.2. Magic Static](#72-magic-static)
+- [8. ABI](#8-abi)
+  - [8.1. Itanium C++ ABI](#81-itanium-c-abi)
+  - [8.2. name mangling 符号生成规则](#82-name-mangling-符号生成规则)
+- [9. useless](#9-useless)
 
 ## 1. 一些资料
 
@@ -236,6 +241,7 @@ auto max_i = static_cast<const int &(*)(const int &, const int &)>(std::max);
 
 - `const char *path = std::getenv("PATH");` 获取环境变量，不存在得到空指针
 - `int *p = static_cast<int*>(std::aligned_alloc(4096, size));` (C++17) 对齐的 malloc，用 free 释放
+- `std::atexit(func)` 注册函数，程序正常退出时调用
 
 ### 3.2. 类型萃取 type_traits
 
@@ -250,16 +256,22 @@ auto max_i = static_cast<const int &(*)(const int &, const int &)>(std::max);
 
 ### 3.3. 正则表达式 regex
 
-```c++
-std::string a = "a[a-z]{2}a", b = "ababcac";
-std::smatch sm; std::regex_search(b, sm, regex(a)); // 第一个匹配的子串，如果全串匹配用 regex_match
-std::cmatch cm; std::regex_search(b.c_str(), cm, regex(a)); // 如果是 c 的字符数组
-
-sm.str() // "abca", string
-sm.prefix() // "ab", string
-sm.suffix() // "c", string
-sm.position() // 2, size_t, 子串位置
+```cpp
+#include <iostream>
+#include <regex>
+int main() {
+    std::string pattern = R"end(a[a-z]{2}a)end";
+    std::string text = "ababcac";
+    std::smatch result;
+    std::regex_search(text, result, std::regex(pattern));
+    std::cout << result.str() << " " << result.position() << "\n";
+}
 ```
+
+- `std::smatch` text 是 `std::string`
+- `std::cmatch` text 是 `const char *`
+- `std::regex_search` 匹配第一个子串
+- `std::regex_match` 匹配全串
 
 ### 3.4. 可空类型 optional
 
@@ -267,8 +279,8 @@ sm.position() // 2, size_t, 子串位置
 
 - `std::nullopt` 空值
 - `std::make_optional(x)` 创建
-- `.has_value()` 判断非空
-- `.value()` 得到值
+- `.operator bool()` `.has_value()` 判断非空
+- `.operator*()` `.value()` 得到值
 - `.value_or(x)` 得到值，空得到 x
 
 ### 3.5. 智能指针
@@ -425,6 +437,9 @@ fs::directory_iterator / fs::recursive_directory_iterator 类
 - `__attribute__((aligned($n)))`：用 n 字节对齐
 - `__attribute__((always_inline))`：强制内联
 - c 的 restrict：在 c++ 中可能是 `__restrict__`，修饰函数参数，表示这段内存只能用该指针来访问。
+- `__attribute__((constructor))` 或 `[[gnu::constructor]]`：函数在程序开始时调用
+
+`bool __builtin_umulll_overflow(size_t a, size_t b, size_t &c)` 用于检查乘法是否越界
 
 ## 6. 规则
 
@@ -460,6 +475,10 @@ most vexing
 UBTWIP (undefined behavior that works in practice)
 
 - 标准不提供方法，但又是刚需，很多人在用，造成了一种特殊的 UB
+
+非良构 (ill-formed)
+
+- 编译错误
 
 ### 6.2. 返回值优化 rvo
 
@@ -506,13 +525,37 @@ UBTWIP (undefined behavior that works in practice)
 2. 从该集合去除函数，只保留可行函数
 3. 分析可行函数集合，以确定唯一的最佳可行函数（可能会涉及隐式转换序列的排行）
 
-## 7. ABI
+### 6.6. SFINAE
 
-### 7.1. Itanium C++ ABI
+### 6.7. ADL
+
+根据参数来定位 unqualified 函数，例如 `endl(std::cout)` 可以根据 std::cout 找到 std::endl。
+
+## 7. 最佳实践
+
+### 7.1. Pimpl
+
+```cpp
+struct A {
+    struct Impl;
+    std::unique_ptr<Impl> impl;
+};
+```
+
+实现细节隐藏在 Impl 中。大量用于 codegen。
+
+1. ABI 稳定：类只有 impl 一个成员，布局不变，Impl 增加成员变量不会导致使用方的重新编译。
+2. 隔离，防止使用的人干坏事。
+
+### 7.2. Magic Static
+
+## 8. ABI
+
+### 8.1. Itanium C++ ABI
 
 [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
 
-### 7.2. name mangling 符号生成规则
+### 8.2. name mangling 符号生成规则
 
 没有统一的约定，只考虑 gcc 编译器
 
@@ -549,10 +592,8 @@ FviiE: void(int, int)
 
 运行时分析：`abi::__cxa_demangle`
 
-demangling 工具 `c++filt`
+demangling 命令行工具 `c++filt`
 
-## 8. useless
-
-`bool __builtin_umulll_overflow(size_t a, size_t b, size_t &c)` 用于检查乘法是否越界
+## 9. useless
 
 据群友所说，std::map 迭代器失效规则不允许 std::map 使用 b 树实现。

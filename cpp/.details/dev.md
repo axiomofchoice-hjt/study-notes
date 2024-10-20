@@ -38,28 +38,38 @@ set(CMAKE_CXX_STANDARD_INCLUDE_DIRECTORIES ${CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTOR
 }
 ```
 
+***
+
+clang-tidy
+
+配置项目根目录 .clang-tidy 文件
+
+```yml
+Checks: '-*,modernize-*,-modernize-use-trailing-return-type'
+```
+
 ## 2. clang-format
 
 ```sh
 sudo apt install clang-format
 ```
 
-配置
+配置项目根目录 .clang-format 文件
 
-```sh
-echo "---
+```yml
+---
 BasedOnStyle: Google
 Language: Cpp
 IndentWidth: 4
 TabWidth: 4
----" > ~/.clang-format
+---
 ```
 
-导出配置：`clang-format -style="{ BasedOnStyle: Google, IndentWidth: 4, TabWidth: 4 }" -dump-config > ~/.clang-format`
+导出配置：`clang-format -style="{ BasedOnStyle: Google, IndentWidth: 4, TabWidth: 4 }" -dump-config > .clang-format`
 
 格式化（vscode clangd 可以用快捷键）
 
-- `clang-format main.cpp` 使用 `~/.clang-format` 配置来格式化 main.cpp，输出到终端
+- `clang-format main.cpp` 使用 `.clang-format` 配置来格式化 main.cpp，输出到终端
 - `clang-format -i main.cpp` 修改源文件
 
 ## 3. doxygen

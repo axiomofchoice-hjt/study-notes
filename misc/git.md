@@ -229,6 +229,9 @@ git rm --cached third_party/fmt
 
 - 打 patch：`git diff $COMMIT $COMMIT > $file`
 - 应用 patch：`git apply $file`
+- `git diff` 未缓存的改动
+- `git diff --cached` 缓存的改动
+- `git diff HEAD` 所有未提交的改动
 
 ## 12. 其他
 

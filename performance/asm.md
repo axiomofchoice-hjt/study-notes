@@ -21,9 +21,6 @@
 
 分为 AT&T 和 intel 语法
 
-- AT&T 语法：objdump、gcc -S
-- intel 语法：godbolt
-
 ### 1.2. 寄存器
 
 - `%rip` 程序计数器 PC，指向下一条指令

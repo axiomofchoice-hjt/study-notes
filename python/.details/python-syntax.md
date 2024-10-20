@@ -6,6 +6,7 @@
 - [4. 读写文件](#4-读写文件)
 - [5. codegen](#5-codegen)
 - [6. 方法](#6-方法)
+- [7. 类型标注](#7-类型标注)
 
 ## 1. python 命令
 
@@ -125,4 +126,30 @@ print(func)  # <function func at 0x114514>
 print(a.func)  # <bound method func of <__main__.A object at 0x1919810>>
 # 解绑
 print(a.func.__func__)  # <function func at 0x114514>
+```
+
+## 7. 类型标注
+
+`from typing import ...`
+
+- `Any` 任意类型
+- `Final` `Final[T]` 不可变，不能对变量赋值
+- `Callable` `Callable[[$arg, $arg], $ret]` 可调用对象
+- `Tuple[()]` 空元组
+- `Awaitable`
+- `Self`
+- `TypedDict("name", {'a': int, 'b': NotRequired[str]})`
+- `TypedDict("name", {'a': Required[int], 'b': str}, total=False)`
+
+```py
+class A:
+    a: int            # 实例变量
+    b: ClassVar[int]  # 类变量
+```
+
+```py
+def foo(**kwargs: int):
+    pass
+def foo(**kwargs: Unpack[TypedDict("", {'a': str})]):
+    pass
 ```

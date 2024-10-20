@@ -199,7 +199,10 @@ function asm() {
 ## 10. zshrc
 
 ```zsh
-alias git=/mnt/c/Apps/Git/bin/git.exe
+# alias git=/mnt/c/Apps/Git/bin/git.exe
+alias ll="ls -l"
+alias la="ls -a"
+alias grep='grep --color=auto'
 
 function study() {
     if [[ "$1" = "up" ]]; then

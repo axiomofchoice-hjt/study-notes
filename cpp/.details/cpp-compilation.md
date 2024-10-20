@@ -32,8 +32,8 @@ sudo apt install build-essential
 
 编译参数
 
-- 头文件目录 `-I ./include`
-- 库目录 `-L ./lib`
+- 头文件目录 `-I $path`
+- 库目录 `-L $path`
 - 优化 `-Og -O0 -O1 -O2 -O3`
 - 调试信息 `-g`
 - 宏 `-D $name` `-D $name=$value`
@@ -42,38 +42,37 @@ sudo apt install build-essential
 
 静态库
 
-- 生成 `ar xxx.cpp -rcs lib/libxxx.a`
-- 查看包含哪些文件 `ar -t lib/libxxx.a`
+- 生成 `ar xxx.cpp -rcs $file.a`
+- 查看包含哪些文件 `ar -t $file.a`
 - 使用 `g++ main.cpp -o main -L lib -lxxx`
-- 使用 `g++ main.cpp -o main lib/libxxx.a`
+- 使用 `g++ main.cpp -o main $file.a`
 
 动态库
 
-- 生成 `g++ xxx.cpp -fPIC -shared -o lib/libxxx.so`
-- 使用 `g++ main.cpp -o main -L lib -lxxx`
-- 使用 `g++ main.cpp -o main lib/libxxx.so`
+- 生成 `g++ xxx.cpp -fPIC -shared -o $file.so`
+- 使用 `g++ main.cpp -o main -L $path -lxxx`
+- 使用 `g++ main.cpp -o main $file.so`
 
 clang 编译可以细分
 
-- `clang++ -E -Xclang -dump-tokens test.cpp` 生成 tokens
-- `clang++ -E -Xclang -ast-dump test.cpp` 生成语法树 AST
+- `clang++ -E -Xclang -dump-tokens $file.cpp` 生成 tokens
+- `clang++ -E -Xclang -ast-dump $file.cpp` 生成语法树 AST
 - ... 生成中间代码 IR
 
 objdump
 
-- `objdump -s -d fileName.o > fileName.o.txt` 反汇编，可读性比较好
+- `objdump -s -d $file.o > $file.objdump` 反汇编，可读性比较好
 - `-S` 显示源码，编译时需要 -g
 - `-C` 解析 c++ 符号名
 - `-l` 显示文件名和行号
 - `-r` 似乎指定这个才能显示跨翻译单元跳转，`-R` 针对动态链接跳转
-- `-j section` 指定 section
 - `-t` 导出符号，`-T` 针对动态链接
 - `-M intel` 用 intel style
-- `objdump -D -b binary -mi386:x86-64 bin file > result` 反汇编独立的符号
+- `objdump -D -b binary -mi386:x86-64 bin $file > $resultFile.objdump` 反汇编独立的符号，可直接查看 jit 生成的函数
 
 readelf
 
-- `readelf -a fileName.o > elf.txt` 阅读 elf 的工具
+- `readelf -a $file.o > $resultFile` 阅读 elf 的工具
 
 lto：链接时优化，因为比较慢可能不常用
 
@@ -134,9 +133,6 @@ elf 构成
 3. 弱符号里选择任意一个
 
 静态库：多个目标文件的打包
-
-- `ar rcs xxx.a xxx.o xxx.o ...`
-- `gcc -static -o main main.o ./xxx.a`
 
 libc.a 提供标准 io、字符串等操作
 

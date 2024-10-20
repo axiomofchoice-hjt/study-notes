@@ -89,6 +89,7 @@ format
 - 指定 BUILD_TYPE (Debug, Release)
   - `$<$<CONFIG:Debug>:xxx>` 如果是 Debug 就得到字符串 `xxx`
   - cmake 编译选项 `-DCMAKE_BUILD_TYPE=Debug`（Debug 开启后似乎自动 `-g`）
+- 编译宏 target_compile_definitions
 
 链接
 

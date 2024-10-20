@@ -318,7 +318,7 @@ wget
 - `env | grep foo` 查找某个环境变量
 - `export foo=bar` 设置环境变量
 - `unset foo` 取消环境变量
-- `foo=bar ./xxx` 临时设置环境变量
+- `foo=bar $CMD` 临时设置环境变量
 - `source xxx.sh` 执行文件并继承环境，缩写为 `. xxx.sh`
 
 添加 path
@@ -338,7 +338,7 @@ wget
 
 ### 7.4. 包管理
 
-- [包管理](./.details/package-manager.md)
+- [包管理](.details/package-manager.md)
 - `which CMD` 查看 CMD 的文件路径
 - `whereis package` 查看 package 的路径
 
@@ -350,8 +350,8 @@ wget
 
 ## 8. 脚本
 
-- [脚本](./.details/script.md)
+- [脚本](.details/script.md)
 
 ## 9. settings
 
-- [settings](./.details/settings.md)
+- [settings](.details/settings.md)
