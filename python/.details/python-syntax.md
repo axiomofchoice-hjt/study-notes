@@ -7,6 +7,9 @@
 - [5. codegen](#5-codegen)
 - [6. 方法](#6-方法)
 - [7. 类型标注](#7-类型标注)
+  - [7.1. 类](#71-类)
+  - [7.2. 可调用对象](#72-可调用对象)
+  - [7.3. kwargs](#73-kwargs)
 
 ## 1. python 命令
 
@@ -134,18 +137,32 @@ print(a.func.__func__)  # <function func at 0x114514>
 
 - `Any` 任意类型
 - `Final` `Final[T]` 不可变，不能对变量赋值
-- `Callable` `Callable[[$arg, $arg], $ret]` 可调用对象
 - `Tuple[()]` 空元组
 - `Awaitable`
-- `Self`
 - `TypedDict("name", {'a': int, 'b': NotRequired[str]})`
 - `TypedDict("name", {'a': Required[int], 'b': str}, total=False)`
 
+### 7.1. 类
+
 ```py
 class A:
-    a: int            # 实例变量
+    a: int  # 实例变量
     b: ClassVar[int]  # 类变量
+    c: Self  # A
 ```
+
+### 7.2. 可调用对象
+
+```py
+Callable  # 匹配所有可调用对象
+Callable[[int, int], None]  # 匹配 def f(_: int, _: int) -> None
+Callable[..., None]  # 匹配 def f(***) -> None
+class Proto(Protocol):
+    def __call__(self, name: str, num: int) -> None: ...
+Proto  # 匹配 def f(name: str, num: int) -> None
+```
+
+### 7.3. kwargs
 
 ```py
 def foo(**kwargs: int):
