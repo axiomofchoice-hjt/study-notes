@@ -6,10 +6,11 @@
 - [4. 读写文件](#4-读写文件)
 - [5. codegen](#5-codegen)
 - [6. 方法](#6-方法)
-- [7. 类型标注](#7-类型标注)
-  - [7.1. 类](#71-类)
-  - [7.2. 可调用对象](#72-可调用对象)
-  - [7.3. kwargs](#73-kwargs)
+- [7. 装饰器](#7-装饰器)
+- [8. 类型标注](#8-类型标注)
+  - [8.1. 类](#81-类)
+  - [8.2. 可调用对象](#82-可调用对象)
+  - [8.3. kwargs](#83-kwargs)
 
 ## 1. python 命令
 
@@ -131,7 +132,37 @@ print(a.func)  # <bound method func of <__main__.A object at 0x1919810>>
 print(a.func.__func__)  # <function func at 0x114514>
 ```
 
-## 7. 类型标注
+## 7. 装饰器
+
+没有参数的装饰器
+
+```py
+def log(func):
+    def wrapper(*args, **kwargs):
+        print('call %s():' % func.__name__)
+        return func(*args, **kwargs)
+    return wrapper
+
+@log
+def f(): ...
+```
+
+有参数的装饰器
+
+```py
+def log(text):
+    def decorator(func):
+        def wrapper(*args, **kw):
+            print('%s %s():' % (text, func.__name__))
+            return func(*args, **kw)
+        return wrapper
+    return decorator
+
+@log("execute")
+def f(): ...
+```
+
+## 8. 类型标注
 
 `from typing import ...`
 
@@ -142,7 +173,7 @@ print(a.func.__func__)  # <function func at 0x114514>
 - `TypedDict("name", {'a': int, 'b': NotRequired[str]})`
 - `TypedDict("name", {'a': Required[int], 'b': str}, total=False)`
 
-### 7.1. 类
+### 8.1. 类
 
 ```py
 class A:
@@ -151,7 +182,7 @@ class A:
     c: Self  # A
 ```
 
-### 7.2. 可调用对象
+### 8.2. 可调用对象
 
 ```py
 Callable  # 匹配所有可调用对象
@@ -162,7 +193,7 @@ class Proto(Protocol):
 Proto  # 匹配 def f(name: str, num: int) -> None
 ```
 
-### 7.3. kwargs
+### 8.3. kwargs
 
 ```py
 def foo(**kwargs: int):
