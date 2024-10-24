@@ -46,7 +46,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE Threads::Threads)
 编译命令
 
 ```sh
-cmake -B build . -DCMAKE_BUILD_TYPE=Release &&
+cmake -B build . -DCMAKE_BUILD_TYPE=Release -Gninja &&
     cmake --build build -j$(nproc)
 ```
 
