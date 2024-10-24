@@ -115,11 +115,17 @@ git checkout $branch
 depth 克隆
 
 ```sh
-git clone $url --depth=1 # 只有 master 的最新版
+git clone $url --depth=1 # 只有 master 最新版
 cd $dir
 git fetch --depth=1 origin $branch # 拉取分支的最新版
 git checkout $branch
 git fetch --unshallow # 拉取当前分支的完整历史
+```
+
+单分支
+
+```sh
+git clone $url --branch $branch --single-branch
 ```
 
 sparse checkout，可拉取指定目录
