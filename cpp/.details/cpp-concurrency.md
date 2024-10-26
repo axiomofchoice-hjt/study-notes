@@ -17,7 +17,7 @@
   - [5.1. 开始](#51-开始)
   - [5.2. 函数](#52-函数)
   - [5.3. 语法](#53-语法)
-- [6. 嵌套](#6-嵌套)
+  - [5.4. 嵌套](#54-嵌套)
 
 ## 1. 线程
 
@@ -389,14 +389,6 @@ class SpinLock {
 - release fence
   - 保证读写、写写的顺序
 
-## 4. 协程
-
-c++20 coroutine
-
-是一个可以被挂机 / 再执行的函数
-
-create / yield / resume 纳秒级别，非常快
-
 ## 5. openmp
 
 并行编程框架
@@ -451,7 +443,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE OpenMP::OpenMP_CXX)
 - `#pragma omp barrier` 所有线程同步一次
 - `#pragma omp simd` 下一个语句进行向量优化，一些简单的代码（比如拷贝）可以优化
 
-## 6. 嵌套
+### 5.4. 嵌套
 
 可以指定线程数并嵌套实现局部同步的效果
 
