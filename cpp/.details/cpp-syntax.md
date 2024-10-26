@@ -429,6 +429,14 @@ fs::directory_iterator / fs::recursive_directory_iterator 类
 
 - 推导 this：成员函数可替代 this，lambda 可用于递归
 
+协程
+
+c++20 coroutine
+
+是一个可以被挂机 / 再执行的函数
+
+create / yield / resume 纳秒级别，非常快
+
 ## 5. 编译器扩展
 
 - `__attribute__((cleanup($func)))`：清除局部变量时执行函数，可用于关闭文件、释放锁等
