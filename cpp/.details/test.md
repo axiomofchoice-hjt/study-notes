@@ -167,3 +167,4 @@ BENCHMARK(bm_vector_push_back)->Apply(custom_args);
 
 - `--benchmark_repetitions=10` 重复次数，同时输出平均值、中位数、标准差、CV
 - `--benchmark_enable_random_interleaving=true` 随机测试减少误差
+- --benchmark_min_time=0.1s / 100x
