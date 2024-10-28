@@ -12,12 +12,11 @@
   - [3.3. 自旋锁](#33-自旋锁)
   - [3.4. 内存模型](#34-内存模型)
   - [3.5. 内存屏障](#35-内存屏障)
-- [4. 协程](#4-协程)
-- [5. openmp](#5-openmp)
-  - [5.1. 开始](#51-开始)
-  - [5.2. 函数](#52-函数)
-  - [5.3. 语法](#53-语法)
-  - [5.4. 嵌套](#54-嵌套)
+- [4. openmp](#4-openmp)
+  - [4.1. 开始](#41-开始)
+  - [4.2. 函数](#42-函数)
+  - [4.3. 语法](#43-语法)
+  - [4.4. 嵌套](#44-嵌套)
 
 ## 1. 线程
 
@@ -389,11 +388,11 @@ class SpinLock {
 - release fence
   - 保证读写、写写的顺序
 
-## 5. openmp
+## 4. openmp
 
 并行编程框架
 
-### 5.1. 开始
+### 4.1. 开始
 
 ```cpp
 #include <omp.h>
@@ -425,14 +424,14 @@ find_package(OpenMP REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE OpenMP::OpenMP_CXX)
 ```
 
-### 5.2. 函数
+### 4.2. 函数
 
 - `omp_set_num_threads(8);` 设置线程数
 - `omp_get_thread_num()` 得到线程编号（0 到当前线程数 - 1）
 - `omp_get_nun_threads()` 得到当前线程数
 - `omp_get_max_threads()` 得到最大线程数
 
-### 5.3. 语法
+### 4.3. 语法
 
 - `#pragma omp parallel` 下一行语句会并行执行
 - `#pragma omp parallel for` 下一个 for 语句会用并行优化
@@ -443,7 +442,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE OpenMP::OpenMP_CXX)
 - `#pragma omp barrier` 所有线程同步一次
 - `#pragma omp simd` 下一个语句进行向量优化，一些简单的代码（比如拷贝）可以优化
 
-### 5.4. 嵌套
+### 4.4. 嵌套
 
 可以指定线程数并嵌套实现局部同步的效果
 

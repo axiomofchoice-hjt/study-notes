@@ -122,7 +122,7 @@ git checkout $branch
 git fetch --unshallow # 拉取当前分支的完整历史
 ```
 
-单分支
+克隆单分支
 
 ```sh
 git clone $url --branch $branch --single-branch

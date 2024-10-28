@@ -45,7 +45,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE Threads::Threads)
 
 编译命令
 
-```sh
+```sh
 cmake -B build . -DCMAKE_BUILD_TYPE=Release -GNinja &&
     cmake --build build -j$(nproc)
 ```
@@ -88,7 +88,7 @@ format
 - 指定 BUILD_TYPE (Debug, Release)
   - `$<$<CONFIG:Debug>:xxx>` 如果是 Debug 就得到字符串 `xxx`
   - cmake 编译选项 `-DCMAKE_BUILD_TYPE=Debug`（Debug 开启后似乎自动 `-g`）
-- 编译宏 target_compile_definitions
+- 编译宏 `target_compile_definitions(${PROJECT_NAME} PRIVATE FOO=1 BAR)`
 
 链接
 
