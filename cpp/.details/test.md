@@ -169,3 +169,4 @@ BENCHMARK(bm_vector_push_back)->Apply(custom_args);
 - `--benchmark_enable_random_interleaving=true` 随机测试减少误差
 - `--benchmark_min_time=0.1s` 一个测试点至少 0.1 秒
 - `--benchmark_min_time=100x` 一个测试点 100 次
+- --benchmark_min_warmup_time
