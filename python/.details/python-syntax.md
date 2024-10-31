@@ -179,7 +179,9 @@ def f(): ...
 class A:
     a: int  # 实例变量
     b: ClassVar[int]  # 类变量
-    c: Self  # A
+    def f(self) -> Self: return self  # 返回自身
+    def f(self) -> 'A': ...  # 用字符串可以在 A 定义前标准类型
+    def f(self) -> A: ...  # 同上，但是需要 from __future__ import annotations
 ```
 
 ### 8.2. 可调用对象
