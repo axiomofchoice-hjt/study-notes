@@ -16,7 +16,7 @@
 
 - `python -c "print(1)"` 执行临时 python 语句
 - `python -m module` 执行 module
-- `-u` stdout 不开启缓存
+- `-u` stdout, stderr 不开启缓存（无作用，默认不开启）
 
 PYTHONPATH 模块搜索的目录
 
