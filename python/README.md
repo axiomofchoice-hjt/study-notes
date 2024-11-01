@@ -9,7 +9,7 @@
 ## 2. 通用库
 
 - [文件系统](.details/filesystem.md)
-- [json](.details/json.md)
+- [json](.details/json.md) | [yaml](.details/pyyaml.md)
 - [命令行参数 argparse](.details/argparse.md)
 - [打包 setuptools](.details/setuptools.md)
 - [测试](.details/python-test.md)
