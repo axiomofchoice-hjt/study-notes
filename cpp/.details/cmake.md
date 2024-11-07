@@ -100,6 +100,7 @@ format
 ## 5. 脚本
 
 - 打印日志 `message("Hello World")`
+- 退出 message(FATAL_ERROR "")
 
 ### 5.1. 变量
 
