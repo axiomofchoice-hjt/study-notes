@@ -63,6 +63,8 @@ void move_pages(void *bytes, int64_t nbytes) {
 gcc stream.c -o stream -fopenmp -O3 -DSTREAM_ARRAY_SIZE=150000000 && ./stream
 ```
 
+这里 STREAM_ARRAY_SIZE 需要是核数 \* 64 的倍数
+
 ## 3. 测延迟
 
 [lmbench](https://github.com/intel/lmbench)
