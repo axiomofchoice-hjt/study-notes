@@ -12,13 +12,15 @@ numa 节点之间有连接，有不同的距离（时延）和带宽。
 
 一个节点内包含多个核心以及连接了内存条，同一 numa 的内核访问内存最快。
 
-用 numactl 来绑核、绑内存。`numactl --cpunodebind=x --membind=x $command`
+用 numactl 来绑核、绑内存。`numactl -C=0-7 -m=x $command`
 
-- `--cpunodebind=0` 只用 0 节点的 cpu
-- `--membind=0` 只用 0 节点的内存
-- `--physcpubind=0-15` 只用编号 0-15 的 cpu
-- `--preferred=0` 优先用 0 节点
+- `-C=0-7` `--physcpubind=0-7` 绑 0-7 核
+- `--cpunodebind=0` 绑 numa0 的核
+- `-m=0` `--membind=0` 绑 numa0 的内存
+- `--preferred=0` 优先用 numa0
 - `--interleave=0,1` 内存交织
+
+`numactl -H` 查看 numa 距离、numa 内存使用量
 
 libnuma：用 `-lnuma` 链接，包含 numa.h `https://github.com/numactl/numactl/blob/master/numa.h`，redhet 安装 numactl-devel
 
