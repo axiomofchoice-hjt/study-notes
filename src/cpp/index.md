@@ -8,7 +8,7 @@
 ## 2. 工具链
 
 - 编译构建：[编译](./cpp-compilation.md) | [cmake](./cmake.md) | [makefile](./makefile.md)
-- [包管理](./package-manager.md)
+- [包管理](./包管理.md)
 - [调试 gdb](./gdb.md)
 - [开发工具 dev](./dev.md)
 - [Linux API](./linux-api.md)

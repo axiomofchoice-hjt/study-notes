@@ -304,7 +304,7 @@ wget
 
 ### 7.4. 包管理
 
-- [包管理](./package-manager.md)
+- [包管理](./包管理.md)
 - `which CMD` 查看 CMD 的文件路径
 - `whereis package` 查看 package 的路径
 
