@@ -19,10 +19,11 @@
 
 ## 3. 第三方库
 
-- 基础：[boost](./boost.md) | [fmt](./fmt.md)
-- 测试：[测试](./test.md)
-- 日志：[日志](./log.md)
-- 序列化：[json](./json.md)
+- [boost](./boost.md)
+- [fmt](./fmt.md)
+- [测试](./test.md)
+- [日志](./log.md)
+- [序列化](./序列化.md)
 - cctz 日期库
 - gmp 大整数库
 - mpark/patterns：模式匹配库（语法糖）

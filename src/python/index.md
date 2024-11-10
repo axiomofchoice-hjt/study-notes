@@ -8,8 +8,7 @@
 
 ## 2. 通用库
 
-- [文件系统](./filesystem.md)
-- [json](./json.md) | [yaml](./pyyaml.md)
+- [序列化](./序列化.md)
 - [命令行参数 argparse](./argparse.md)
 - [打包 setuptools](./setuptools.md)
 - [测试](./python-test.md)

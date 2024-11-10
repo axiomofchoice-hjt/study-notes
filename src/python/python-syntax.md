@@ -10,11 +10,13 @@
 
 PYTHONPATH 模块搜索的目录
 
-## 2. 动态参数
+## 2. 函数
+
+### 2.1. 动态参数
 
 `def func(*args, **kwargs): ...`
 
-## 3. 魔法函数
+### 2.2. 魔法函数
 
 算术运算
 
@@ -88,23 +90,7 @@ __hash__
 __new__
 ```
 
-## 4. 读写文件
-
-- `with open(path, 'r') as f: ...`
-  - `f.read()` 返回 `str`，读所有内容
-  - `f.readlines()` 返回 `List[str]`，按行读所有内容
-- `with open(path, 'w') as f: ...`
-  - `f.write(str)` 写内容
-
-## 5. codegen
-
-1. 生成字符串 `code = 'def func(...): ...'`
-2. `code = compile(code, '', 'exec')`，可指定优化等级
-3. `vars = { ... }`
-4. `exec(code, vars)`
-5. `vars['func']` 得到函数
-
-## 6. 方法
+### 2.3. 方法绑定
 
 类的方法绑定只需要 A.func = func
 
@@ -125,7 +111,7 @@ print(a.func)  # <bound method func of <__main__.A object at 0x1919810>>
 print(a.func.__func__)  # <function func at 0x114514>
 ```
 
-## 7. 装饰器
+### 2.4. 装饰器
 
 没有参数的装饰器
 
@@ -155,7 +141,15 @@ def log(text):
 def f(): ...
 ```
 
-## 8. 类型标注
+## 3. codegen
+
+1. 生成字符串 `code = 'def func(...): ...'`
+2. `code = compile(code, '', 'exec')`，可指定优化等级
+3. `vars = { ... }`
+4. `exec(code, vars)`
+5. `vars['func']` 得到函数
+
+## 4. 类型标注
 
 `from typing import ...`
 
@@ -166,7 +160,7 @@ def f(): ...
 - `TypedDict("name", {'a': int, 'b': NotRequired[str]})`
 - `TypedDict("name", {'a': Required[int], 'b': str}, total=False)`
 
-### 8.1. 类
+### 4.1. 类
 
 ```py
 class A:
@@ -177,7 +171,7 @@ class A:
     def f(self) -> A: ...  # 同上，但是需要 from __future__ import annotations
 ```
 
-### 8.2. 可调用对象
+### 4.2. 可调用对象
 
 ```py
 Callable  # 匹配所有可调用对象
@@ -188,7 +182,7 @@ class Proto(Protocol):
 Proto  # 匹配 def f(name: str, num: int) -> None
 ```
 
-### 8.3. kwargs
+### 4.3. kwargs
 
 ```py
 def foo(**kwargs: int):
@@ -196,3 +190,72 @@ def foo(**kwargs: int):
 def foo(**kwargs: Unpack[TypedDict("", {'a': str})]):
     pass
 ```
+
+## 5. 文件系统
+
+### 5.1. pathlib
+
+`from pathlib import Path`
+
+- `Path(str)` 通过路径字符串得到 Path
+- `path / path` 拼接
+- `.exists()` 是否存在
+- `.is_dir() .is_file()` 是否是目录 / 文件
+- `for i in path.iterdir(): ...` 遍历
+- `.glob('**/*.py')` glob 匹配
+- `.absolute()` 转换为绝对路径
+- `.resolve()` 转换为无链接的路径
+- `.as_posix()` 转换为字符串
+- `Path(__file__).parent` python 文件所在目录
+
+路径信息
+
+- `.name` 文件名
+- `.suffix` 后缀名，比如 `.py`
+- `.stem` 无后缀的文件名
+
+读写文件
+
+- `with path.open('r') as f: ...` 打开文件
+- `path.read_text() / .read_bytes()` 读文件
+- `path.write_text(str) / write_bytes(bytes)` 写文件
+
+### 5.2. open
+
+- `with open(path, 'r') as f: ...`
+  - `f.read()` 返回 `str`，读所有内容
+  - `f.readlines()` 返回 `List[str]`，按行读所有内容
+- `with open(path, 'w') as f: ...`
+  - `f.write(str)` 写内容
+
+### 5.3. os
+
+`import os`
+
+- 重命名文件 `os.rename(file, name)`
+- 删除文件 `os.remove(file)`
+- 返回当前目录中的内容（不带路径） `os.listdir(dir)`
+- 创建目录 `os.mkdir(dir)`
+- 删除空目录 `os.rmdir(dir)`
+- 返回当前目录 `os.getcwd()`
+- 切换当前目录 `os.chdir(dir)`
+- 返回是否是文件 `os.path.isfile(file)`
+- 返回是否是目录 `os.path.isdir(dir)`
+- 路径拼接 `os.path.join(s1, s2, ...)`
+- 去掉路径去掉扩展名 `os.path.basename(file)`
+- 执行文件的目录 `os.path.dirname(os.path.abspath(__file__))`
+
+### 5.4. shutil
+
+`import shutil`
+
+- 复制文件 `shutil.copy(from, to)`
+- 复制文件夹 `shutil.copytree(from, to)`（将一个文件夹的内容复制到一个空文件夹中，后者不存在则创建）
+- 删除文件夹 `shutil.rmtree(dir)`
+- 移动文件（夹） `shutil.move(from, to)`
+
+### 5.5. glob
+
+`import glob`
+
+- `glob.glob(s)` 返回所有匹配的文件或目录，支持通配符
