@@ -73,7 +73,7 @@ IdentityFile ~/.ssh/id_xxx
 
 注释 `#` 必须是在行首，不能跟在内容后，下面的写法不合法
 
-```gitignore
+```text
 build  # comment
 ```
 

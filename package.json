@@ -1,5 +1,5 @@
 {
-  "name": "underdog-daily",
+  "name": "study-notes",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -9,7 +9,6 @@
     "vitepress": "^1.3.4"
   },
   "scripts": {
-    "new": "node new-daily.mjs",
     "dev": "vitepress dev",
     "build": "vitepress build",
     "preview": "vitepress preview"

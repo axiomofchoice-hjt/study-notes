@@ -18,7 +18,7 @@ WSL 默认安装位置在 `C:\Users\Axiomofchoice\AppData\Local\Packages\`
 
 不导入 windows 路径：`sudo vim /etc/wsl.conf` 写入
 
-```conf
+```ini
 [interop]
 appendWindowsPath = false
 ```
