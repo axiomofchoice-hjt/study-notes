@@ -37,3 +37,11 @@ die 是晶圆上切下的一个单元。
 |      SSD      | 20 us  |
 | SSD 访问 1 MB |  1 ms  |
 | HDD 访问 1 MB |  5 ms  |
+
+## 绑核
+
+// 当前线程绑到 id 核上
+cpu_set_t cpus;
+CPU_ZERO(&cpus);
+CPU_SET(id, &cpus);
+CHECK(sched_setaffinity(0, sizeof(cpu_set_t), &cpus) == 0);
