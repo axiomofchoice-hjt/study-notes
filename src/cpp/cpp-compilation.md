@@ -33,8 +33,7 @@ sudo apt install build-essential
 - 宏 `-D $name` `-D $name=$value`
 - 增强警告 `-Wall -Wextra -Wpedantic`
 - 传给链接器 `-Wl,...,...`
-
--Wl,-rpath,$dir 运行时动态库搜索目录
+- `-Wl,-rpath,$dir` 运行时动态库搜索目录
 
 静态库
 
