@@ -34,6 +34,8 @@ sudo apt install build-essential
 - 增强警告 `-Wall -Wextra -Wpedantic`
 - 传给链接器 `-Wl,...,...`
 
+-Wl,-rpath,$dir 运行时动态库搜索目录
+
 静态库
 
 - 生成 `ar xxx.cpp -rcs $file.a`
