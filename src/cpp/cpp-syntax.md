@@ -408,6 +408,7 @@ create / yield / resume 纳秒级别，非常快
 - `__attribute__((always_inline))`：强制内联
 - c 的 restrict：在 c++ 中可能是 `__restrict__`，修饰函数参数，表示这段内存只能用该指针来访问。
 - `__attribute__((constructor))` 或 `[[gnu::constructor]]`：函数在程序开始时调用
+- `__attribute((__visibility__("hidden")))` 隐藏符号
 
 `bool __builtin_umulll_overflow(size_t a, size_t b, size_t &c)` 用于检查乘法是否越界
 
