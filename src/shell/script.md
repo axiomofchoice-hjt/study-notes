@@ -150,6 +150,8 @@ python 可能要用 `"\033[?m"`
 
 ## 9. 一些写法
 
+cd 脚本所在目录：`cd $(dirname "$(realpath "${BASH_SOURCE[-1]}")")`
+
 ```sh
 function check() {
     "$@"
