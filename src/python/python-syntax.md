@@ -159,6 +159,8 @@ def f(): ...
 - `Awaitable`
 - `TypedDict("name", {'a': int, 'b': NotRequired[str]})`
 - `TypedDict("name", {'a': Required[int], 'b': str}, total=False)`
+- `type Tree = Dict[str, Tree]` 递归
+- `type` 类型的类型
 
 ### 4.1. 类
 
