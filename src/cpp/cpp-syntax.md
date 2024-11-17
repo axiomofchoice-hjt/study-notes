@@ -26,6 +26,7 @@
 - `__PRETTY_FUNCTION__` 完整的函数接口，非标
 - `__DATE__` 编译日期
 - `__TIME__` 编译时间
+- `__COUNTER__` GCC / clang 扩展，从 0 开始的计数器
 
 条件编译
 
