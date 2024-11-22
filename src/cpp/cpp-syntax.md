@@ -120,7 +120,7 @@ class A: virtual public B { ... }
 
 问题：dynamic_cast 原理（似乎是虚函数表的信息）
 
-replacement new，在指定位置调用构造函数 `auto ptr = malloc(sizeof T); new (ptr) T();`
+placement new，在指定位置调用构造函数 `auto ptr = malloc(sizeof T); new (ptr) T();`
 
 在指定位置调用析构函数 `ptr->~T()`，此处的 T 不要加命名空间
 
