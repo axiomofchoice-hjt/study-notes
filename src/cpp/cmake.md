@@ -97,6 +97,10 @@ format
 - 环境变量
   - `$ENV{NAME}`
 
+打印所有变量
+get_cmake_property(_v...)
+foreach
+
 ### 5.2. 运算
 
 - AND / OR / NOT
