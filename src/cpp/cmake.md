@@ -98,8 +98,14 @@ format
   - `$ENV{NAME}`
 
 打印所有变量
-get_cmake_property(_v...)
-foreach
+
+```cpp
+get_cmake_property(_variableNames VARIABLES)
+foreach (_variableName ${_variableNames})
+  message(STATUS "${_variableName}=${${_variableName}}")
+endforeach()
+
+```
 
 ### 5.2. 运算
 

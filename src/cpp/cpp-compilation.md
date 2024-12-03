@@ -67,7 +67,7 @@ objdump
 
 nm
 
-- nm -D $file 查看符号，T 符号，U 符号引用，W 弱符号
+- `nm -D $file` 查看符号，T 符号，U 符号引用，W 弱符号
 
 readelf
 
