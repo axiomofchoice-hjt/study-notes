@@ -65,6 +65,10 @@ objdump
 - `-M intel` 用 intel style
 - `objdump -D -b binary -mi386:x86-64 bin $file > $resultFile.objdump` 反汇编独立的符号，可直接查看 jit 生成的函数
 
+nm
+
+- nm -D $file 查看符号，T 符号，U 符号引用，W 弱符号
+
 readelf
 
 - `readelf -a $file.o > $resultFile` 阅读 elf 的工具
