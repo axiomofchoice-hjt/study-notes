@@ -25,14 +25,14 @@ find_package(Threads REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE Threads::Threads)
 ```
 
-编译命令
+构建命令
 
 ```sh
 cmake -B build . -DCMAKE_BUILD_TYPE=Release -GNinja
 cmake --build build -j$(nproc)
 ```
 
-安装
+构建安装命令
 
 ```sh
 cmake -B build . -DCMAKE_BUILD_TYPE=Release -GNinja -DCMAKE_INSTALL_PREFIX=xxx
