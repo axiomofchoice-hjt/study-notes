@@ -28,8 +28,16 @@ target_link_libraries(${PROJECT_NAME} PRIVATE Threads::Threads)
 编译命令
 
 ```sh
-cmake -B build . -DCMAKE_BUILD_TYPE=Release -GNinja &&
-    cmake --build build -j$(nproc)
+cmake -B build . -DCMAKE_BUILD_TYPE=Release -GNinja
+cmake --build build -j$(nproc)
+```
+
+安装
+
+```sh
+cmake -B build . -DCMAKE_BUILD_TYPE=Release -GNinja -DCMAKE_INSTALL_PREFIX=xxx
+cmake --build build -j$(nproc)
+cmake --install build
 ```
 
 ## 3. vscode 配置
