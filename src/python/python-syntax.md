@@ -20,96 +20,53 @@ PYTHONPATH 模块搜索的目录
 
 算术运算
 
-```py
-'加法 self + b' __add__ '减法 self - b' __sub__ '乘法 self * b' __mul__
-'除法 self / b' __truediv__ '地板除 self // b' __floordiv__ '模 self % b' __mod__
-'负号 -self' __neg__ '正号 +self' __pos__
-'幂 self ** b' __pow__
-'绝对值 abs(self)' __abs__
-'四舍五入 round(self, n)' __round__
-'右加 b + self' __radd__
-'自加 self += b' __iadd__
-```
+- `__add__[+] __sub__[-] __mul__[*] __truediv__[/] __floordiv__[//] __mod__[%] __pow__[**]`
+- 单目 `__neg__[-] __pos__[+]`
+- `__abs__[abs] __round__[round]`
+- 右操作数 `__radd__[+]`
+- `__iadd__[+=]`
 
 比较运算
 
-```py
-'等于 self == b' __eq__
-'其他比较运算' __ne__ __lt__ __gt__ __le__ __ge__
-```
+- `__eq__[==] __ne__[!=] __lt__[<] __gt__[>] __le__[<=] __ge__[>=]`
 
 类型转换
 
-```py
-'str(self)' __str__
-'bool(self)' __bool__
-'int(self)' __int__
-'float(self)' __float__
-```
+- `__str__[str] __bool__[bool] __int__[int] __float__[float]`
 
 位运算
 
-```py
-'位与 self & b' __and__
-'其他位运算' __or__ __invert__ __xor__ __lshift__ __rshift__
-```
+- `__and__[&] __or__[|] __invert__[~] __xor__[^] __lshift__[<<] __rshift__[>>]`
 
 容器操作
 
-```py
-'长度 len(self)' __len__
-'self[b]' __getitem__
-'self[b] = c' __setitem__
-'del self[b]' __delitem__
-'b in self' __contains__
-'切片' __index__
-```
+- `__len__[len] __getitem__[self[x]] __setitem__[self[x] = y] __delitem__[del self[x]] __contains__[x in self] __index__[self[x:y:z]]`
 
 属性操作
 
-```py
-'self.b 无匹配' __getattr__ __setattr__
-'self.b 无条件' __getattribute__
-'foo.bar bar 的类型是 Self' __get__ __set__
-'del self.b' __delattr__
-'所有属性?' __dict__
-'所有属性?' __dir__
-```
+- self.x 匹配失败时 `__getattr__ __setattr__`
+- self.x 无条件执行 `__getattribute__ __setattribute__`
+- `__get__ __set__`
+- `__delattr__[del self.x]`
+- `__dict__`
+- `__dir__`
 
 其他
 
-```py
-'构造 Self()' __init__
-'析构 del self' __del__
-'?' __repr__
-'函数调用 self(b)' __call__
-'with self as foo: ...' __enter__ __exit__
-'for i in self: ...' __iter__ __next__
-'模块' __all__
-__hash__
-__new__
-```
+- `__init__[Self(...)] __del__[del]`
+- `__repr__`
+- `__call__[self(...)]`
+- `__enter__+__exit__[with self as x]`
+- `__iter__+__next__[for x in self]`
+- 模块 `__all__`
+- `__hash__`
+- `__new__`
 
 ### 2.3. 方法绑定
 
-类的方法绑定只需要 A.func = func
-
-对象的方法绑定 / 解绑，需要额外操作
-
-```py
-def func(self):
-    pass
-class A:
-    pass
-
-# 绑定
-a = A()
-a.func = func.__get__(a, a.__class__)
-print(func)  # <function func at 0x114514>
-print(a.func)  # <bound method func of <__main__.A object at 0x1919810>>
-# 解绑
-print(a.func.__func__)  # <function func at 0x114514>
-```
+1. 修改类的方法 `A.method = func`（修改会影响到已创建的实例）
+2. 对象绑定方法 `a.method = func.__get__(a, a.__class__)`
+3. 获取方法的原始函数 `a.method.__func__`
 
 ### 2.4. 装饰器
 
