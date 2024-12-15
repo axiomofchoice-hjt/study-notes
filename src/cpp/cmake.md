@@ -153,15 +153,7 @@ endforeach()
 
 ## 7. 构建
 
-```sh
-mkdir build -p
-cd build
-cmake .. && make -j
-```
-
-make 可以用 `cmake --build .` 代替
-
-也可以指定构建路径
+一般在 build 目录下构建：
 
 ```sh
 cmake -B build . && cmake --build build

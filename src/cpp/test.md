@@ -40,7 +40,7 @@ find_package(fmt CONFIG REQUIRED)
 
 1. `cd build`
 2. `cmake ..`
-3. `make test -j` 只要构建 test 项目
+3. `make test -j$(nproc)` 只要构建 test 项目
 4. `cd test` build 目录里的 test 文件夹
 5. `ctest`
 
