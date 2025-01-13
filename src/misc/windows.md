@@ -90,13 +90,18 @@ Invoke-Expression (oh-my-posh init pwsh --config "XXX\hjt.omp.json")
 
 ## 9. powershell prompt
 
-开启脚本 `set-executionpolicy remotesigned`
+管理员执行 `set-executionpolicy remotesigned`
 
-新建 `$PSHOME\Profile.ps1`
+新建 `$PSHOME\Profile.ps1` 写入：
 
-写入 `function prompt { "$env:COMPUTERNAME $(Get-Location) -> " }`
-
-...
+```ps
+function prompt {
+    Write-Host $env:USERNAME -ForegroundColor Cyan -NoNewline
+    Write-Host " " -NoNewline
+    Write-Host $($executionContext.SessionState.Path.CurrentLocation) -ForegroundColor Yellow -NoNewline 
+    " -> "
+}
+```
 
 ## 10. 查看文件夹被哪个进程占用
 
