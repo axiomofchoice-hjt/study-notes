@@ -42,3 +42,15 @@ layer 需要继承 `nn.Module` 并实现 forward 方法，`__call__()` 会重定
 - nn.Linear 线性层
 - nn.Parameter 可以训练的张量
 - nn.Embedding, nn.EmbeddingBag 嵌入表
+
+## 序列化
+
+.pt
+
+torch.load(file)
+torch.save(obj, file)
+
+.safetensors
+
+import safetensors.torch
+safetensors.torch.load_file(file)
