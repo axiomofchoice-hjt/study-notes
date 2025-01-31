@@ -465,3 +465,19 @@ create / yield / resume 纳秒级别，非常快。
 ### 5.4. 销毁 destroy
 
 销毁协程激活帧，只能在挂起的协程上执行。
+
+***
+
+C++ 协程是低层次、通用工具，主要为库作者提供。
+
+promise 接口定义协程行为，包括创建、销毁、co_await、co_yield。
+
+awaitable 接口定义 co_await 逻辑。
+
+***
+
+co_await 一元运算符，只能在协程里使用（包含 co_await 的函数是协程）。后面跟 awaitble。
+
+promise 的 await_transform 方法可以更改 co_await 含义。Normal Awaitable 指没有这个方法，Contextually Awaitable 指有这个方法。
+
+awaiter 类型实现了 co_await 调用的三种方法 await_ready, await_suspend, await_resume
