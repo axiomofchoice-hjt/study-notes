@@ -448,36 +448,51 @@ c++20 coroutine
 
 create / yield / resume 纳秒级别，非常快。
 
-逻辑上，协程激活帧包含协程帧（挂起保留）和堆栈帧（挂起销毁）。协程帧通常需要存储在堆上，有时可以优化到栈上。
+### 5.1. 协程句柄
 
-### 5.1. 创建 create
+协程是：
 
-调用方分配堆栈帧，写入参数，然后转移到协程。协程会分配协程帧并把参数复制 / 移动到协程帧中。
+1. 返回 Task 的函数
+2. 包含 (co_await, co_yield) / co_return
+3. 通过 `std::coroutine_traits<Task>` 得到 promise?
 
-### 5.2. 挂起 suspend
+`std::coroutine_handle<T>` 是协程的句柄，包含方法：
 
-将寄存器的值和挂起点 (resume-point) 写入协程帧，回传句柄。句柄可作为正常值在函数之间传递。
+- `operator()` / `resume` 恢复一个暂停的协程，最终暂停无法恢复。
+- `done` 是否在最终暂停点。
+- `destroy` 销毁暂停或异常的协程。
+- `operator bool` 是否为空。
+- `address` / `from_address` 转换为 `void *` 或还原，用于 C 接口。
 
-### 5.3. 恢复 resume
+经过 promise 特化的协程句柄增加方法：
 
-调用方分配堆栈帧，转移到协程的挂起点。
+- `promise` / `from_promise` 获取 promise 对象的引用和还原
+- `operator std::coroutine_handle<void>` 转换为一般形式。
 
-### 5.4. 销毁 destroy
+`std::coroutine_handle<void>` 是一般形式，仅存储一个指针。
 
-销毁协程激活帧，只能在挂起的协程上执行。
+`std::coroutine_handle<std::noop_coroutine_promise>` 是无操作协程的句柄类型，`std::noop_coroutine` 函数返回无操作协程的句柄。
 
-***
+### 5.2. awaiter 等待对象
 
-C++ 协程是低层次、通用工具，主要为库作者提供。
+awaiter 包含方法：
 
-promise 接口定义协程行为，包括创建、销毁、co_await、co_yield。
+- `bool await_ready()`
+- `[void/bool/std::coroutine_handle<T>] await_suspend(std::coroutine_handle<T>)`
+- `D await_resume()` 是 `co_await <awaiter>` 的结果
 
-awaitable 接口定义 co_await 逻辑。
+`co_await awaiter`：
 
-***
+- 如果 `await_ready()`，立即返回 `await_resume()`。
+- 反之当前函数的句柄作为参数调用 `await_suspend()`，函数暂停。
 
-co_await 一元运算符，只能在协程里使用（包含 co_await 的函数是协程）。后面跟 awaitble。
+`std::suspend_always` await_ready 返回 false 的 awaiter，`std::suspend_never` await_ready 返回 true 的 awaiter。
 
-promise 的 await_transform 方法可以更改 co_await 含义。Normal Awaitable 指没有这个方法，Contextually Awaitable 指有这个方法。
+await_suspend 返回 false 立即执行 await_resume，返回 true 则不执行，返回协程句柄则立即恢复它。
 
-awaiter 类型实现了 co_await 调用的三种方法 await_ready, await_suspend, await_resume
+暂停的条件：`await_ready -> false` 且：
+
+- await_suspend 返回 void 或 true。
+- await_suspend 返回非自己的协程句柄。
+
+co_await 1s
