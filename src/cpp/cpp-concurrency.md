@@ -495,4 +495,21 @@ await_suspend 返回 false 立即执行 await_resume，返回 true 则不执行�
 - await_suspend 返回 void 或 true。
 - await_suspend 返回非自己的协程句柄。
 
-co_await 1s
+await_transform：用来指导 co_await 操作数变换到 awaiter
+
+### 5.3. promise
+
+Task 类型对应 promise 类型 `std::coroutine_traits<Task>::promise_type`
+
+promise 包含方法：
+
+- `get_return_object() -> Task`
+- `initial_suspend() -> [std::suspend_never/std::suspend_always]`
+- final_suspend
+- unhandled_exception
+- return_void / return_value 对应 Task 无值 / 有值
+
+协程创建会将参数给 promise 构造，然后调用 get_return_object 获取 Task
+
+然后协程内调用 `co_await initial_suspend()`，一般来说会返回 `std::suspend_never`（不暂停）或 `std::suspend_always`（暂停）
+

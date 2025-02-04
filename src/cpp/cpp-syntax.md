@@ -104,7 +104,15 @@ std::string s;
 
 mutable
 
-### 2.5. 面向对象
+### 2.5. placement new
+
+头文件 `#include <new>`
+
+placement new，在指定位置调用构造函数 `auto ptr = malloc(sizeof(T)); new (ptr) T();`
+
+在指定位置调用析构函数 `ptr->~T()`，此处的 T 不要加命名空间
+
+### 2.6. 面向对象
 
 虚继承：菱形继承重复的基类只在内存出现一次
 
@@ -120,13 +128,9 @@ class A: virtual public B { ... }
 
 问题：dynamic_cast 原理（似乎是虚函数表的信息）
 
-placement new，在指定位置调用构造函数 `auto ptr = malloc(sizeof T); new (ptr) T();`
-
-在指定位置调用析构函数 `ptr->~T()`，此处的 T 不要加命名空间
-
 成员指针很可能的实现是 16 字节，包含成员函数偏移、多继承 this 的偏移
 
-### 2.6. 变参模板
+### 2.7. 变参模板
 
 `sizeof...(Args)` 得到参数个数，可以用 if constexpr 判断：
 
@@ -163,7 +167,7 @@ auto sum(Args ...x) {
 }
 ```
 
-### 2.7. 移动语义
+### 2.8. 移动语义
 
 - `type &&` 只能绑定右值，可变
 - `std::move(x)` 等价于 `static_cast<type &&>(x)`，只是将类型转换了，真正的移动发生在移动构造函数里
@@ -180,7 +184,7 @@ T& operator=(T other) {
 }
 ```
 
-### 2.8. 类型转换
+### 2.9. 类型转换
 
 - `static_cast<T>` 常规的类型转换
 - `reinterpret_cast<T>` 二进制数据的强制转换，用于指针或引用
