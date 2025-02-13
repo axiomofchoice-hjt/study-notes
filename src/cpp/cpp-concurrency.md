@@ -506,10 +506,17 @@ promise 包含方法：
 - `get_return_object() -> Task`
 - `initial_suspend() -> [std::suspend_never/std::suspend_always]`
 - final_suspend
-- unhandled_exception
+- `unhandled_exception() -> void`
 - return_void / return_value 对应 Task 无值 / 有值
 
 协程创建会将参数给 promise 构造，然后调用 get_return_object 获取 Task
 
 然后协程内调用 `co_await initial_suspend()`，一般来说会返回 `std::suspend_never`（不暂停）或 `std::suspend_always`（暂停）
+
+协程执行时抛出异常会调用 unhandled_exception，这个函数里用 `std::current_expection()` 获取异常。用 `std::rethrow_expection` 重新抛出，协程会处于异常状态，只能被销毁。
+
+`co_return x; => promize.return_value(x);` `co_return; => promise.return_void();`
+
+执行完 co_return 后会执行 `co_await promise.final_suspend();`，如果协程暂停，就是最终暂停点，`done() = true`  且可以 `destroy()` 销毁。如果没有暂停，返回后立即销毁。
+
 
