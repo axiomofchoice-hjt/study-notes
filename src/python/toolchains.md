@@ -37,7 +37,7 @@ rm miniconda3.sh
 ## 4. pip
 
 - `pip install -r requirements.txt` 安装 requirements.txt
-- pip freeze > requirements.txt 生成 requirements.txt
+- `pip freeze > requirements.txt` 生成 requirements.txt
 - `pip install $package==$version` 安装特定版本
 - `pip uninstall $package`
 - `pip list` 查看所有包
