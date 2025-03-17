@@ -132,9 +132,10 @@ b h s d q 分别是 8 16 32 64 128 为一个单元
 
 argmax：
 
+```cpp
 svint32_t index;
 svfloat32_t max = svdup_f32(-inf);
-for i {
+for (int i = 0; i < n; i += vl) {
     svfloat32_t v = svld1(pg, ptr + i);
     svbool_t cmp = svcmpge(pg, max, v);
     max = svsel(cmp, max, v);
@@ -142,6 +143,7 @@ for i {
 }
 svfloat32_t maxv = svmaxv(pg, max);
 return svminv(svcmpeq(pg, max, maxv), index);
+```
 
 ## 3. arm neon
 
