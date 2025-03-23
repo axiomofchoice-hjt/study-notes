@@ -60,3 +60,7 @@ Powershell 启动脚本位于
 ## 9. 查看文件夹被哪个进程占用
 
 任务管理器 -> 性能 -> 资源监视器 -> CPU 标签 -> 关联的句柄，搜索目录
+
+## 10. git bash prompt
+
+`git/etc/profile.d/git-prompt.sh` 里的 PS1 变量
