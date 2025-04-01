@@ -14,9 +14,57 @@ PYTHONPATH 模块搜索的目录
 
 ### 2.1. 动态参数
 
-`def func(*args, **kwargs): ...`
+用 args, kwargs 接受额外的位置参数、关键字参数
 
-### 2.2. 魔法函数
+```py
+def func(*args, **kwargs): ...
+```
+
+### 2.2. 位置参数和关键字参数
+
+定义函数可以用 `/` 和 `*` 来划分位置参数、位置或关键字参数、关键字参数。
+
+```py
+def func(pos1, pos2, /, pos_or_kw, *, kw): ...
+```
+
+### 2.3. 方法绑定
+
+1. 修改类的方法 `A.method = func`（修改会影响到已创建的实例）
+2. 对象绑定方法 `a.method = func.__get__(a, a.__class__)`
+3. 获取方法的原始函数 `a.method.__func__`
+
+### 2.4. 装饰器
+
+没有参数的装饰器
+
+```py
+def log(func):
+    def wrapper(*args, **kwargs):
+        print('call %s():' % func.__name__)
+        return func(*args, **kwargs)
+    return wrapper
+
+@log
+def f(): ...
+```
+
+有参数的装饰器
+
+```py
+def log(text):
+    def decorator(func):
+        def wrapper(*args, **kw):
+            print('%s %s():' % (text, func.__name__))
+            return func(*args, **kw)
+        return wrapper
+    return decorator
+
+@log("execute")
+def f(): ...
+```
+
+### 2.5. 魔法函数
 
 算术运算
 
@@ -62,43 +110,7 @@ PYTHONPATH 模块搜索的目录
 - `__hash__`
 - `__new__`
 
-### 2.3. 方法绑定
-
-1. 修改类的方法 `A.method = func`（修改会影响到已创建的实例）
-2. 对象绑定方法 `a.method = func.__get__(a, a.__class__)`
-3. 获取方法的原始函数 `a.method.__func__`
-
-### 2.4. 装饰器
-
-没有参数的装饰器
-
-```py
-def log(func):
-    def wrapper(*args, **kwargs):
-        print('call %s():' % func.__name__)
-        return func(*args, **kwargs)
-    return wrapper
-
-@log
-def f(): ...
-```
-
-有参数的装饰器
-
-```py
-def log(text):
-    def decorator(func):
-        def wrapper(*args, **kw):
-            print('%s %s():' % (text, func.__name__))
-            return func(*args, **kw)
-        return wrapper
-    return decorator
-
-@log("execute")
-def f(): ...
-```
-
-## 3. codegen
+## 3. codegen 案例
 
 1. 生成字符串 `code = 'def func(...): ...'`
 2. `code = compile(code, '', 'exec')`，可指定优化等级
