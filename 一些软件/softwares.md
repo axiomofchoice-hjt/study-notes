@@ -21,6 +21,7 @@
 - [图像编辑](https://www.gimp.org/)
 - [视频剪辑](https://​www.shotcut.org/download/)
 - [音频剪辑](https://​www.audacityteam.org/)
+- [控制手机](https://cn.anlinksoft.com/download/)
 
 ## 3. 刚需
 
