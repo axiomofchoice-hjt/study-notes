@@ -19,6 +19,7 @@
   - `info args` 查看参数
   - `info locals` 查看局部变量
 - `p <var>` 查看变量
+  - `p *ptr@10` 查看指针指向的数组内容（前 10 个）
 - `display <var>` 每步查看一次变量
   - `display /10i $pc` 显示 pc 寄存器后的 10 条指令
 
