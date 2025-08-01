@@ -250,3 +250,7 @@ type
 - perf 性能优化
 - test 测试
 - chore 项目构建配置
+
+## 14. 问题
+
+git 太卡，用 `git gc` 优化性能。
