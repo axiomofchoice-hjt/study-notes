@@ -4,48 +4,48 @@
 
 ## 1. 安装 WSL Fedora
 
-[参考](https://zhuanlan.zhihu.com/p/513046463)
-
-[网址](https://koji.fedoraproject.org/koji/packageinfo?packageID=26387) 里选一个，下载 .tar.xz，解压后进入某种编码的目录，拿出 layer.tar，重命名为 Fedora.tar
+Fedora 可以官方途径安装。
 
 ```sh
-wsl --shutdown
-wsl --import Fedora $dir $tar_dir/Fedora.tar --version 2
-wsl --set-default sysname
+wsl --install FedoraLinux-42
+wsl --set-default FedoraLinux-42
 ```
-
-为了方便就只用 root 登录了
 
 ## 2. 换源
 
 [参考](https://mirrors.huaweicloud.com/mirrorDetail/5ea14dee7c04483df02c7103)
 
 ```sh
-sed -i "s/#baseurl/baseurl/g" /etc/yum.repos.d/fedora.repo /etc/yum.repos.d/fedora-updates.repo /etc/yum.repos.d/fedora-modular.repo /etc/yum.repos.d/fedora-updates-modular.repo
+sudo cp -a /etc/yum.repos.d/fedora.repo /etc/yum.repos.d/fedora.repo.backup
 
-sed -i "s/metalink/#metalink/g" /etc/yum.repos.d/fedora.repo /etc/yum.repos.d/fedora-updates.repo /etc/yum.repos.d/fedora-modular.repo /etc/yum.repos.d/fedora-updates-modular.repo
+sudo cp -a /etc/yum.repos.d/fedora-updates.repo /etc/yum.repos.d/fedora-updates.repo.backup
 
-sed -i "s@http://.*/pub/fedora/linux@https://mirrors.huaweicloud.com/fedora@g" /etc/yum.repos.d/fedora.repo /etc/yum.repos.d/fedora-updates.repo /etc/yum.repos.d/fedora-modular.repo /etc/yum.repos.d/fedora-updates-modular.repo
+sudo sed -i "s/#baseurl/baseurl/g" /etc/yum.repos.d/fedora.repo /etc/yum.repos.d/fedora-updates.repo
+
+sudo sed -i "s/metalink/#metalink/g" /etc/yum.repos.d/fedora.repo /etc/yum.repos.d/fedora-updates.repo
+
+sudo sed -i "s@http://download.example/pub/fedora/linux@https://mirrors.huaweicloud.com/fedora@g" /etc/yum.repos.d/fedora.repo /etc/yum.repos.d/fedora-updates.repo
+
+dnf makecache -y
+sudo dnf update -y
 ```
-
-`yum makecache`
 
 ## 3. 基础软件
 
 ```sh
-dnf install vim nano git curl zip unzip tar
+sudo dnf install vim nano git wget curl zip unzip tar -y
 ```
 
 网络
 
 ```sh
-dnf install net-tools iputils
+sudo dnf install net-tools iputils -y
 ```
 
 进程
 
 ```sh
-dnf install htop
+sudo dnf install htop -y
 ```
 
 ## 4. wsl.conf
@@ -66,7 +66,7 @@ appendWindowsPath = false" | sudo tee /etc/wsl.conf
 ### 6.1. 编译工具
 
 ```sh
-dnf install gcc gcc-c++ cmake
+sudo dnf install gcc gcc-c++ cmake -y
 ```
 
 ### 6.2. clangd
@@ -105,6 +105,6 @@ rm miniconda3.sh
 ## 8. Node 环境
 
 ```sh
-dnf install nodejs
+sudo dnf install nodejs
 npm install --global yarn
 ```
