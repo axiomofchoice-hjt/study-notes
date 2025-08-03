@@ -105,6 +105,6 @@ rm miniconda3.sh
 ## 8. Node 环境
 
 ```sh
-sudo dnf install nodejs
-npm install --global yarn
+sudo dnf install nodejs -y
+sudo npm install --global yarn
 ```
