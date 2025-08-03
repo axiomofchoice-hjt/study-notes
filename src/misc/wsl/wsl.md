@@ -74,3 +74,12 @@ WantedBy=multi-user.target
 开机启动 `sudo systemctl enable clash.service`
 
 手动启动 `sudo systemctl start clash.service`
+
+如果手动启动报错 `System has not been booted ...`，`sudo -e /etc/wsl.conf` 增加
+
+```ini
+[boot]
+systemd=true
+```
+
+如果报错 Country.mmdb 下载不了，手动下载并放到 `~/.config/clash/Country.mmdb`
