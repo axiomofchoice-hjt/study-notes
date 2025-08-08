@@ -10,8 +10,12 @@ sudo dnf install xmake
 
 ```sh
 xmake create $proj_name
+```
+
+构建运行
+
+```sh
+xmake project -k compile_commands build
 xmake
 xmake run
 ```
-
-生成 compile_commands `xmake project -k compile_commands build`
