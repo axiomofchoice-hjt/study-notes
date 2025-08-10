@@ -17,7 +17,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt)
 
 ## 2. 使用
 
-`#include <fmt/core.h>`
+`#include <fmt/format.h>`
 
 ### 2.1. 格式
 
