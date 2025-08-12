@@ -63,10 +63,10 @@ appendWindowsPath = false" | sudo tee /etc/wsl.conf
 
 ## 6. cpp 环境
 
-### 6.1. 编译工具
+### 6.1. 软件
 
 ```sh
-sudo dnf install gcc gcc-c++ cmake -y
+sudo dnf install gcc gcc-c++ cmake gdb -y
 ```
 
 ### 6.2. clangd
