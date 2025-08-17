@@ -7,7 +7,7 @@
 `~/.bashrc`
 
 ```sh
-export PS1="\e[91m\u \e[33m\w\e[0m -> "
+export PS1="\[\e[91m\]\u \[\e[33m\]\w\[\e[0m\] -> "
 ```
 
 ## 2. zsh
