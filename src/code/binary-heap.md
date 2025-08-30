@@ -68,7 +68,7 @@ class Solution {
     std::vector<int> sortArray(std::vector<int>& nums) {
         BinaryHeap<int, std::vector<int>, std::greater<int>> heap;
         heap.assign(nums);
-        for (int64_t i = 0; i < nums.size(); ++i) {
+        for (int64_t i = 0; i < static_cast<int64_t>(nums.size()); ++i) {
             nums[i] = heap.top();
             heap.pop();
         }
