@@ -1,6 +1,10 @@
 # binary-heap
 
-二叉堆和真可删堆。
+二叉堆和真可删堆（不是惰性删除）。
+
+二叉堆是正常的实现。
+
+真可删堆使用了 bidirect_ref，可能不是很好的设计，push 返回的句柄 `bidirect_ref<NonValue>` 具有唯一性。
 
 ```cpp
 #include <iostream>
@@ -51,7 +55,7 @@ struct BinaryHeap {
         }
     }
 
-    void insert(T value) {
+    void push(T value) {
         data.push_back(std::move(value));
         sift_up(data.size() - 1);
     }
@@ -65,14 +69,6 @@ struct BinaryHeap {
     const T& top() const { return data.front(); }
 
     bool empty() const { return data.empty(); }
-
-    void erase(const T& ref) {
-        int64_t index = &ref - &data[0];
-        std::swap(data[index], data.back());
-        data.pop_back();
-        index = sift_up(index);
-        sift_down(index);
-    }
 };
 
 template <typename T>
@@ -85,7 +81,7 @@ template <typename T, bool master = false>
 struct bidirect_ref : std::conditional_t<master, Value<T>, NonValue> {
     bidirect_ref<T, !master>* opposite{};
     bidirect_ref() : opposite(nullptr) {}
-    bidirect_ref(bidirect_ref&& other) : opposite(nullptr) {
+    bidirect_ref(bidirect_ref&& other) noexcept : opposite(nullptr) {
         if constexpr (master) {
             this->value = std::move(other.value);
         }
@@ -97,9 +93,9 @@ struct bidirect_ref : std::conditional_t<master, Value<T>, NonValue> {
     }
     bidirect_ref(const bidirect_ref&) = delete;
     bidirect_ref& operator=(const bidirect_ref&) = delete;
-    bidirect_ref& operator=(bidirect_ref&& other) {
+    bidirect_ref& operator=(bidirect_ref&& other) noexcept {
         if (opposite) {
-            throw std::runtime_error("Already bound");
+            unbind();
         }
         if constexpr (master) {
             this->value = std::move(other.value);
@@ -163,14 +159,20 @@ struct RemovableBinaryHeap {
                Compare2>
         heap;
 
-    bidirect_ref<T> insert(T value) {
+    bidirect_ref<T> push(T value) {
         auto [ref1, ref2] = bidirect_ref<T>::make_pair();
         ref1.value = std::move(value);
-        heap.insert(std::move(ref1));
+        heap.push(std::move(ref1));
         return std::move(ref2);
     }
 
-    void erase(bidirect_ref<T>& ref) { heap.erase(ref.get_opposite()); }
+    void erase(bidirect_ref<T>& ref) {
+        int64_t index = &ref.get_opposite() - heap.data.data();
+        std::swap(heap.data[index], heap.data.back());
+        heap.data.pop_back();
+        index = heap.sift_up(index);
+        heap.sift_down(index);
+    }
 
     void pop() { heap.pop(); }
 
@@ -202,7 +204,7 @@ class Solution239 {
         std::vector<binary_heap::bidirect_ref<int>> refs(nums.size());
         std::vector<int> result;
         for (int i = 0; i < static_cast<int64_t>(nums.size()); ++i) {
-            refs[i] = heap.insert(nums[i]);
+            refs[i] = heap.push(nums[i]);
             if (i >= k - 1) {
                 result.push_back(heap.top());
                 heap.erase(refs[i - k + 1]);
