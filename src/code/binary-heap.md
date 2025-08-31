@@ -4,7 +4,7 @@
 
 二叉堆是正常的实现。
 
-真可删堆使用了 bidirect_ref，可能不是很好的设计，push 返回的句柄 `bidirect_ref<NonValue>` 具有唯一性。
+真可删堆 push 返回句柄，为确保堆调整时也能通过句柄找到使用了双向引用，句柄具有唯一性，可能不是很好的设计。
 
 ```cpp
 #include <iostream>
@@ -166,12 +166,23 @@ struct RemovableBinaryHeap {
         return std::move(ref2);
     }
 
-    void erase(bidirect_ref<T>& ref) {
-        int64_t index = &ref.get_opposite() - heap.data.data();
+    void erase(bidirect_ref<T> ref) {
+        auto& master_ref = ref.get_opposite();
+        int64_t index = &master_ref - heap.data.data();
+        if (index < 0 || index >= static_cast<int64_t>(heap.data.size()) ||
+            &heap.data[index] != &master_ref) {
+            throw std::runtime_error("Reference not in heap");
+        }
+        if (index == static_cast<int64_t>(heap.data.size()) - 1) {
+            heap.data.pop_back();
+            return;
+        }
         std::swap(heap.data[index], heap.data.back());
         heap.data.pop_back();
-        index = heap.sift_up(index);
-        heap.sift_down(index);
+        int64_t new_index = heap.sift_up(index);
+        if (new_index == index) {
+            heap.sift_down(index);
+        }
     }
 
     void pop() { heap.pop(); }
@@ -207,7 +218,7 @@ class Solution239 {
             refs[i] = heap.push(nums[i]);
             if (i >= k - 1) {
                 result.push_back(heap.top());
-                heap.erase(refs[i - k + 1]);
+                heap.erase(std::move(refs[i - k + 1]));
             }
         }
         return result;
