@@ -25,6 +25,7 @@
 - `str != str` 字符串不相等
 - `-z str` 字符串为空
 - `-n str` 字符串非空
+- `strA =~ strB` strA 包含 strB
 
 ## 3. 数组操作
 
