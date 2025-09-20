@@ -83,3 +83,7 @@ systemd=true
 ```
 
 如果报错 Country.mmdb 下载不了，手动下载并放到 `~/.config/clash/Country.mmdb`
+
+## 5. 网络问题 - wsl-vpnkit
+
+<https://www.ghostchu.com/fix-wsl-no-internet-connection/>
