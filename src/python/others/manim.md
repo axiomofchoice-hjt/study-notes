@@ -4,7 +4,7 @@
 
 ## 1. Get Start
 
-`conda install manim`
+`conda install -c conda-forge manim`
 
 ```py
 import manim
@@ -18,13 +18,15 @@ class Main(manim.Scene):
         self.play(manim.FadeOut(circle))
 ```
 
-执行命令 `manim -qh xxx.py Main` 即可
+执行命令 `manim -qh xxx.py Main` 即可。
+
+（可能要升级 ffmpeg）
 
 ## 2. vscode 配置
 
-安装插件 Manim Sideview
+安装插件 Manim Sideview。
 
-增加设置
+增加设置：
 
 ```json
 {
@@ -33,11 +35,11 @@ class Main(manim.Scene):
 }
 ```
 
-打开 python 文件点右上角按钮，需要输入场景名
+打开 python 文件点右上角按钮，需要输入场景名，场景名是类名 `Main`。
 
 ## 3. 基本操作
 
-`self.play` 执行动画，多个参数表示动画同时进行
+`self.play` 执行动画，多个参数表示动画同时进行。
 
 `self.play(circle.animate.set_fill(manim.PINK, opacity=0.5))`
 
@@ -59,13 +61,13 @@ ReplacementTransform 变形
 
 `mobject.align_to(mobject2, manim.LEFT)` 用对象左边界来定位
 
-## 外观
+## 5. 外观
 
 `.set_stroke(color=manim.GREEN, width=20)` 线样式
 
 `set_fill(manim.YELLOW, opacity=1.0)` 填充样式
 
-## 动画
+## 6. 动画
 
 `self.play` 播放动画
 
@@ -77,7 +79,7 @@ ReplacementTransform 变形
 
 `self.wait(2)` 停两秒
 
-## 5. 输出设置
+## 7. 输出设置
 
 `manim -qh xxx.py Main`
 
@@ -87,7 +89,7 @@ ReplacementTransform 变形
 
 用 `self.next_section()` 分割，加上 `--save_sections` 命令行参数，可以输出多个视频
 
-## x
+## 8. x
 
 数学对象 mobject，是可以显示的对象
 
