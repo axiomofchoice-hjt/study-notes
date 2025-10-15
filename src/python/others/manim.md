@@ -7,15 +7,15 @@
 `conda install -c conda-forge manim`
 
 ```py
-import manim
+import manim as mm
 
 
-class Main(manim.Scene):
+class Main(mm.Scene):
     def construct(self):
-        circle = manim.Circle()
-        circle.set_fill(manim.PINK, opacity=0.5)
-        self.play(manim.Create(circle))
-        self.play(manim.FadeOut(circle))
+        circle = mm.Circle()
+        circle.set_fill(mm.PINK, opacity=0.5)
+        self.play(mm.Create(circle))
+        self.play(mm.FadeOut(circle))
 ```
 
 执行命令 `manim -qh xxx.py Main` 即可。
@@ -37,11 +37,29 @@ class Main(manim.Scene):
 
 打开 python 文件点右上角按钮，需要输入场景名，场景名是类名 `Main`。
 
-## 3. 基本操作
+## 3. 对象
+
+圆
+
+```py
+circle = mm.Circle()
+self.play(mm.Create(circle))
+```
+
+文本
+
+```py
+text = mm.Text("Hello Manim!", font_size=48)
+self.play(mm.Write(text))
+```
+
+数学公式（需要装 latex，略）
+
+## 4. 基本操作
 
 `self.play` 执行动画，多个参数表示动画同时进行。
 
-`self.play(circle.animate.set_fill(manim.PINK, opacity=0.5))`
+`self.play(circle.animate.set_fill(mm.PINK, opacity=0.5))`
 
 ReplacementTransform 变形
 
@@ -49,37 +67,37 @@ ReplacementTransform 变形
 
 `self.wait()` 等待一段时间
 
-## 4. 定位
+## 5. 定位
 
 创建时 mobject 位于原点（屏幕中心）
 
-`mobject.shift(manim.RIGHT)` 向右移动一单位
+`mobject.shift(mm.RIGHT)` 向右移动一单位
 
-`mobject.move_to(manim.RIGHT * 2)` 移动到绝对位置
+`mobject.move_to(mm.RIGHT * 2)` 移动到绝对位置
 
-`mobject.next_to(mobject2, manim.RIGHT, buff=0.5)` 移动到 mobject2 的相对位置
+`mobject.next_to(mobject2, mm.RIGHT, buff=0.5)` 移动到 mobject2 的相对位置
 
-`mobject.align_to(mobject2, manim.LEFT)` 用对象左边界来定位
+`mobject.align_to(mobject2, mm.LEFT)` 用对象左边界来定位
 
-## 5. 外观
+## 6. 外观
 
-`.set_stroke(color=manim.GREEN, width=20)` 线样式
+`.set_stroke(color=mm.GREEN, width=20)` 线样式
 
-`set_fill(manim.YELLOW, opacity=1.0)` 填充样式
+`set_fill(mm.YELLOW, opacity=1.0)` 填充样式
 
-## 6. 动画
+## 7. 动画
 
 `self.play` 播放动画
 
 - 参数 run_time 设置秒数，默认 1
 
-`manim.FadeIn`
+`mm.FadeIn`
 
-`manim.FadeOut`
+`mm.FadeOut`
 
 `self.wait(2)` 停两秒
 
-## 7. 输出设置
+## 8. 输出设置
 
 `manim -qh xxx.py Main`
 
@@ -89,7 +107,7 @@ ReplacementTransform 变形
 
 用 `self.next_section()` 分割，加上 `--save_sections` 命令行参数，可以输出多个视频
 
-## 8. x
+## 9. x
 
 数学对象 mobject，是可以显示的对象
 
