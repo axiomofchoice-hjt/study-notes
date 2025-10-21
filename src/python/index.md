@@ -2,7 +2,7 @@
 
 ## 1. 基础设施
 
-- [语法](./python-syntax.md)
+- [语言](./python.md)
 - [并发](./python-concurrency.md)
 - [工具链](./toolchains.md)
 
@@ -15,7 +15,6 @@
 
 ## 3. 其他
 
-- [代码生成 jinja2](./jinja2.md)
 - [深度学习 pytorch](./pytorch.md)
 - [c++ 绑定 pybind11](./pybind11.md)
 
