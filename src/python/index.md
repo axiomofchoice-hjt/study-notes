@@ -12,6 +12,7 @@
 - [命令行参数 argparse](./argparse.md)
 - [打包 setuptools](./setuptools.md)
 - [测试](./python-test.md)
+- [其他通用库](./common.md)
 
 ## 3. 其他
 
