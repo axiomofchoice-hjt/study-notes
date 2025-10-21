@@ -15,7 +15,6 @@
 
 ## 3. 其他
 
-- [深度学习 pytorch](./pytorch.md)
 - [c++ 绑定 pybind11](./pybind11.md)
 
 ***
