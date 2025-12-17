@@ -213,7 +213,7 @@ def foo(**kwargs: Unpack[TypedDict("", {'a': str})]):
 - 返回是否是文件 `os.path.isfile(file)`
 - 返回是否是目录 `os.path.isdir(dir)`
 - 路径拼接 `os.path.join(s1, s2, ...)`
-- 去掉路径去掉扩展名 `os.path.basename(file)`
+- 文件名（包含扩展名） `os.path.basename(file)`
 - 执行文件的目录 `os.path.dirname(os.path.abspath(__file__))`
 
 ### 5.4. shutil
