@@ -36,6 +36,7 @@ if __name__ == '__main__':
 - `parser.add_argument('--size', type=int, default=0)`
 - 获取 `args.size`
 - 命令行 `python xxx.py --size 123` 或 `--size=123`
+- 不能省略加 `required=True`
 
 ## 5. 枚举
 
