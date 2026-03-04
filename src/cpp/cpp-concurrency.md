@@ -518,5 +518,3 @@ promise 包含方法：
 `co_return x; => promize.return_value(x);` `co_return; => promise.return_void();`
 
 执行完 co_return 后会执行 `co_await promise.final_suspend();`，如果协程暂停，就是最终暂停点，`done() = true`  且可以 `destroy()` 销毁。如果没有暂停，返回后立即销毁。
-
-
