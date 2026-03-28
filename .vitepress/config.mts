@@ -25,7 +25,7 @@ export default defineConfig({
     },
     footer: {
       message: 'Released under the <a href="https://github.com/axiomofchoice-hjt/study-notes/blob/main/LICENSE">MIT License</a>.',
-      copyright: 'Copyright © 2022-present <a href="https://github.com/axiomofchoice-hjt">Axiomofchoice-hjt</a>'
+      copyright: 'Copyright © 2022-present <a href="https://github.com/axiomofchoice-hjt">axiomofchoice-hjt</a>'
     },
     editLink: {
       pattern: 'https://github.com/axiomofchoice-hjt/study-notes/edit/main/src/:path'
