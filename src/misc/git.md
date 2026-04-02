@@ -11,12 +11,13 @@ Debian: `sudo apt install git`
 查看所有配置 `git config --list`
 
 ```sh
-git config --global user.name "axiomofchoice-hjt" # 用户名
-git config --global user.email "Axiomofchoice@163.com" # 邮箱
-git config --global core.quotepath false # 文件名显示中文
-git config --global core.autocrlf false # 取消 CRLF
-git config --global pull.rebase true # pull 默认 rebase
-git config --global core.editor "code --wait" # 编辑器默认 vscode
+git config --global user.name "axiomofchoice-hjt"  # 用户名
+git config --global user.email "Axiomofchoice@163.com"  # 邮箱
+git config --global core.quotepath false  # 文件名显示中文
+git config --global core.autocrlf false  # 取消 CRLF
+git config --global pull.rebase true  # pull 默认 rebase
+git config --global rebase.autoStash true
+git config --global core.editor "code --wait"  # 编辑器默认 vscode
 ```
 
 ### 2.1. 命令别名
