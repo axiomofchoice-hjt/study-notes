@@ -7,8 +7,8 @@
 Fedora 可以官方途径安装。
 
 ```sh
-wsl --install FedoraLinux-42
-wsl --set-default FedoraLinux-42
+wsl --install FedoraLinux-43
+wsl --set-default FedoraLinux-43
 ```
 
 ## 2. 换源
@@ -33,7 +33,7 @@ sudo dnf update -y
 ## 3. 基础软件
 
 ```sh
-sudo dnf install vim nano git wget curl zip unzip tar -y
+sudo dnf install vim nano git wget curl zip unzip tar awk -y
 ```
 
 网络
@@ -57,9 +57,9 @@ appendWindowsPath = false" | sudo tee /etc/wsl.conf
 
 重启 WSL
 
-## 5. zsh
+## 5. bash prompt
 
-[zsh](../../shell/settings.md#zsh)
+[settings](../../shell/settings.md)
 
 ## 6. cpp 环境
 
@@ -99,7 +99,7 @@ mkdir -p ~/miniconda3
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda3.sh
 bash miniconda3.sh -b -u -p ~/miniconda3
 rm miniconda3.sh
-~/miniconda3/bin/conda init zsh
+~/miniconda3/bin/conda init bash
 ```
 
 ## 8. Node 环境
