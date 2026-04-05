@@ -51,7 +51,7 @@ appendWindowsPath = false
 
 [参考](https://docs.gtk.pw/contents/linux/clash-cli.html)
 
-[下载](https://github.com/netboy1024/clash/releases)，解压得到可执行
+[下载](https://github.com/netboy1024/clash/releases)，解压得到可执行 (clash-linux-amd64)
 
 运行得到 `~/.config/clash` 目录
 
@@ -61,26 +61,26 @@ appendWindowsPath = false
 
 ```ini
 [Unit]
-Description=Clash Daemon
+Description = Clash Daemon
 
 [Service]
-ExecStart=/xxx/clash -d /home/xxx/.config/clash/
-Restart=on-failure
+ExecStart = /xxx/clash-linux-amd64 -d /home/xxx/.config/clash/
+Restart = on-failure
 
 [Install]
-WantedBy=multi-user.target
+WantedBy = multi-user.target
+```
+
+`sudo -e /etc/wsl.conf` 增加
+
+```ini
+[boot]
+systemd = true
 ```
 
 开机启动 `sudo systemctl enable clash.service`
 
 手动启动 `sudo systemctl start clash.service`
-
-如果手动启动报错 `System has not been booted ...`，`sudo -e /etc/wsl.conf` 增加
-
-```ini
-[boot]
-systemd=true
-```
 
 如果报错 Country.mmdb 下载不了，手动下载并放到 `~/.config/clash/Country.mmdb`
 
