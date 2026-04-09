@@ -47,7 +47,19 @@ appendWindowsPath = false
 
 点左下角，选择 New WSL Window 即可
 
-## 4. 网络问题 - 用 clash 内核
+## 4. 网络问题 - 用镜像模式 (win11)
+
+新建 `C:\Users\你的用户名\.wslconfig` 写入：
+
+```ini
+[wsl2]
+networkingMode=mirrored
+dnsTunneling=true
+firewall=true
+autoProxy=true
+```
+
+## 5. 网络问题 - 用 clash 内核
 
 [参考](https://docs.gtk.pw/contents/linux/clash-cli.html)
 
@@ -84,6 +96,6 @@ systemd = true
 
 如果报错 Country.mmdb 下载不了，手动下载并放到 `~/.config/clash/Country.mmdb`
 
-## 5. 网络问题 - wsl-vpnkit
+## 6. 网络问题 - wsl-vpnkit
 
 <https://www.ghostchu.com/fix-wsl-no-internet-connection/>
