@@ -19,7 +19,7 @@
  */
 template <typename T>
 void quickSort3Way(T* arr, int64_t p0, int64_t p4) {
-    if (p4 - p1 <= 1) {
+    if (p4 - p0 <= 1) {
         return;
     }
     T pivot = arr[p0];  // 可以随机挑选 T privot = arr[p0 + rand() % (p4 - p0)];
